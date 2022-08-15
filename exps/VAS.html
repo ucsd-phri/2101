@@ -215,24 +215,24 @@ jsPsych.init({
 
     function SaveData(curData) {
   var dataToServer = {
-    'id': randCode,
-    'experimenter': 'Ethan',
-    'experimentName': 'functionalForm_pilot',
+    'id': jsPsych.data.getURLVariable('initials') + jsPsych.data.getURLVariable('id'),
+    'experimenter': '2101',
+    'experimentName': 'VAS_PLP',
     'curData': curData
   }; 
 	
   if(forward() == "yes"){
-    $.post("https://madlab.ucsd.edu/mturk/save.php",
+    $.post("132.239.36.101/PHRI/save.php",
     dataToServer,
     FunctionWhenDoneSaving
   ).fail(FunctionWhenDoneSaving);
 
     function FunctionWhenDoneSaving() {
-            var urlToRedirect = "https://www.ethanhurwitz.com/VAS2.html" 
+            var urlToRedirect = "https://ucsd-phri.github.io/2101/exps/VAS2.html" 
         window.location.href = urlToRedirect;
         };
   } else {
-    $.post("https://madlab.ucsd.edu/mturk/save.php",
+    $.post("132.239.36.101/PHRI/save.php",
     dataToServer,
     function(data) { 
 			var newDoc = document.open("text/html", "replace");
