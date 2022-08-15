@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> </title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+<script src="../jsLibs/jquery-3-6-0-min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://timbrady.org/turk/TimTurkTools.js"></script> -->
+<script src="../jsLibs/ajax.js"></script>
+<script src="../jsLibs/bootstrap-min.js"></script>
+<script src="../jsLibs/TimTurkTools.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/jspsych.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-html-button-response.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-image-keyboard-response.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-survey-multi-choice.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-survey-multi-select.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-survey-multi-choice2.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-survey-multi-select2.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-video-button-response.js"></script>
+<!-- <script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-survey-text.js"></script> -->
+<script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-survey-text.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-survey-html-form.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-html-slider-response2.js"></script>
+<!-- <script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-html-slider-response2.js"></script> -->
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-preload.js"></script>
+<link href="../jsPsych/jspsych-6.3.1/css/jspsych2.css" rel="stylesheet" type="text/css"></link>
+
+<style>
+</style>
+</head>
+  
+  <body>
+    
+    <script>
+
+var timeline = [];
+
+// var trial = {
+//     type: 'html-slider-response',
+//     stimulus: '<p>Please rate your phantom limb pain</p>',
+//     require_movement: true,
+//     slider_start: 0,
+//     min: 0,
+//     max: 100,
+//     step: 0.5,
+//     slider_width: 800,
+//     labels: ['No Pain<br>Sensation', 'Most Intense<br>Pain Sensation<br>Imaginable'],
+//     prompt: "<p></p>"
+// };
+
+// timeline.push(trial);
+
+var text = ['pain intensity', 'pain unpleasantness',
+            'pain', 'pain',
+            'pain', 'pain',
+            'pain', 'pain'];
+var text2 = ['right now', 'right now',
+            'on average during the past day', 'at its highest peak during the past day',
+            'on average during the past week', 'at its highest peak during the past week',
+            'on average during the past month', 'at its highest peak during the past month'];
+
+var text3 = ['intense', 'unpleasant',
+            'painful', 'painful',
+            'painful', 'painful',
+            'painful', 'painful'];
+
+for (i=0; i<8; i++) {
+    timeline.push({
+        type: 'html-slider-response',
+        stimulus: `<p><i>To provide a rating, please click on the page then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br> <b>${text[i]}</b> of your pain <u>other than your phantom limb pain</u> <b>${text2[i]}</b>.<br></p>`,
+        require_movement: true,
+        slider_start: 0,
+        min: 0,
+        max: 100,
+        step: 1,
+        slider_width: 800,
+        labels: [`Most ${text3[i]}<br>Imaginable`, `Not at all<br>${text3[i]}`],
+        prompt: "<p></p>",
+        data: {
+            type: 'VAS',
+            rating: text[i],
+            timing: text2[i]
+        }
+    })
+};
+
+jsPsych.data.addProperties({userAgent: navigator.userAgent,
+	startTime: new Date(),
+    volID: jsPsych.data.getURLVariable('initials'),
+    volNum: jsPsych.data.getURLVariable('id')
+	// randCode: randCode
+});
+
+jsPsych.init({
+      timeline: timeline,
+    //   preload_images: preloadMedia,
+	  show_progress_bar: true,
+      on_finish: function () {
+			var endTime = new Date();
+			jsPsych.data.addProperties({endTime: endTime});
+            // jsPsych.data.displayData();
+			 SaveData(jsPsych.data.get().csv()); // .json()?
+    }
+    });
+
+    function SaveData(curData) {
+  var dataToServer = {
+    'id': randCode,
+    'experimenter': 'Ethan',
+    'experimentName': 'test1',
+    'curData': curData
+  }; 
+	
+  // $.post("save.php",
+$.post("http://localhost:8000/save.php",
+    dataToServer,
+    function(data) { 
+			var newDoc = document.open("text/html", "replace");
+			newDoc.write("All done, thanks! To submit the HIT, paste this code into Turk: " + randCode);
+			newDoc.close();
+    }
+  ).fail(function(data) { 
+			var newDoc = document.open("text/html", "replace");
+			newDoc.write("All done, thanks! To submit the HIT, paste this code into Turk: " + randCode);
+			newDoc.close();
+	});
+};
+
+    </script>
+  </body>
+</html>
