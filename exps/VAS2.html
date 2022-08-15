@@ -108,23 +108,23 @@ jsPsych.init({
 
     function SaveData(curData) {
   var dataToServer = {
-    'id': randCode,
-    'experimenter': 'Ethan',
-    'experimentName': 'test1',
+    'id': jsPsych.data.getURLVariable('initials') + jsPsych.data.getURLVariable('id'),
+    'experimenter': '2101',
+    'experimentName': 'VAS_NotPLP',
     'curData': curData
   }; 
 	
   // $.post("save.php",
-$.post("http://localhost:8000/save.php",
+$.post("132.239.36.101/PHRI/save.php",
     dataToServer,
     function(data) { 
 			var newDoc = document.open("text/html", "replace");
-			newDoc.write("All done, thanks! To submit the HIT, paste this code into Turk: " + randCode);
+			newDoc.write("All done, thanks!");
 			newDoc.close();
     }
   ).fail(function(data) { 
 			var newDoc = document.open("text/html", "replace");
-			newDoc.write("All done, thanks! To submit the HIT, paste this code into Turk: " + randCode);
+			newDoc.write("All done, thanks!");
 			newDoc.close();
 	});
 };
