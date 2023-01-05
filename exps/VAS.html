@@ -152,7 +152,7 @@ var instructions = {
   '<br><br><br><br>'+
   'We will <u>first</u> ask you about your <b>typical</b> phantom limb pain experiences and <u>second</u> about your'+
   'standout <b>high intensity</b> ones. If you do not experience any standout high intensity “flare ups”, '+
-  'then respond to the first question on the basis of all your experiences and respond with “NA” to'+
+  'then respond to the first question on the basis of all your experiences and respond with “NA” to '+
   'the second questions.',
   choices: ["Continue"],
   data: {type: "instructions"}
@@ -177,7 +177,7 @@ timeline.push(plp_freq_typical);
 timeline.push({
     type: 'survey-text',
     questions: [
-        {prompt: "Of those phantom limb pain experiences in the past week, what was the typical or most common duration, i.e., approximately how long did you experience the phantom limb pain for once it started?<br>"+
+        {prompt: "Of those phantom limb pain experiences in the past week, what was the <b>typical or most common duration</b>, i.e., approximately how long did you experience the phantom limb pain for once it started?<br><br>"+
         'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.', 
         name: 'plp_freq_typical', rows: 1, columns: 10, required: true}
     ],
@@ -190,7 +190,7 @@ timeline.push({
     questions: [
           {
             prompt: `Of those occasions of phantom limb pain in the past week, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall phantom limb pain you experienced?`,
-            options: ["NA (No occasions in the past week)", "0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
+            options: ["NA <br>(No occasions<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
             horizontal: true,
@@ -250,7 +250,7 @@ timeline.push({
 timeline.push({
     type: 'survey-text',
     questions: [
-        {prompt: 'Of those uniquely high intensity "flare up" phantom limb pain experiences in the past week, what was the typical or most common duration, i.e., approximately how long did you experience the phantom limb pain for once it started?<br>'+
+        {prompt: 'Of those uniquely high intensity "flare up" phantom limb pain experiences in the past week, what was the <b>typical or most common duration<b>, i.e., approximately how long did you experience the phantom limb pain for once it started?<br><br>'+
         'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.<br>'+
         'If you did not have any such experiences, please write "NA".', 
         name: 'plp_freq_flares', rows: 1, columns: 10, required: true}
@@ -264,7 +264,7 @@ timeline.push({
     questions: [
           {
             prompt: `Of those uniquely high intensity "flare up" occasions of phantom limb pain in the past week, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall phantom limb pain you experienced?`,
-            options: ["NA (No occasions in the past week)", "0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
+            options: ["NA <br>(No occasions<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
             horizontal: true,
@@ -274,7 +274,7 @@ timeline.push({
 
 timeline.push({
     type: 'html-slider-response',
-    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of those uniquely high intensity "flare up" phantom limb pain experiences in the past week.<br>If you did not have any such experiences, set the bar to the left.<br></p>`,
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of those uniquely high intensity<br>"flare up" phantom limb pain experiences in the past week.<br>If you did not have any such experiences, set the bar to the left.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
@@ -292,7 +292,7 @@ timeline.push({
 
 timeline.push({
     type: 'html-slider-response',
-    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>unpleasantness</b> of those uniquely high intensity "flare up" phantom limb pain experiences in the past week.<br>If you did not have any such experiences, set the bar to the left.<br></p>`,
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>unpleasantness</b> of those uniquely high intensity<br>"flare up" phantom limb pain experiences in the past week.<br>If you did not have any such experiences, set the bar to the left.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
@@ -323,7 +323,7 @@ timeline.push({
 timeline.push({
     type: 'survey-text',
     questions: [
-        {prompt: "Of those residual limb pain experiences in the past week, what was the typical or most common duration, i.e., approximately how long did you experience the residual limb pain for once it started?<br>"+
+        {prompt: "Of those residual limb pain experiences in the past week, what was the <b>typical or most common duration</b>, i.e., approximately how long did you experience the residual limb pain for once it started?<br><br>"+
         'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.', 
         name: 'residual_freq', rows: 1, columns: 10, required: true}
     ],
@@ -336,7 +336,7 @@ timeline.push({
     questions: [
           {
             prompt: `Of those occasions of residual limb pain in the past week, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall residual limb pain you experienced?`,
-            options: ["NA (No occasions in the past week)", "0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
+            options: ["NA <br>(No occasions<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
             horizontal: true,
@@ -395,7 +395,7 @@ timeline.push({
 timeline.push({
     type: 'survey-text',
     questions: [
-        {prompt: "Of those other pain experiences in the past week, what was the typical or most common duration, i.e., approximately how long did you experience the other pain for once it started?<br>"+
+        {prompt: "Of those other pain experiences in the past week, what was the <b>typical or most common duration</b>, i.e., approximately how long did you experience the other pain for once it started?<br>"+
         'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.', 
         name: 'other_freq', rows: 1, columns: 10, required: true}
     ],
@@ -408,7 +408,7 @@ timeline.push({
     questions: [
           {
             prompt: `Of those occasions of other pain in the past week, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall other pain you experienced?`,
-            options: ["NA (No occasions in the past week)", "0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
+            options: ["NA <br>(No occasions<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
             horizontal: true,
@@ -456,7 +456,7 @@ timeline.push({
 
 timeline.push({
   type: 'html-button-response',
-  stimulus: 'In the following questions, we are going to ask about your <b>current</b> pain experiences <b>right now</b>',
+  stimulus: 'In the following questions, we are going to ask about your <b>current</b> pain experiences <b>right now</b><br><br>',
   choices: ["Continue"],
   data: {type: "instructions2"}
 });
@@ -468,7 +468,7 @@ timeline.push({
     questions: [
           {
             prompt: `Please provide a rating for your overall <b>phantom limb pain</b> <u>right now</u>, from 0 'no pain at all' to 10 'worst pain imaginable'`,
-            options: ["NA (No occasions in the past week)", "0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
+            options: ["NA <br>(No occasions<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
             horizontal: true,
@@ -519,7 +519,7 @@ timeline.push({
     questions: [
           {
             prompt: `Please provide a rating for your overall <b>residual limb pain</b> <u>right now</u>, from 0 'no pain at all' to 10 'worst pain imaginable'`,
-            options: ["NA (No occasions in the past week)", "0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
+            options: ["NA <br>(No occasions<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
             horizontal: true,
@@ -570,7 +570,7 @@ timeline.push({
     questions: [
           {
             prompt: `Please provide a rating for your overall <b>other pain</b> <u>right now</u>, from 0 'no pain at all' to 10 'worst pain imaginable'`,
-            options: ["NA (No occasions in the past week)", "0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
+            options: ["NA <br>(No occasions<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
             horizontal: true,
@@ -620,7 +620,7 @@ timeline.push({
     type: 'survey-multi-choice',
     questions: [
           {
-            prompt: `Please provide a rating for how much kindness you feel toward yourself/others, from 0 "no kindness at all" to 10 "most kindness imaginable"`,
+            prompt: `Please provide a rating for how much <br>kindness</b> you feel toward yourself/others, from 0 "no kindness at all" to 10 "most kindness imaginable"`,
             options: ["0<br>no kindness at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>most kindness imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
@@ -631,7 +631,7 @@ timeline.push({
 
 timeline.push({
     type: 'html-slider-response',
-    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br> how much kindness you feel toward yourself/others.<br></p>`,
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br> how much <b>kindness</b> you feel toward yourself/others.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
@@ -650,7 +650,7 @@ timeline.push({
 
 timeline.push({
     type: 'html-slider-response',
-    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents<br>how much stress you feel right now.<br></p>`,
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents<br>how much <b>stress</b> you feel right now.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
@@ -669,7 +669,7 @@ timeline.push({
 
 timeline.push({
     type: 'html-slider-response',
-    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents<br>how useful/effective you feel the experience was.<br></p>`,
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents<br>how <b>useful/effective</b> you feel the experience was.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
