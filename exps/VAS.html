@@ -190,10 +190,10 @@ timeline.push({
     questions: [
           {
             prompt: `Of those occasions of phantom limb pain in the past week, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall phantom limb pain you experienced?`,
-            options: ["NA <br>(No occasion in the past week)", "0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
+            options: ["NA <br>(No occasion<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-            horizontal: false,
+            horizontal: true,
             required: true,
             name: `plp_painRating_typical`
           }]});
@@ -250,7 +250,7 @@ timeline.push({
 timeline.push({
     type: 'survey-text',
     questions: [
-        {prompt: 'Of those uniquely high intensity "flare up" phantom limb pain experiences in the past week, what was the <b>typical or most common duration<b>, i.e., approximately how long did you experience the phantom limb pain for once it started?<br><br>'+
+        {prompt: 'Of those uniquely high intensity "flare up" phantom limb pain experiences in the past week, what was the <b>typical or most common duration</b>, i.e., approximately how long did you experience the phantom limb pain for once it started?<br><br>'+
         'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.<br>'+
         'If you did not have any such experiences, please write "NA".', 
         name: 'plp_freq_flares', rows: 1, columns: 10, required: true}
@@ -264,10 +264,10 @@ timeline.push({
     questions: [
           {
             prompt: `Of those uniquely high intensity "flare up" occasions of phantom limb pain in the past week, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall phantom limb pain you experienced?`,
-            options: ["NA <br>(No occasion in the past week)", "0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
+            options: ["NA <br>(No occasion<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-            horizontal: false,
+            horizontal: true,
             required: true,
             name: `plp_painRating_flares`
           }]});
@@ -336,10 +336,10 @@ timeline.push({
     questions: [
           {
             prompt: `Of those occasions of residual limb pain in the past week, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall residual limb pain you experienced?`,
-            options: ["NA <br>(No occasion in the past week)", "0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
+            options: ["NA <br>(No occasion<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-            horizontal: false,
+            horizontal: true,
             required: true,
             name: `residual_painRating`
           }]});
@@ -421,10 +421,10 @@ timeline.push({
     questions: [
           {
             prompt: `Of those occasions of other pain in the past week, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall other pain you experienced?`,
-            options: ["NA (No occasions in the past week)", "0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
+            options: ["NA <br>(No occasion<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-            horizontal: false,
+            horizontal: true,
             required: true,
             name: `other_painRating`
           }]});
@@ -481,10 +481,10 @@ timeline.push({
     questions: [
           {
             prompt: `Please provide a rating for your overall <b>phantom limb pain</b> <u>right now</u>, from 0 'no pain at all' to 10 'worst pain imaginable'`,
-            options: ["0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
+            options: ["0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-            horizontal: false,
+            horizontal: true,
             required: true,
             name: `plp_painRating_current`
           }]});
@@ -532,10 +532,10 @@ timeline.push({
     questions: [
           {
             prompt: `Please provide a rating for your overall <b>residual limb pain</b> <u>right now</u>, from 0 'no pain at all' to 10 'worst pain imaginable'`,
-            options: ["0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
+            options: ["0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-            horizontal: false,
+            horizontal: true,
             required: true,
             name: `residual_painRating_current`
           }]});
@@ -585,10 +585,10 @@ timeline.push({
     questions: [
           {
             prompt: `Please provide a rating for your overall <b>other pain</b> <u>right now</u>, from 0 'no pain at all' to 10 'worst pain imaginable'`,
-            options: ["0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
+            options: ["0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-            horizontal: false,
+            horizontal: true,
             required: true,
             name: `other_painRating_current`
           }]});
@@ -640,10 +640,10 @@ timeline.push({
     questions: [
           {
             prompt: `Please provide a rating for how much <br>kindness</b> you feel toward yourself, from 0 "no kindness at all" to 10 "most kindness imaginable"`,
-            options: ["0<br>no kindness at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>most kindness imaginable"],
+            options: ["0<br>no kindness<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>most kindness<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-            horizontal: false,
+            horizontal: true,
             required: true,
             name: "kindness_self_nrs"
           }]});
@@ -671,10 +671,10 @@ timeline.push({
     questions: [
           {
             prompt: `Please provide a rating for how much <br>kindness</b> you feel toward others, from 0 "no kindness at all" to 10 "most kindness imaginable"`,
-            options: ["0<br>no kindness at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>most kindness imaginable"],
+            options: ["0<br>no kindness<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>most kindness<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-            horizontal: false,
+            horizontal: true,
             required: true,
             name: "kindness_others_nrs"
           }]});
