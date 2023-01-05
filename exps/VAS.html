@@ -385,6 +385,18 @@ timeline.push({
 timeline.push({
     type: 'survey-text',
     questions: [
+        {prompt: "In the past <b>WEEK</b> have you experienced any <u>other</u> pain (besides your phantom limb and residual limb pain)?<br>"+
+	 "If so, please write where that pain is/describe it in the field below", 
+        name: 'other_description', rows: 1, columns: 30, required: true}
+    ],
+    data: {
+        type: "other_description"}
+});	    
+	    
+	    
+timeline.push({
+    type: 'survey-text',
+    questions: [
         {prompt: "In the past <b>WEEK</b> how many times/occasions of <u>other</u> pain (besides your phantom limb and residual limb pain) have you experienced?<br>Please write only the number in the field below.", 
         name: 'other_freq', rows: 1, columns: 4, required: true}
     ],
@@ -396,7 +408,8 @@ timeline.push({
     type: 'survey-text',
     questions: [
         {prompt: "Of those other pain experiences in the past week, what was the <b>typical or most common duration</b>, i.e., approximately how long did you experience the other pain for once it started?<br>"+
-        'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.', 
+        'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.<br><br>'+
+	 'If you have not had any experiences of other pain, please write "NA".', 
         name: 'other_freq', rows: 1, columns: 10, required: true}
     ],
     data: {
@@ -408,10 +421,10 @@ timeline.push({
     questions: [
           {
             prompt: `Of those occasions of other pain in the past week, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall other pain you experienced?`,
-            options: ["NA <br>(No occasions<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            options: ["NA (No occasions in the past week)", "0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-            horizontal: true,
+            horizontal: false,
             required: true,
             name: `other_painRating`
           }]});
@@ -468,10 +481,10 @@ timeline.push({
     questions: [
           {
             prompt: `Please provide a rating for your overall <b>phantom limb pain</b> <u>right now</u>, from 0 'no pain at all' to 10 'worst pain imaginable'`,
-            options: ["NA <br>(No occasions<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            options: ["0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
-            values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-            horizontal: true,
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: false,
             required: true,
             name: `plp_painRating_current`
           }]});
@@ -519,10 +532,10 @@ timeline.push({
     questions: [
           {
             prompt: `Please provide a rating for your overall <b>residual limb pain</b> <u>right now</u>, from 0 'no pain at all' to 10 'worst pain imaginable'`,
-            options: ["NA <br>(No occasions<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            options: ["0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
-            values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-            horizontal: true,
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: false,
             required: true,
             name: `residual_painRating_current`
           }]});
@@ -572,10 +585,10 @@ timeline.push({
     questions: [
           {
             prompt: `Please provide a rating for your overall <b>other pain</b> <u>right now</u>, from 0 'no pain at all' to 10 'worst pain imaginable'`,
-            options: ["NA <br>(No occasions<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            options: ["0<br>no pain at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
-            values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-            horizontal: true,
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: false,
             required: true,
             name: `other_painRating_current`
           }]});
@@ -630,7 +643,7 @@ timeline.push({
             options: ["0<br>no kindness at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>most kindness imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-            horizontal: true,
+            horizontal: false,
             required: true,
             name: "kindness_self_nrs"
           }]});
@@ -661,7 +674,7 @@ timeline.push({
             options: ["0<br>no kindness at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>most kindness imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
-            horizontal: true,
+            horizontal: false,
             required: true,
             name: "kindness_others_nrs"
           }]});
@@ -734,8 +747,8 @@ timeline.push({
 
 jsPsych.data.addProperties({userAgent: navigator.userAgent,
 	startTime: new Date(),
-    volID: jsPsych.data.getURLVariable('initials'),
-    volNum: jsPsych.data.getURLVariable('id')
+    volID: jsPsych.data.getURLVariable('id'),
+    redcap: jsPsych.data.getURLVariable('redcap')
 });
 
 jsPsych.init({
@@ -754,7 +767,7 @@ jsPsych.init({
 
     function SaveData(curData) {
   var dataToServer = {
-    'id': jsPsych.data.getURLVariable('initials') + jsPsych.data.getURLVariable('id'),
+    'id': jsPsych.data.getURLVariable('id'),
     'experimenter': 'Ethan',
     'experimentName': '2101_followUp_2week',
     'curData': curData
@@ -763,16 +776,20 @@ jsPsych.init({
   $.post("https://bradylab.ucsd.edu/turk/save.php",
     dataToServer,
     function(data) { 
-			var newDoc = document.open("text/html", "replace");
-			// newDoc.write("All done, thanks! To submit the HIT, paste this code into Turk: " + randCode);
-            newDoc.write("Your responses have been recorded.");
-			newDoc.close();
+           var urlToRedirect = "https://my.ctri.ucsd.edu/surveys/?s=" + jsPsych.data.getURLVariable('redcap')
+           window.location.href = urlToRedirect;
+// 			var newDoc = document.open("text/html", "replace");
+// 			// newDoc.write("All done, thanks! To submit the HIT, paste this code into Turk: " + randCode);
+//             newDoc.write("Your responses have been recorded.");
+// 			newDoc.close();
     }
   ).fail(function(data) { 
-			var newDoc = document.open("text/html", "replace");
-			// newDoc.write("All done, thanks! To submit the HIT, paste this code into Turk: " + randCode);
-            newDoc.write("Your responses have been recorded.");
-			newDoc.close();
+	   var urlToRedirect = "https://my.ctri.ucsd.edu/surveys/?s=" + jsPsych.data.getURLVariable('redcap')
+           window.location.href = urlToRedirect;
+// 			var newDoc = document.open("text/html", "replace");
+// 			// newDoc.write("All done, thanks! To submit the HIT, paste this code into Turk: " + randCode);
+//             newDoc.write("Your responses have been recorded.");
+// 			newDoc.close();
 	});  
 	
 //   if(forward() == "yes"){
