@@ -216,8 +216,8 @@ jsPsych.init({
     function SaveData(curData) {
   var dataToServer = {
     'id': jsPsych.data.getURLVariable('initials') + jsPsych.data.getURLVariable('id'),
-    'experimenter': '2101',
-    'experimentName': 'VAS_PLP',
+    'experimenter': 'Ethan',
+    'experimentName': '2101_VAS',
     'curData': curData
   }; 
 	
@@ -232,7 +232,7 @@ jsPsych.init({
         window.location.href = urlToRedirect;
         };
   } else {
-    $.post("https://132.239.36.101/PHRI/save.php",
+    $.post("https://bradylab.ucsd.edu/turk/save.php",
     dataToServer,
     function(data) { 
 			var newDoc = document.open("text/html", "replace");
