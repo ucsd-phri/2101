@@ -151,7 +151,7 @@ var instructions = {
   'phantom limb pain experiences and any <b>high intensity “flare up” episodes</b> that you may experience.'+
   '<br><br><br><br>'+
   'We will <u>first</u> ask you about your <b>typical</b> phantom limb pain experiences and <u>second</u> about your '+
-  'standout <b>high intensity</b> ones. If you have not recently experience any standout high intensity “flare ups”, '+
+  'standout <b>high intensity</b> ones. If you have not recently experienced any standout high intensity “flare ups”, '+
   'then respond to the first question on the basis of all your experiences and respond with “NA” to '+
   'the second questions.',
   choices: ["Continue"],
@@ -200,7 +200,9 @@ timeline.push({
 
 timeline.push({
     type: 'html-slider-response',
-    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of your phantom limb pain.<br></p>`,
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br>`+
+	`Recall that intensity of the pain refers to the "volume" or "loudness" of your pain, while unpleasantness refers to your emotional reaction or how much the pain bothers you.<br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of your phantom limb pain in the past week.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
@@ -218,7 +220,9 @@ timeline.push({
 
 timeline.push({
     type: 'html-slider-response',
-    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>unpleasantness</b> of your phantom limb pain.<br></p>`,
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br>`+
+	`Recall that intensity of the pain refers to the "volume" or "loudness" of your pain, while unpleasantness refers to your emotional reaction or how much the pain bothers you.<br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents the<br>typical or most common <b>unpleasantness</b> of your phantom limb pain in the past week.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
@@ -346,7 +350,7 @@ timeline.push({
 
 timeline.push({
     type: 'html-slider-response',
-    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of your residual limb pain.<br></p>`,
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of your residual limb pain in the past week.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
@@ -364,7 +368,7 @@ timeline.push({
 
 timeline.push({
     type: 'html-slider-response',
-    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>unpleasantness</b> of your residual limb pain.<br></p>`,
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>unpleasantness</b> of your residual limb pain in the past week.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
@@ -431,7 +435,7 @@ timeline.push({
 
 timeline.push({
     type: 'html-slider-response',
-    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of your other pain.<br></p>`,
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of your other pain in the psat week.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
@@ -449,7 +453,7 @@ timeline.push({
 
 timeline.push({
     type: 'html-slider-response',
-    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>unpleasantness</b> of your other pain.<br></p>`,
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>unpleasantness</b> of your other pain in the past week.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
@@ -561,7 +565,6 @@ timeline.push({
 timeline.push({
     type: 'html-slider-response',
     stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br><br>`+
-	`Recall that intensity of the pain refers to the "volume" or "loudness" of your pain, while unpleasantness refers to your emotional reaction or how much the pain bothers you.<br><br>`+
 	`<p>With that in mind, please provide a rating on the scale that best represents the<br><b>unpleasantness</b> of your residual limb pain <u>right now</u>.<br></p>`,
     require_movement: true,
     slider_start: 0,
@@ -596,7 +599,6 @@ timeline.push({
 timeline.push({
     type: 'html-slider-response',
     stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br><br>`+
-	`Recall that intensity of the pain refers to the "volume" or "loudness" of your pain, while unpleasantness refers to your emotional reaction or how much the pain bothers you.<br><br>`+
 	`<p>With that in mind, please provide a rating on the scale that best represents the<br><b>intensity</b> of your other pain <u>right now</u>.<br></p>`,
     require_movement: true,
     slider_start: 0,
@@ -616,7 +618,6 @@ timeline.push({
 timeline.push({
     type: 'html-slider-response',
     stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br><br>`+
-	`Recall that intensity of the pain refers to the "volume" or "loudness" of your pain, while unpleasantness refers to your emotional reaction or how much the pain bothers you.<br><br>`+
 	`<p>With that in mind, please provide a rating on the scale that best represents the<br><b>unpleasantness</b> of your other pain <u>right now</u>.<br></p>`,
     require_movement: true,
     slider_start: 0,
@@ -639,7 +640,7 @@ timeline.push({
     type: 'survey-multi-choice',
     questions: [
           {
-            prompt: `Please provide a rating for how much <br>kindness</b> you feel toward yourself, from 0 "no kindness at all" to 10 "most kindness imaginable"`,
+            prompt: `Please provide a rating for how much <b>kindness</b> you feel toward <u>yourself</u>, from 0 "no kindness at all" to 10 "most kindness imaginable"`,
             options: ["0<br>no kindness<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>most kindness<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
@@ -651,7 +652,7 @@ timeline.push({
 timeline.push({
     type: 'html-slider-response',
     stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br><br>`+
-	`<p>Please provide a rating on the scale that best represents the<br> how much <b>kindness</b> you feel toward yourself.<br></p>`,
+	`<p>Please provide a rating on the scale that best represents the<br> how much <b>kindness</b> you feel toward <u>yourself</u>.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
@@ -670,7 +671,7 @@ timeline.push({
     type: 'survey-multi-choice',
     questions: [
           {
-            prompt: `Please provide a rating for how much <br>kindness</b> you feel toward others, from 0 "no kindness at all" to 10 "most kindness imaginable"`,
+            prompt: `Please provide a rating for how much <b>kindness</b> you feel toward <u>others</u>, from 0 "no kindness at all" to 10 "most kindness imaginable"`,
             options: ["0<br>no kindness<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>most kindness<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
             values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
@@ -682,7 +683,7 @@ timeline.push({
 timeline.push({
     type: 'html-slider-response',
     stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br><br>`+
-	`<p>Please provide a rating on the scale that best represents the<br> how much <b>kindness</b> you feel toward others.<br></p>`,
+	`<p>Please provide a rating on the scale that best represents the<br> how much <b>kindness</b> you feel toward <u>others</u>.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
