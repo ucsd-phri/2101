@@ -179,7 +179,7 @@ timeline.push({
     questions: [
         {prompt: "Of those phantom limb pain experiences in the past week, what was the <b>typical or most common duration</b>, i.e., approximately how long did you experience the phantom limb pain for once it started?<br><br>"+
         'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.', 
-        name: 'plp_freq_typical', rows: 1, columns: 10, required: true}
+        name: 'plp_duration_typical', rows: 1, columns: 10, required: true}
     ],
     data: {
         type: "plp_duration_typical"}
@@ -257,7 +257,7 @@ timeline.push({
         {prompt: 'Of those uniquely high intensity "flare up" phantom limb pain experiences in the past week, what was the <b>typical or most common duration</b>, i.e., approximately how long did you experience the phantom limb pain for once it started?<br><br>'+
         'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.<br>'+
         'If you did not have any such experiences, please write "NA".', 
-        name: 'plp_freq_flares', rows: 1, columns: 10, required: true}
+        name: 'plp_duration_flares', rows: 1, columns: 10, required: true}
     ],
     data: {
         type: "plp_duration_flares"}
@@ -329,7 +329,7 @@ timeline.push({
     questions: [
         {prompt: "Of those residual limb pain experiences in the past week, what was the <b>typical or most common duration</b>, i.e., approximately how long did you experience the residual limb pain for once it started?<br><br>"+
         'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.', 
-        name: 'residual_freq', rows: 1, columns: 10, required: true}
+        name: 'residual_duration', rows: 1, columns: 10, required: true}
     ],
     data: {
         type: "residual_duration"}
@@ -414,7 +414,7 @@ timeline.push({
         {prompt: "Of those other pain experiences in the past week, what was the <b>typical or most common duration</b>, i.e., approximately how long did you experience the other pain for once it started?<br>"+
         'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.<br><br>'+
 	 'If you have not had any experiences of other pain, please write "NA".', 
-        name: 'other_freq', rows: 1, columns: 10, required: true}
+        name: 'other_duration', rows: 1, columns: 10, required: true}
     ],
     data: {
         type: "other_duration"}
