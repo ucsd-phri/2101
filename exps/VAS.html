@@ -874,7 +874,8 @@ timeline.push({
 jsPsych.data.addProperties({userAgent: navigator.userAgent,
 	startTime: new Date(),
     volID: jsPsych.data.getURLVariable('id'),
-    redcap: jsPsych.data.getURLVariable('redcap')
+    redcap: jsPsych.data.getURLVariable('redcap'),
+    timepoint: jsPsych.data.getURLVariable('timepoint')		    
 });
 
 jsPsych.init({
