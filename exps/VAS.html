@@ -169,7 +169,13 @@ var plp_freq_typical = {
         name: 'plp_freq_typical', rows: 1, columns: 4, required: true}
     ],
     data: {
-        type: "plp_freq_typical"}
+//         type: "plp_freq_typical"
+	construct: "plp",
+	rating: "frequency",
+	subtype: "typical",
+	timing: "week",
+	scale: "open-text"
+    }
 };
 
 timeline.push(plp_freq_typical);
@@ -182,7 +188,13 @@ timeline.push({
         name: 'plp_duration_typical', rows: 1, columns: 10, required: true}
     ],
     data: {
-        type: "plp_duration_typical"}
+//         type: "plp_duration_typical"
+	construct: "plp",
+	rating: "duration",
+	subtype: "typical",
+	timing: "week",
+	scale: "open-text"
+    }
 });
 
 timeline.push({
@@ -196,7 +208,15 @@ timeline.push({
             horizontal: true,
             required: true,
             name: `plp_painRating_typical`
-          }]});
+          }],
+     data: {
+	construct: "plp",
+	rating: "overall",
+	subtype: "typical",
+	timing: "week",
+	scale: "nrs"
+     }
+});
 
 timeline.push({
     type: 'html-slider-response',
@@ -211,11 +231,13 @@ timeline.push({
     slider_width: 800,
     labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        rating: "plp_intensity_typical",
-        timing: "week"
-        }
+     data: {
+	construct: "plp",
+	rating: "intensity",
+	subtype: "typical",
+	timing: "week",
+	scale: "vas"
+     }
     })
 
 timeline.push({
@@ -231,11 +253,13 @@ timeline.push({
     slider_width: 800,
     labels: [`Most unpleasant<br>imaginable`, `Not unpleasant<br>at all`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        rating: "plp_unpleasantness_typical",
-        timing: "week"
-        }
+     data: {
+	construct: "plp",
+	rating: "unpleasantness",
+	subtype: "typical",
+	timing: "week",
+	scale: "vas"
+     }
     })
 
 // PLP high intensity past week
@@ -247,8 +271,13 @@ timeline.push({
         'Please write only the number in the field below. If you did not have any uniquely high intensity "flare ups", write 0.', 
         name: 'plp_freq_flares', rows: 1, columns: 4, required: true}
     ],
-    data: {
-        type: "plp_freq_flares"}
+     data: {
+	construct: "plp",
+	rating: "frequency",
+	subtype: "flares",
+	timing: "week",
+	scale: "open-text"
+     }
 });
 
 timeline.push({
@@ -259,8 +288,13 @@ timeline.push({
         'If you did not have any such experiences, please write "NA".', 
         name: 'plp_duration_flares', rows: 1, columns: 10, required: true}
     ],
-    data: {
-        type: "plp_duration_flares"}
+     data: {
+	construct: "plp",
+	rating: "duration",
+	subtype: "flares",
+	timing: "week",
+	scale: "open-text"
+     }
 });
 
 timeline.push({
@@ -274,7 +308,15 @@ timeline.push({
             horizontal: true,
             required: true,
             name: `plp_painRating_flares`
-          }]});
+          }],
+     data: {
+	construct: "plp",
+	rating: "overall",
+	subtype: "flares",
+	timing: "week",
+	scale: "vas"
+     }
+});
 
 timeline.push({
     type: 'html-slider-response',
@@ -287,11 +329,13 @@ timeline.push({
     slider_width: 800,
     labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        rating: "plp_intensity_flares",
-        timing: "week"
-        }
+     data: {
+	construct: "plp",
+	rating: "intensity",
+	subtype: "flares",
+	timing: "week",
+	scale: "vas"
+     }
     })
 
 timeline.push({
@@ -305,11 +349,13 @@ timeline.push({
     slider_width: 800,
     labels: [`Most unpleasant<br>imaginable`, `Not unpleasant<br>at all`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        rating: "plp_unpleasantness_flares",
-        timing: "week"
-        }
+     data: {
+	construct: "plp",
+	rating: "unpleasantness",
+	subtype: "flares",
+	timing: "week",
+	scale: "vas"
+     }
     })
 
 // Residual limb pain past week
@@ -320,8 +366,12 @@ timeline.push({
         {prompt: "In the past <b>WEEK</b> how many times/occasions of <u>residual limb</u> pain have you experienced?<br>Please write only the number in the field below.", 
         name: 'residual_freq', rows: 1, columns: 4, required: true}
     ],
-    data: {
-        type: "residual_freq"}
+     data: {
+	construct: "residual_pain",
+	rating: "frequency",
+	timing: "week",
+	scale: "open-text"
+     }
 });
 
 timeline.push({
@@ -331,8 +381,12 @@ timeline.push({
         'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.', 
         name: 'residual_duration', rows: 1, columns: 10, required: true}
     ],
-    data: {
-        type: "residual_duration"}
+     data: {
+	construct: "residual_pain",
+	rating: "duration",
+	timing: "week",
+	scale: "open-text"
+     }
 });
 
 timeline.push({
@@ -346,7 +400,14 @@ timeline.push({
             horizontal: true,
             required: true,
             name: `residual_painRating`
-          }]});
+          }],
+     data: {
+	construct: "residual_pain",
+	rating: "overall",
+	timing: "week",
+	scale: "nrs"
+     }
+});
 
 timeline.push({
     type: 'html-slider-response',
@@ -359,11 +420,12 @@ timeline.push({
     slider_width: 800,
     labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        rating: "residual_intensity",
-        timing: "week"
-        }
+     data: {
+	construct: "residual_pain",
+	rating: "intensity",
+	timing: "week",
+	scale: "vas"
+     }
     })
 
 timeline.push({
@@ -377,11 +439,12 @@ timeline.push({
     slider_width: 800,
     labels: [`Most unpleasant<br>imaginable`, `Not unpleasant<br>at all`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        rating: "residual_unpleasantness",
-        timing: "week"
-        }
+     data: {
+	construct: "residual_pain",
+	rating: "unpleasantness",
+	timing: "week",
+	scale: "vas"
+     }
     })
 
 // Other pain week
@@ -393,8 +456,12 @@ timeline.push({
 	 "If so, please write where that pain is/describe it in the field below", 
         name: 'other_description', rows: 1, columns: 30, required: true}
     ],
-    data: {
-        type: "other_description"}
+     data: {
+	construct: "other_pain",
+	rating: "description",
+	timing: "week",
+	scale: "open-text"
+     }
 });	    
 	    
 	    
@@ -404,8 +471,12 @@ timeline.push({
         {prompt: "In the past <b>WEEK</b> how many times/occasions of <u>other</u> pain (besides your phantom limb and residual limb pain) have you experienced?<br>Please write only the number in the field below.", 
         name: 'other_freq', rows: 1, columns: 4, required: true}
     ],
-    data: {
-        type: "other_freq"}
+     data: {
+	construct: "other_pain",
+	rating: "frequency",
+	timing: "week",
+	scale: "open-text"
+     }
 });
 
 timeline.push({
@@ -416,8 +487,12 @@ timeline.push({
 	 'If you have not had any experiences of other pain, please write "NA".', 
         name: 'other_duration', rows: 1, columns: 10, required: true}
     ],
-    data: {
-        type: "other_duration"}
+     data: {
+	construct: "other_pain",
+	rating: "duration",
+	timing: "week",
+	scale: "open-text"
+     }
 });
 
 timeline.push({
@@ -431,7 +506,14 @@ timeline.push({
             horizontal: true,
             required: true,
             name: `other_painRating`
-          }]});
+          }],
+     data: {
+	construct: "other_pain",
+	rating: "overall",
+	timing: "week",
+	scale: "nrs"
+     }
+});
 
 timeline.push({
     type: 'html-slider-response',
@@ -444,11 +526,12 @@ timeline.push({
     slider_width: 800,
     labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        rating: "other_intensity",
-        timing: "week"
-        }
+     data: {
+	construct: "other_pain",
+	rating: "intensity",
+	timing: "week",
+	scale: "vas"
+     }
     })
 
 timeline.push({
@@ -462,11 +545,12 @@ timeline.push({
     slider_width: 800,
     labels: [`Most unpleasant<br>imaginable`, `Not unpleasant<br>at all`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        rating: "other_unpleasantness",
-        timing: "week"
-        }
+     data: {
+	construct: "other_pain",
+	rating: "unpleasantness",
+	timing: "week",
+	scale: "vas"
+     }
     })
 
 // Instructions for shift to current ratings.
@@ -491,7 +575,14 @@ timeline.push({
             horizontal: true,
             required: true,
             name: `plp_painRating_current`
-          }]});
+          }],
+     data: {
+	construct: "plp",
+	rating: "overall",
+	timing: "current",
+	scale: "nrs"
+     }	
+});
 
 timeline.push({
     type: 'html-slider-response',
@@ -504,11 +595,12 @@ timeline.push({
     slider_width: 800,
     labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        rating: "plp_intensity",
-        timing: "current"
-        }
+     data: {
+	construct: "plp",
+	rating: "intensity",
+	timing: "current",
+	scale: "vas"
+     }
     })
 
 timeline.push({
@@ -522,11 +614,12 @@ timeline.push({
     slider_width: 800,
     labels: [`Most unpleasant<br>imaginable`, `Not unpleasant<br>at all`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        rating: "plp_unpleasantness",
-        timing: "current"
-        }
+      data: {
+	construct: "plp",
+	rating: "unpleasantness",
+	timing: "current",
+	scale: "vas"
+     }
     })
 
 // Residual right now
@@ -542,7 +635,14 @@ timeline.push({
             horizontal: true,
             required: true,
             name: `residual_painRating_current`
-          }]});
+          }],
+      data: {
+	construct: "residual_pain",
+	rating: "overall",
+	timing: "current",
+	scale: "nrs"
+     }	
+});
 
 timeline.push({
     type: 'html-slider-response',
@@ -555,11 +655,12 @@ timeline.push({
     slider_width: 800,
     labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        rating: "residual_intensity",
-        timing: "current"
-        }
+      data: {
+	construct: "residual_pain",
+	rating: "intensity",
+	timing: "current",
+	scale: "vas"
+     }	
     })
 
 timeline.push({
@@ -574,11 +675,12 @@ timeline.push({
     slider_width: 800,
     labels: [`Most unpleasant<br>imaginable`, `Not unpleasant<br>at all`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        rating: "residual_unpleasantness",
-        timing: "current"
-        }
+      data: {
+	construct: "residual_pain",
+	rating: "unpleasantness",
+	timing: "current",
+	scale: "vas"
+     }	
     })
 
 // Other pain current
@@ -594,7 +696,14 @@ timeline.push({
             horizontal: true,
             required: true,
             name: `other_painRating_current`
-          }]});
+          }],
+      data: {
+	construct: "other_pain",
+	rating: "overall",
+	timing: "current",
+	scale: "nrs"
+     }		
+});
 
 timeline.push({
     type: 'html-slider-response',
@@ -608,11 +717,12 @@ timeline.push({
     slider_width: 800,
     labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        rating: "other_intensity",
-        timing: "current"
-        }
+      data: {
+	construct: "other_pain",
+	rating: "intensity",
+	timing: "current",
+	scale: "vas"
+     }		
     })
 
 timeline.push({
@@ -627,11 +737,12 @@ timeline.push({
     slider_width: 800,
     labels: [`Most unpleasant<br>imaginable`, `Not unpleasant<br>at all`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        rating: "other_unpleasantness",
-        timing: "current"
-        }
+      data: {
+	construct: "other_pain",
+	rating: "unpleasantness",
+	timing: "current",
+	scale: "vas"
+     }		
     })
 
 // Kindness
@@ -647,7 +758,13 @@ timeline.push({
             horizontal: true,
             required: true,
             name: "kindness_self_nrs"
-          }]});
+          }],
+      data: {
+	construct: "kindness",
+	rating: "self",
+	scale: "nrs"
+     }			
+});
 
 timeline.push({
     type: 'html-slider-response',
@@ -661,10 +778,11 @@ timeline.push({
     slider_width: 800,
     labels: [`Most kindness<br>imaginable`, `No kindness<br>at all`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        name: "kindness_self_vas"
-        }
+      data: {
+	construct: "kindness",
+	rating: "self",
+	scale: "vas"
+     }		
     })
 	    
 timeline.push({
@@ -678,7 +796,13 @@ timeline.push({
             horizontal: true,
             required: true,
             name: "kindness_others_nrs"
-          }]});
+          }],
+      data: {
+	construct: "kindness",
+	rating: "others",
+	scale: "nrs"
+     }		
+});
 
 timeline.push({
     type: 'html-slider-response',
@@ -692,10 +816,11 @@ timeline.push({
     slider_width: 800,
     labels: [`Most kindness<br>imaginable`, `No kindness<br>at all`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        name: "kindness_others_vas"
-        }
+      data: {
+	construct: "kindness",
+	rating: "others",
+	scale: "vas"
+     }	
     })	    
 
 // Stress
@@ -712,10 +837,10 @@ timeline.push({
     slider_width: 800,
     labels: [`Most stress<br>imaginable`, `No stress<br>at all`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        name: "stress"
-        }
+      data: {
+	construct: "stress",
+	scale: "vas"
+     }	
     })
 
 // Effectiveness
@@ -732,10 +857,10 @@ timeline.push({
     slider_width: 800,
     labels: [`Most useful/effective<br>imaginable`, `Not useful/effective<br>at all`],
     prompt: "<p></p>",
-    data: {
-        type: 'VAS',
-        name: "effectiveness"
-        }
+      data: {
+	construct: "effectiveness",
+	scale: "vas"
+     }	
     })
 
 // test
