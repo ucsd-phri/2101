@@ -202,9 +202,9 @@ timeline.push({
     questions: [
           {
             prompt: `Of those occasions of phantom limb pain in the past week, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall phantom limb pain you experienced?`,
-            options: ["NA <br>(No occasion<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            options: ["0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
-            values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
             horizontal: true,
             required: true,
             name: `plp_painRating_typical`
@@ -394,9 +394,9 @@ timeline.push({
     questions: [
           {
             prompt: `Of those occasions of residual limb pain in the past week, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall residual limb pain you experienced?`,
-            options: ["NA <br>(No occasion<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            options: ["0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
-            values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
             horizontal: true,
             required: true,
             name: `residual_painRating`
@@ -500,9 +500,9 @@ timeline.push({
     questions: [
           {
             prompt: `Of those occasions of other pain in the past week, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall other pain you experienced?`,
-            options: ["NA <br>(No occasion<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            options: ["0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
             // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
-            values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
             horizontal: true,
             required: true,
             name: `other_painRating`
@@ -517,7 +517,7 @@ timeline.push({
 
 timeline.push({
     type: 'html-slider-response',
-    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of your other pain in the psat week.<br></p>`,
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of your other pain in the past week.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
@@ -646,7 +646,7 @@ timeline.push({
 
 timeline.push({
     type: 'html-slider-response',
-    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br><b>intensity</b> of your residual limb pain <u>right now</u>.<br></p>`,
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br><br><p>Please provide a rating on the scale that best represents the<br><b>intensity</b> of your residual limb pain <u>right now</u>.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
@@ -666,7 +666,7 @@ timeline.push({
 timeline.push({
     type: 'html-slider-response',
     stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br><br>`+
-	`<p>With that in mind, please provide a rating on the scale that best represents the<br><b>unpleasantness</b> of your residual limb pain <u>right now</u>.<br></p>`,
+	`<p>Please provide a rating on the scale that best represents the<br><b>unpleasantness</b> of your residual limb pain <u>right now</u>.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
@@ -708,7 +708,7 @@ timeline.push({
 timeline.push({
     type: 'html-slider-response',
     stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br><br>`+
-	`<p>With that in mind, please provide a rating on the scale that best represents the<br><b>intensity</b> of your other pain <u>right now</u>.<br></p>`,
+	`<p>Please provide a rating on the scale that best represents the<br><b>intensity</b> of your other pain <u>right now</u>.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
@@ -728,7 +728,7 @@ timeline.push({
 timeline.push({
     type: 'html-slider-response',
     stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>You can also use the left and right arrows on your keyboard to move the scale.</i></p><br><br><br><br>`+
-	`<p>With that in mind, please provide a rating on the scale that best represents the<br><b>unpleasantness</b> of your other pain <u>right now</u>.<br></p>`,
+	`<p>Please provide a rating on the scale that best represents the<br><b>unpleasantness</b> of your other pain <u>right now</u>.<br></p>`,
     require_movement: true,
     slider_start: 0,
     min: 0,
