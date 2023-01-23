@@ -141,6 +141,18 @@
 //    this.style.background = 'linear-gradient(to right, red 0%, red ' + value + '%, #fff ' + value + '%, white 100%)'
 // };
 var timeline = [];
+	    
+var id = {
+    type: 'survey-text',
+    questions: [
+        {prompt: "Enter Volunteer ID", 
+        name: 'id', rows: 1, columns: 4, required: true}
+    ],
+    data: {
+//         type: "plp_freq_typical"
+	construct: "id"
+    }
+};	    
 
 var instructions = {
   type: 'html-button-response',
