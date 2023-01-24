@@ -782,6 +782,7 @@ jsPsych.init({
             // if(forward() == "yes"){
             //     window.location.href = "https://www.ethanhurwitz.com/VAS2.html";
             // } else {jsPsych.data.displayData();}
+	      		console.log(jsPsych.data.get().json());
 			SaveData(jsPsych.data.get().csv()); // .json()?
     }
     });
