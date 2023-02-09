@@ -335,6 +335,9 @@ b{
     line-height:1;
     padding:15px 20px
 }
+.button:hover{
+    background-color: #60b9f4;
+}
 .button svg{
     margin-right:10px
 }
