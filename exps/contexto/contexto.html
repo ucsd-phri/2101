@@ -268,6 +268,7 @@ let close_enough_on = 0;
     $('.message').empty();
     $('.end-msg').remove();
     $("input").show();
+    $(".how-to-play").hide();	  
 
     // If they are finished with all the trials, show ending screen and save data to server.
 
@@ -456,9 +457,31 @@ let close_enough_on = 0;
 });
 };
 
-game();
+// game();
 
 </script>
+	  
+<script>
+    $("input").hide();
+</script>
+<div class="how-to-play">
+    <div>
+       <div class="modal-title">
+          <h1>How to play:</h1>
+       </div>
+       <p>On each trial, there is a randomly selected secret word.<br>Your goal is to try and figure out that secret word.</p> 
+       <p>You have a maximum of <u>40</u> guesses per trial.</p>
+       <p>The words were sorted by an artificial intelligence algorithm according to how similar they were to the secret word.</p>
+       <p>After submitting a word, you will see its position. The secret word is number 1.</p>
+       <!-- <p>The algorithm analyzed thousands of texts. It uses the context in which words are used to calculate the similarity between them.</p> -->
+       <p>You will earn points based on the closest word you can get on each trial.<br>If you get the secret word, you will earn a bonus for that trial.</p>
+    </div>
+    <div style="position: relative; padding: 15px 0px;">
+        <button type="button" class="button" onclick="game()">
+           <div style="min-width: 104px;">Begin</div>
+        </button>
+     </div>    
+ </div>	  
 
 <!-- Only have message show up after first guess -->
   <div class="message">
