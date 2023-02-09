@@ -40,10 +40,13 @@
 // var targets = ["frog", "king"];
 
 // targets = jsPsych.randomization.repeat(targets, 1);
-
+	
     // target words and starting word -- if giving a word to start with
-var targets = {'word': ["frog", "king"],
-               'start': ["animal", "court"]};
+var targets = {'word': ['church', 'wizard', 'fairy', 'damp', 'seaweed', 'harp', 
+	'corpse', 'blaze', 'clock', 'barbecue', 'pleasure', 
+	'honest', 'society', 'warmth', 'helpful', 'anger', 
+	'justice', 'horror', 'attractive', 'pathetic'],
+               'start': ['']};
 
 function shuffle(obj1, obj2) {
   var index = obj1.length;
@@ -68,7 +71,7 @@ shuffle(targets.word, targets.start);
 for (let i=0; i < targets.word.length; i++){
   // window[targets[i]] = [];
 
-  $.getJSON(targets.word[i] + '.json', function(data) {
+  $.getJSON('vector_files/' + targets.word[i] + '.json', function(data) {
     window[targets.word[i]] = data
   }) 
   
