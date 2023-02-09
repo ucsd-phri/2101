@@ -194,7 +194,7 @@ var $sortedDivs = [];
   var position = function(n) {
     // TEMP: Replace "frog" with trial target word
     // return targets[n].word.indexOf($('.word').val().toLowerCase()) + 1
-    return window[targets.word[n]].word.indexOf($('.word').val().toLowerCase()) + 1  
+    return window[targets.word[n]].word.indexOf(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0]) + 1  
   };
 </script>
 
@@ -288,7 +288,7 @@ let close_enough = 30;
     if (e.key === 'Enter') {
       // console.log($('.word').val().toLowerCase())
       // Add response time and add to + update guess counter *if it exists and is new*
-      if (!data_temp.responses.includes($('.word').val().toLowerCase()) && (position(counter) > 0)) {
+      if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0]) && (position(counter) > 0)) {
         // if(data_temp.time.length === 0){
         //   time_temp = new Date();
         //   data_temp.time.push(time_temp);
@@ -337,7 +337,7 @@ let close_enough = 30;
         '</div>'+
         '<div class="row">'+
           '<span>'+
-            $('.word').val().toLowerCase() +
+            lemmatizer.only_lemmas($('.word').val().toLowerCase())[0] +
           '</span>'+
           '<span>'+
             // <!-- Similarity of Most Recent Guess - Need to use IIFE because embedding in HTML, can't use addition -->
@@ -354,7 +354,7 @@ let close_enough = 30;
     change_class();  
 
     // Add row to guess history *only if it is new AND in the word list*
-    if (!data_temp.responses.includes($('.word').val().toLowerCase()) && (position(counter) > 0)) {
+    if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0]) && (position(counter) > 0)) {
       $('.guess-history').append(row_template);
     };
     
@@ -374,7 +374,7 @@ let close_enough = 30;
   '</div>' +
 '</div>'
 
-    if (!data_temp.responses.includes($('.word').val().toLowerCase()) && (Number($(".guess-history").children().get()[0].getAttribute("data-sort")) < close_enough) && (!(Number($(".guess-history").children().get()[0].getAttribute("data-sort")) === 1))) {
+    if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0]) && (Number($(".guess-history").children().get()[0].getAttribute("data-sort")) < close_enough) && (!(Number($(".guess-history").children().get()[0].getAttribute("data-sort")) === 1))) {
       $(close_msg).insertAfter(".top-bar");
       data.data.push(data_temp);
       counter++;
@@ -390,7 +390,7 @@ let close_enough = 30;
         '</div>'+
         '<div class="row">'+
           '<span>'+
-            $('.word').val().toLowerCase() +
+            lemmatizer.only_lemmas($('.word').val().toLowerCase())[0] +
           '</span>'+
           '<span>'+
             // <!-- Similarity of Most Recent Guess - Need to use IIFE because embedding in HTML, can't use addition -->
@@ -404,11 +404,11 @@ let close_enough = 30;
         '</div>'+
       '</div>'
 
-    let message_repeat = '<div class="message-text">The word <u>' + $('.word').val().toLowerCase() + '</u> was already guessed.</div>' 
+    let message_repeat = '<div class="message-text">The word <u>' + lemmatizer.only_lemmas($('.word').val().toLowerCase())[0] + '</u> was already guessed.</div>' 
     let message_unknown = `<div class="message-text">I'm sorry, I don't know this word.</div>`
 
     // Add Message
-    if (data_temp.responses.includes($('.word').val().toLowerCase())) {
+    if (data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0])) {
       $('.message').html(message_repeat);
     } else if (position(counter) === 0) {
       $('.message').html(message_unknown);
@@ -417,8 +417,8 @@ let close_enough = 30;
     }
 
     // Save response *only if it is new and exists!*
-    if (!data_temp.responses.includes($('.word').val().toLowerCase()) && (position(counter) > 0)) {
-      data_temp.responses.push($('.word').val().toLowerCase())    
+    if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0]) && (position(counter) > 0)) {
+      data_temp.responses.push(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0])    
     };
 
     // Add screen to begin next trial:
