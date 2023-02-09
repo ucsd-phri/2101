@@ -3,26 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>TITLE</title>
+  <title>Guess That Word!</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/jspsych.js"></script>
   <!-- <script defer="defer" src="static/js/main.341327a7.js"></script> -->
-  <link href="css/main.b6b9b6e5.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
   
 </head>
 <body>
-	
-<!--  <script src="javascript-lemmatizer/bower_components/jquery/dist/jquery.js"></script> -->
-  <script src="javascript-lemmatizer/bower_components/underscore/underscore.js"></script>
-  <script src="javascript-lemmatizer/js/lemmatizer.js"></script>
-
-  <script type="text/javascript">
-    var lemmatizer = new Lemmatizer();
-  </script>	
-
-<script>
-// Create Exp Variables:
-var num_guesses = 0
+    <script src="javascript-lemmatizer/bower_components/underscore/underscore.js"></script>
+    <script src="javascript-lemmatizer/js/lemmatizer.js"></script>
+  
+    <script type="text/javascript">
+      var lemmatizer = new Lemmatizer();
+    </script>	
+  
+  <script>
+  // Create Exp Variables:
+  var num_guesses = 0
 
   // Create Data Variable
   var data = {
@@ -39,17 +37,39 @@ var num_guesses = 0
 <script>
 // List of target words:
 
-var targets = ["frog", "king"];
+// var targets = ["frog", "king"];
 
-targets = jsPsych.randomization.repeat(targets, 1)
+// targets = jsPsych.randomization.repeat(targets, 1);
+
+    // target words and starting word -- if giving a word to start with
+var targets = {'word': ["frog", "king"],
+               'start': ["animal", "court"]};
+
+function shuffle(obj1, obj2) {
+  var index = obj1.length;
+  var rnd, tmp1, tmp2;
+
+  while (index) {
+    rnd = Math.floor(Math.random() * index);
+    index -= 1;
+    tmp1 = obj1[index];
+    tmp2 = obj2[index];
+    obj1[index] = obj1[rnd];
+    obj2[index] = obj2[rnd];
+    obj1[rnd] = tmp1;
+    obj2[rnd] = tmp2;
+  }
+};
+
+shuffle(targets.word, targets.start);
 
 // Load in json files of word similarity vectors
 
-for (let i=0; i < targets.length; i++){
+for (let i=0; i < targets.word.length; i++){
   // window[targets[i]] = [];
 
-  $.getJSON(targets[i] + '.json', function(data) {
-    window[targets[i]] = data
+  $.getJSON(targets.word[i] + '.json', function(data) {
+    window[targets.word[i]] = data
   }) 
   
 };
@@ -99,6 +119,13 @@ const getBarColor = (distance) => {
   }
   return 'var(--red)';
 };
+
+// Above are from contexto. Below are novel.
+
+// const set_guess_limit = (n) => {
+//     return n;
+// };
+
 </script>
 
 <div id="root">
@@ -106,13 +133,13 @@ const getBarColor = (distance) => {
     <div class="top-bar">
       <div class="title">
         <h1>
-          Experiment
+          Guess That Word!
+          <br><br>
         </h1>
       </div>
       <div style="position: relative;">
-        <button class="btn">
-
-        </button>
+        <!-- <button class="btn">
+        </button> -->
       </div>
 
     </div>
@@ -164,7 +191,7 @@ var $sortedDivs = [];
   var position = function(n) {
     // TEMP: Replace "frog" with trial target word
     // return targets[n].word.indexOf($('.word').val().toLowerCase()) + 1
-    return window[targets[n]].word.indexOf($('.word').val().toLowerCase()) + 1  
+    return window[targets.word[n]].word.indexOf($('.word').val().toLowerCase()) + 1  
   };
 </script>
 
@@ -185,6 +212,8 @@ var change_class = function() {
 var time1 = new Date();
 var time_temp = new Date();
 let counter = 0;
+let guess_limit = 50;
+let close_enough = 30;
 </script>
 
 <script>
@@ -225,7 +254,7 @@ let counter = 0;
     $('.word').off();
     num_guesses = 0;
     time_temp = new Date();
-    data_temp = {'target': targets[counter],
+    data_temp = {'target': targets.word[counter],
       'trial': counter + 1,
       'responses': [],
       'time': []};
@@ -234,19 +263,20 @@ let counter = 0;
     $('.guess-history').empty();
     $('.message').empty();
     $('.end-msg').remove();
+    $("input").show();
 
     // If they are finished with all the trials, show ending screen and save data to server.
 
     let finish_msg = '<div class="end-msg" id="finish-msg">' +
-  '<p class="bigger"><span>You are now done with this part of the study. <br>Thank you!<br><br>Here is where the data would save.<br>It printed to the console for this test.</span></p>' +
+  '<p class="bigger"><span>You are now done with this part of the study. <br>Thank you!</span></p>' +
     '</div>'
 
-    if (counter === targets.length) {
+    if (counter === targets.word.length) {
         $(finish_msg).insertAfter(".top-bar");
         // SaveData(JSON.stringify(data)); 
         console.log(JSON.stringify(data));
         return;
-    };
+    };    
   
     // Start all the shit that is basically a trial:
     $('.trial_num').html("#" + (counter + 1))
@@ -256,22 +286,46 @@ let counter = 0;
       // console.log($('.word').val().toLowerCase())
       // Add response time and add to + update guess counter *if it exists and is new*
       if (!data_temp.responses.includes($('.word').val().toLowerCase()) && (position(counter) > 0)) {
-        if(data_temp.time.length === 0){
-          time_temp = new Date();
-          data_temp.time.push(time_temp);
-          // console.log("first time entry");
-        } else {
-          // Get time difference (time between response entries) in milliseconds
-          data_temp.time.push((new Date()) - time_temp);
-          // console.log((new Date()) - time_temp);
-          time_temp = new Date();
-        }
+        // if(data_temp.time.length === 0){
+        //   time_temp = new Date();
+        //   data_temp.time.push(time_temp);
+        //   // console.log("first time entry");
+        // } else {
+        //   // Get time difference (time between response entries) in milliseconds
+        //   data_temp.time.push((new Date()) - time_temp);
+        //   // console.log((new Date()) - time_temp);
+        //   time_temp = new Date();
+        // }
+
+        data_temp.time.push(new Date());
         
 
         num_guesses++;
         update_guess_counter();
 
     };
+
+    // Code for instating a guess limit:
+    let guess_limit_msg = '<div class="end-msg" id="limit-msg">' +
+      '<p class="bigger"><span>You have reached the maximum number of guesses allowed for this word!</span></p>' +
+  '<p><span>The target word was</span> <u>' + targets.word[counter] + '</u></p>'+
+  '<div>' +
+     '<div style="position: relative; padding: 15px 0px;">' +
+        '<button type="button" class="button" onclick="game()">'+
+           '<div style="min-width: 104px;">Next Trial</div>' +
+        '</button>' +
+     '</div>' +
+  '</div>' +
+'</div>'
+
+    if (($('.guess-history').children('div').length + 1) === guess_limit) {
+      $(guess_limit_msg).insertAfter(".top-bar");
+      data.data.push(data_temp);
+      counter++;
+    };
+    
+
+
         // Create template row to add to guess history
       let row_template = '<div class="row-wrapper current" id="guesses" data-sort=' + position(counter) + '>'+
         '<div class="outer-bar">'+
@@ -304,6 +358,27 @@ let counter = 0;
     // Sort the guess history by similarity
     sort_guesses();
 
+    // Code for getting close enough:
+    let close_msg = '<div class="end-msg" id="close-msg">' +
+      '<p class="bigger"><span>Nice work! This is close enough to move on to the next trial.</span></p>' +
+  '<p><span>The target word was</span> <u>' + targets.word[counter] + '</u></p>'+
+  '<div>' +
+     '<div style="position: relative; padding: 15px 0px;">' +
+        '<button type="button" class="button" onclick="game()">'+
+           '<div style="min-width: 104px;">Next Trial</div>' +
+        '</button>' +
+     '</div>' +
+  '</div>' +
+'</div>'
+
+    if (!data_temp.responses.includes($('.word').val().toLowerCase()) && (Number($(".guess-history").children().get()[0].getAttribute("data-sort")) < close_enough) && (!(Number($(".guess-history").children().get()[0].getAttribute("data-sort")) === 1))) {
+      $(close_msg).insertAfter(".top-bar");
+      data.data.push(data_temp);
+      counter++;
+      // Hide input
+      $("input").hide();
+    };
+    
     // Create template for Message History
     let message_template = '<div class="row-wrapper current" id="guesses" data-sort=' + position(counter) + '>'+
         '<div class="outer-bar">'+
@@ -346,7 +421,7 @@ let counter = 0;
     // Add screen to begin next trial:
     let win_message = '<div class="end-msg">' +
   '<p class="bigger"><span>Congrats!</span></p>' +
-  '<p><span>You got the</span> word <u>' + targets[counter] + '</u><br>in <u>' + data_temp.responses.length + '</u> guesses.</p>'+
+  '<p><span>You got the</span> word <u>' + targets.word[counter] + '</u><br>in <u>' + data_temp.responses.length + '</u> guesses.</p>'+
   '<div class="chart-wrapper">' +
      '<div class="chart"></div>' +
   '</div>' +
@@ -365,6 +440,8 @@ let counter = 0;
       data.data.push(data_temp);
       counter++;
       };    
+
+
 
     // Clear input field
     // TEMP: Will want this to be an if/then -- only clear if guess is valid?
