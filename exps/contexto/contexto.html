@@ -217,6 +217,7 @@ var time_temp = new Date();
 let counter = 0;
 let guess_limit = 50;
 let close_enough = 30;
+let close_enough_on = 0;	
 </script>
 
 <script>
@@ -374,7 +375,7 @@ let close_enough = 30;
   '</div>' +
 '</div>'
 
-    if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0]) && (Number($(".guess-history").children().get()[0].getAttribute("data-sort")) < close_enough) && (!(Number($(".guess-history").children().get()[0].getAttribute("data-sort")) === 1))) {
+    if ((close_enough_on === 1) && !data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0]) && (Number($(".guess-history").children().get()[0].getAttribute("data-sort")) < close_enough) && (!(Number($(".guess-history").children().get()[0].getAttribute("data-sort")) === 1))) {
       $(close_msg).insertAfter(".top-bar");
       data.data.push(data_temp);
       counter++;
