@@ -41,30 +41,56 @@
 
 // targets = jsPsych.randomization.repeat(targets, 1);
 	
+var setA = ['seaweed', 'camera', 'barbecue', 'wizard', 'justice'];
+setA = jsPsych.randomization.repeat(setA, 1);
+var setB = ['damp', 'cilantro', 'harp', 'clock', 'pathetic'];
+setB = jsPsych.randomization.repeat(setB, 1);
+var setC = ['scallop', 'flower', 'moose', 'corpse', 'honest'];
+setC = jsPsych.randomization.repeat(setC, 1);
+var setD = ['alcohol', 'desert', 'quiche', 'anger', 'pleasure'];
+setD = jsPsych.randomization.repeat(setD, 1);
+var setE = ['blaze', 'cookie', 'church', 'horror', 'society'];
+setE = jsPsych.randomization.repeat(setE, 1);
+
+var targets = {'word': [""],
+               'start': [""]};
+
+    if (jsPsych.data.getURLVariable('set') == 'A') {
+        targets.word = setA;
+    } else if (jsPsych.data.getURLVariable('set') == 'B') {
+        targets.word = setB;
+    } else if (jsPsych.data.getURLVariable('set') == 'C') {
+        targets.word = setC;
+    } else if (jsPsych.data.getURLVariable('set') == 'D') {
+        targets.word = setD;
+    } else if (jsPsych.data.getURLVariable('set') == 'E') {
+        targets.word = setE;
+    };	
+	
     // target words and starting word -- if giving a word to start with
-var targets = {'word': ['church', 'wizard', 'fairy', 'damp', 'seaweed', 'harp', 
-	'corpse', 'blaze', 'clock', 'barbecue', 'pleasure', 
-	'honest', 'society', 'warmth', 'helpful', 'anger', 
-	'justice', 'horror', 'attractive', 'pathetic'],
-               'start': ['']};
+// var targets = {'word': ['church', 'wizard', 'fairy', 'damp', 'seaweed', 'harp', 
+// 	'corpse', 'blaze', 'clock', 'barbecue', 'pleasure', 
+// 	'honest', 'society', 'warmth', 'helpful', 'anger', 
+// 	'justice', 'horror', 'attractive', 'pathetic'],
+//                'start': ['']};
 
-function shuffle(obj1, obj2) {
-  var index = obj1.length;
-  var rnd, tmp1, tmp2;
+// function shuffle(obj1, obj2) {
+//   var index = obj1.length;
+//   var rnd, tmp1, tmp2;
 
-  while (index) {
-    rnd = Math.floor(Math.random() * index);
-    index -= 1;
-    tmp1 = obj1[index];
-    tmp2 = obj2[index];
-    obj1[index] = obj1[rnd];
-    obj2[index] = obj2[rnd];
-    obj1[rnd] = tmp1;
-    obj2[rnd] = tmp2;
-  }
-};
+//   while (index) {
+//     rnd = Math.floor(Math.random() * index);
+//     index -= 1;
+//     tmp1 = obj1[index];
+//     tmp2 = obj2[index];
+//     obj1[index] = obj1[rnd];
+//     obj2[index] = obj2[rnd];
+//     obj1[rnd] = tmp1;
+//     obj2[rnd] = tmp2;
+//   }
+// };
 
-shuffle(targets.word, targets.start);
+// shuffle(targets.word, targets.start);
 
 // Load in json files of word similarity vectors
 
