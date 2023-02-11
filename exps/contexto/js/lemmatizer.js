@@ -75,7 +75,7 @@ var Lemmatizer = function() {
     this.wordlists[key] = {};
     this.exceptions[key] = {};
   }
-
+localStorage.clear(); // clear local storage
   // store dictionary data to localStorage from wn_files
   for (var pos in this.wn_files) {
     this.load_wordnet_files(pos, this.wn_files[pos][0], this.wn_files[pos][1]);
