@@ -220,7 +220,7 @@ var $sortedDivs = [];
   var position = function(n) {
     // TEMP: Replace "frog" with trial target word
     // return targets[n].word.indexOf($('.word').val().toLowerCase()) + 1
-    return window[targets.word[n]].word.indexOf(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0]) + 1  
+    return window[targets.word[n]].word.indexOf(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) + 1  
   };
 </script>
 
@@ -316,7 +316,7 @@ let close_enough_on = 0;
     if (e.key === 'Enter') {
       // console.log($('.word').val().toLowerCase())
       // Add response time and add to + update guess counter *if it exists and is new*
-      if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0]) && (position(counter) > 0)) {
+      if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) && (position(counter) > 0)) {
         // if(data_temp.time.length === 0){
         //   time_temp = new Date();
         //   data_temp.time.push(time_temp);
@@ -365,7 +365,7 @@ let close_enough_on = 0;
         '</div>'+
         '<div class="row">'+
           '<span>'+
-            lemmatizer.only_lemmas($('.word').val().toLowerCase())[0] +
+            lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0] +
           '</span>'+
           '<span>'+
             // <!-- Similarity of Most Recent Guess - Need to use IIFE because embedding in HTML, can't use addition -->
@@ -382,7 +382,7 @@ let close_enough_on = 0;
     change_class();  
 
     // Add row to guess history *only if it is new AND in the word list*
-    if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0]) && (position(counter) > 0)) {
+    if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) && (position(counter) > 0)) {
       $('.guess-history').append(row_template);
     };
     
@@ -402,7 +402,7 @@ let close_enough_on = 0;
   '</div>' +
 '</div>'
 
-    if ((close_enough_on === 1) && !data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0]) && (Number($(".guess-history").children().get()[0].getAttribute("data-sort")) < close_enough) && (!(Number($(".guess-history").children().get()[0].getAttribute("data-sort")) === 1))) {
+    if ((close_enough_on === 1) && !data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) && (Number($(".guess-history").children().get()[0].getAttribute("data-sort")) < close_enough) && (!(Number($(".guess-history").children().get()[0].getAttribute("data-sort")) === 1))) {
       $(close_msg).insertAfter(".top-bar");
       data.data.push(data_temp);
       counter++;
@@ -418,7 +418,7 @@ let close_enough_on = 0;
         '</div>'+
         '<div class="row">'+
           '<span>'+
-            lemmatizer.only_lemmas($('.word').val().toLowerCase())[0] +
+            lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0] +
           '</span>'+
           '<span>'+
             // <!-- Similarity of Most Recent Guess - Need to use IIFE because embedding in HTML, can't use addition -->
@@ -432,11 +432,11 @@ let close_enough_on = 0;
         '</div>'+
       '</div>'
 
-    let message_repeat = '<div class="message-text">The word <u>' + lemmatizer.only_lemmas($('.word').val().toLowerCase())[0] + '</u> was already guessed.</div>' 
+    let message_repeat = '<div class="message-text">The word <u>' + lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0] + '</u> was already guessed.</div>' 
     let message_unknown = `<div class="message-text">I'm sorry, I don't know this word.</div>`
 
     // Add Message
-    if (data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0])) {
+    if (data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0])) {
       $('.message').html(message_repeat);
     } else if (position(counter) === 0) {
       $('.message').html(message_unknown);
@@ -445,8 +445,8 @@ let close_enough_on = 0;
     }
 
     // Save response *only if it is new and exists!*
-    if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0]) && (position(counter) > 0)) {
-      data_temp.responses.push(lemmatizer.only_lemmas($('.word').val().toLowerCase())[0])    
+    if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) && (position(counter) > 0)) {
+      data_temp.responses.push(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0])    
     };
 
     // Add screen to begin next trial:
@@ -496,7 +496,7 @@ let close_enough_on = 0;
           <h1>How to play:</h1>
        </div>
        <p>On each trial, there is a randomly selected secret word.<br>Your goal is to try and figure out that secret word.</p> 
-       <p>You have a maximum of <u>40</u> guesses per trial.</p>
+       <p>The secret word will always be a noun. You have a maximum of <u>40</u> guesses per trial.</p>
        <p>The words were sorted by an artificial intelligence algorithm according to how similar they were to the secret word.</p>
        <p>After submitting a word, you will see its position. The secret word is number 1.</p>
        <!-- <p>The algorithm analyzed thousands of texts. It uses the context in which words are used to calculate the similarity between them.</p> -->
