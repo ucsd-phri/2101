@@ -83,7 +83,7 @@ var Lemmatizer = function() {
 
   // fetch dictionary data from localStorage, then set up wordlists and exceptions
   for (var pos in this.wn_files) {
-    console.log(this.setup_dic_data(pos));
+//     console.log(this.setup_dic_data(pos));
     this.setup_dic_data(pos);
   }
 };
