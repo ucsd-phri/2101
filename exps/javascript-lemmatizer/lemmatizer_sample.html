@@ -12,58 +12,6 @@
   <script type="text/javascript">
     var lemmatizer = new Lemmatizer();
 
-    function escapeHTML(val) {
-      return $('<div />').text(val).html();
-    };
-
-    function display_lemma(form, pos) {
-      if (!form) { return; }
-      var html = '';
-      _.each(lemmatizer.lemmas(form, pos), function(val) {
-        html = html + "The base form of '" + escapeHTML(form) + "' is '" + escapeHTML(val[0]) + "' as " + escapeHTML(val[1]) + ".<br />";
-      });
-      $("#lem-result").html(html);
-    }
-
-    $(document).ready( function() {
-      $("#search-lemma").click( function(){
-        var word = $("#word").val();
-        var pos  = $("#pos").val();
-        display_lemma(word, pos);
-      });
-
-      $('#lem-exc-button').click( function() {
-        $('#lem-confirm').html( confirm_dic('exc') );
-      });
-
-      $('#lem-list-button').click( function() {
-        // index data is much larger than exceptions data.
-        $('#lem-confirm').html( confirm_dic('idx') );
-      });
-    });
-
-    // for debug to use like $('#lem-confirm').html( confirm_dic('exc') )
-    function confirm_dic(type) {
-      var words = null;
-      if (type == 'exc') {
-        words = lemmatizer.exceptions;
-      } else if (type == 'idx') {
-        words = lemmatizer.wordlists;
-      }
-      var html = '*** ' + type + ' ***<br />';
-      var parts = ['verb', 'noun', 'adj', 'adv'];
-      var len = parts.length;
-      for (var i = 0; i < len; i++) {
-        var pos = parts[i];
-        var pos_comment = '--- ' + pos + ' ---<br />';
-        var html = html + pos_comment;
-        for (var w in words[pos]) {
-          var item = w + ' -> ' + words[pos][w] + '<br />';
-          var html = html + item;
-        }
-      }
-      return html;
-    }
   </script>
 
   <form action="">
