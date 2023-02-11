@@ -180,6 +180,7 @@ Lemmatizer.prototype = {
       xhr.open("GET", file, false);
       xhr.send();
       var data = xhr.responseText;
+      console.log(`${key} ${file} ${data}`);
       this.store_data(key, data);
     }
   },
