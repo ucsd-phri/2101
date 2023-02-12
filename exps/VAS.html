@@ -907,7 +907,7 @@ jsPsych.init({
 
     function SaveData(curData) {
   var dataToServer = {
-    'id': jsPsych.data.getURLVariable('id') + "_" + jsPsych.data.getURLVariable('visit'),
+    'id': jsPsych.data.getURLVariable('id') + "_" + jsPsych.data.getURLVariable('timepoint'),
     'experimenter': 'Ethan',
     'experimentName': '2101_VAS',
     'curData': curData
