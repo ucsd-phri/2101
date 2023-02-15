@@ -236,6 +236,7 @@ var change_class = function() {
   var data_temp = {'target': '',
       'trial': '',
       'responses': [],
+      'similarity': [],	   
       'time': []}
 
 var time1 = new Date();
@@ -287,6 +288,7 @@ let close_enough_on = 0;
     data_temp = {'target': targets.word[counter],
       'trial': counter + 1,
       'responses': [],
+      'similarity': [],
       'time': []};
     // Remove the previous guesses and messages -- Reset to beginning state
     $('#guess-count').html(0);
@@ -425,7 +427,8 @@ let close_enough_on = 0;
 
     // Save response *only if it is new and exists!*
     if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) && (position(counter) > 0)) {
-      data_temp.responses.push(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0])    
+      data_temp.responses.push(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]);
+      data_temp.similarity.push(position(counter));    
     };
 
     // Add screen to begin next trial:
