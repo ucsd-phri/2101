@@ -336,27 +336,6 @@ let close_enough_on = 0;
 
     };
 
-    // Code for instating a guess limit:
-    let guess_limit_msg = '<div class="end-msg" id="limit-msg">' +
-      '<p class="bigger"><span>You have reached the maximum number of guesses allowed for this word!</span></p>' +
-  '<p><span>The target word was</span> <u>' + targets.word[counter] + '</u></p>'+
-  '<div>' +
-     '<div style="position: relative; padding: 15px 0px;">' +
-        '<button type="button" class="button" onclick="game()">'+
-           '<div style="min-width: 104px;">Next Trial</div>' +
-        '</button>' +
-     '</div>' +
-  '</div>' +
-'</div>'
-
-    if (($('.guess-history').children('div').length + 1) === guess_limit) {
-      $(guess_limit_msg).insertAfter(".top-bar");
-      data.data.push(data_temp);
-      counter++;
-    };
-    
-
-
         // Create template row to add to guess history
       let row_template = '<div class="row-wrapper current" id="guesses" data-sort=' + position(counter) + '>'+
         '<div class="outer-bar">'+
@@ -472,7 +451,24 @@ let close_enough_on = 0;
       counter++;
       };    
 
+    // Code for instating a guess limit:
+    let guess_limit_msg = '<div class="end-msg" id="limit-msg">' +
+      '<p class="bigger"><span>You have reached the maximum number of guesses allowed for this word!</span></p>' +
+  '<p><span>The target word was</span> <u>' + targets.word[counter] + '</u></p>'+
+  '<div>' +
+     '<div style="position: relative; padding: 15px 0px;">' +
+        '<button type="button" class="button" onclick="game()">'+
+           '<div style="min-width: 104px;">Next Trial</div>' +
+        '</button>' +
+     '</div>' +
+  '</div>' +
+'</div>'
 
+    if ((($('.guess-history').children('div').length) === guess_limit) && !($('.end-msg').length === 1)) {
+      $(guess_limit_msg).insertAfter(".top-bar");
+      data.data.push(data_temp);
+      counter++;
+    };
 
     // Clear input field
     // TEMP: Will want this to be an if/then -- only clear if guess is valid?
