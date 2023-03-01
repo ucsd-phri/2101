@@ -54,25 +54,7 @@ var id = {
     }
 };	    
 
-var instructions = {
-  type: 'html-button-response',
-  stimulus: 'We understand that phantom limb pain experiences can be variable, in terms of their frequency '+
-  'of occurrence, duration, and intensity of pain or discomfort. We also know that some people '+
-  'experience standout “flare up” episodes that are more intense than their typical phantom limb '+
-  'pain experience. In the following questions, we want to ask you <u>separately</u> about your <b>typical</b> '+
-  'phantom limb pain experiences and any <b>high intensity “flare up” episodes</b> that you may experience.'+
-  '<br><br><br><br>'+
-  'We will <u>first</u> ask you about your <b>typical</b> phantom limb pain experiences and <u>second</u> about your '+
-  'standout <b>high intensity</b> ones. If you have not recently experienced any standout high intensity “flare ups”, '+
-  'then respond to the first question on the basis of all your experiences and respond with “NA” to '+
-  'the second questions.',
-  choices: ["Continue"],
-  data: {type: "instructions"}
-};
-
-timeline.push(instructions);
-
-// Instructions for shift to current ratings.
+// Instructions
 
 timeline.push({
   type: 'html-button-response',
@@ -203,6 +185,21 @@ timeline.push({
     })
 
 // Other pain current
+	    
+timeline.push({
+    type: 'survey-text',
+    questions: [
+        {prompt: "Are you <b>CURRENTLY</b> experiencing any <u>other</u> pain (besides your phantom limb and residual limb pain)?<br>"+
+	 "If so, please write where that pain is/describe it in the field below", 
+        name: 'other_description', rows: 1, columns: 30, required: true}
+    ],
+     data: {
+	construct: "other_pain",
+	rating: "description",
+	timing: "current",
+	scale: "open-text"
+     }
+});	    	    
 
 timeline.push({
     type: 'survey-multi-choice',
@@ -264,13 +261,111 @@ timeline.push({
      }		
     })
 
+// Kindness
+
+timeline.push({
+    type: 'survey-multi-choice',
+    questions: [
+          {
+            prompt: `Please provide a rating for how much <b>kindness</b> you feel toward <u>yourself</u>, from 0 "no kindness at all" to 10 "most kindness imaginable"`,
+            options: ["0<br>no kindness<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>most kindness<br>imaginable"],
+            // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: true,
+            required: true,
+            name: "kindness_self_nrs"
+          }],
+      data: {
+	construct: "kindness",
+	rating: "self",
+	scale: "nrs"
+     }			
+});
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents the<br> how much <b>kindness</b> you feel toward <u>yourself</u>.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most kindness<br>imaginable`, `No kindness<br>at all`],
+    prompt: "<p></p>",
+      data: {
+	construct: "kindness",
+	rating: "self",
+	scale: "vas"
+     }		
+    })
+	    
+timeline.push({
+    type: 'survey-multi-choice',
+    questions: [
+          {
+            prompt: `Please provide a rating for how much <b>kindness</b> you feel toward <u>others</u>, from 0 "no kindness at all" to 10 "most kindness imaginable"`,
+            options: ["0<br>no kindness<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>most kindness<br>imaginable"],
+            // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: true,
+            required: true,
+            name: "kindness_others_nrs"
+          }],
+      data: {
+	construct: "kindness",
+	rating: "others",
+	scale: "nrs"
+     }		
+});
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents the<br> how much <b>kindness</b> you feel toward <u>others</u>.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most kindness<br>imaginable`, `No kindness<br>at all`],
+    prompt: "<p></p>",
+      data: {
+	construct: "kindness",
+	rating: "others",
+	scale: "vas"
+     }	
+    })	    
+
+// Stress
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents<br>how much <b>stress</b> you feel right now.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most stress<br>imaginable`, `No stress<br>at all`],
+    prompt: "<p></p>",
+      data: {
+	construct: "stress",
+	scale: "vas"
+     }	
+    })	    
+	    
 // var forward = function() {return jsPsych.data.get().last(1).select('response').values[[0]].otherPain};
 
 jsPsych.data.addProperties({userAgent: navigator.userAgent,
 	startTime: new Date(),
     volID: jsPsych.data.getURLVariable('id'),
     redcap: jsPsych.data.getURLVariable('redcap'),
-    timepoint: jsPsych.data.getURLVariable('timepoint')		    
+    timepoint: "postsession"		    
 });
 
 jsPsych.init({
@@ -290,9 +385,10 @@ jsPsych.init({
 
     function SaveData(curData) {
   var dataToServer = {
-    'id': jsPsych.data.getURLVariable('id') + "_" + jsPsych.data.getURLVariable('timepoint'),
+//     'id': jsPsych.data.getURLVariable('id') + "_" + jsPsych.data.getURLVariable('timepoint'),
+    'id': jsPsych.data.getURLVariable('id') + "_postsession",	  
     'experimenter': 'Ethan',
-    'experimentName': '2101_post_scan',
+    'experimentName': '2101_postsession',
     'curData': curData
   }; 
 
