@@ -51,7 +51,9 @@ setC = jsPsych.randomization.repeat(setC, 1);
 var setD = ['corpse', 'wine', 'pencil', 'cookie', 'dinosaur'];
 setD = jsPsych.randomization.repeat(setD, 1);
 var setE = ['submarine', 'pancake', 'desert', 'church', 'hammer'];
-setE = jsPsych.randomization.repeat(setE, 1);            
+setE = jsPsych.randomization.repeat(setE, 1);
+var setF = ['flower', 'moose', 'cookie', 'car', 'pencil'];
+setF = jsPsych.randomization.repeat(setF, 1);   	
 
 var targets = {'word': [""],
                'start': [""]};
@@ -66,6 +68,8 @@ var targets = {'word': [""],
         targets.word = setD;
     } else if (jsPsych.data.getURLVariable('set') == 'E') {
         targets.word = setE;
+    } else if (jsPsych.data.getURLVariable('set') == 'F') {
+        targets.word = setF;
     };	
 
 // function shuffle(obj1, obj2) {
