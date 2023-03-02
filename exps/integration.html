@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> </title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+<script src="../jsLibs/jquery-3-6-0-min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://timbrady.org/turk/TimTurkTools.js"></script> -->
+<script src="../jsLibs/ajax.js"></script>
+<script src="../jsLibs/bootstrap-min.js"></script>
+<script src="../jsLibs/TimTurkTools.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/jspsych.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-html-button-response.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-image-keyboard-response.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-survey-multi-choice.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-survey-multi-select.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-survey-multi-choice2.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-survey-multi-select2.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-video-button-response.js"></script>
+<!-- <script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-survey-text.js"></script> -->
+<script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-survey-text.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-survey-html-form.js"></script>
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-html-slider-response2.js"></script>
+<!-- <script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-html-slider-response2.js"></script> -->
+<script src="../jsPsych/jspsych-6.3.1/plugins/jspsych-preload.js"></script>
+<link href="../jsPsych/jspsych-6.3.1/css/jspsych2.css" rel="stylesheet" type="text/css"></link>
+
+<style>
+    input[type=range]{
+    -webkit-appearance: none;
+}
+
+/*Chrome*/
+/* @media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+      overflow: hidden;
+      width: 500px;
+      -webkit-appearance: none; */
+      /* background-color: #9a905d; */
+      /* border: solid 1px black; */
+    /* } */
+    
+    /* input[type='range']::-webkit-slider-runnable-track {
+      height: 60px;
+      -webkit-appearance: none; */
+      /* color: red; */
+      /* margin-top: 0px;
+      border: solid 1px black;
+    } */
+    
+    /* input[type='range']::-webkit-slider-thumb {
+      width: 10px;
+      -webkit-appearance: none;
+      height: 10px;
+      cursor: ew-resize;
+      background: red;
+      box-shadow: -80px 0 0 80px red;
+    } */
+
+/* } */
+/** FF*/
+/* input[type="range"]::-moz-range-progress {
+  background-color: red; 
+} */
+/* input[type="range"]::-moz-range-track {  
+  background-color: #9a905d;
+} */
+/* IE*/
+/* input[type="range"]::-ms-fill-lower {
+  background-color: red; 
+} */
+/* input[type="range"]::-ms-fill-upper {  
+  background-color: #9a905d;
+} */
+
+/* #myinput { */
+   /* background: linear - gradient(to right, red 0%); */
+   /* border: solid 1px black; */
+  /* border-radius: 8px; */
+  /* height: 20px; */
+  /* width: 200px; */
+  /* outline: none; */
+  /* transition: background 450ms ease-in; */
+  /* -webkit-appearance: none; */
+/* }; */
+
+/* .slider { */
+   /* background: linear - gradient(to right, red 0%); */
+   /* border: solid 1px black; */
+  /* border-radius: 8px; */
+  /* height: 20px; */
+  /* width: 200px; */
+  /* outline: none; */
+  /* transition: background 450ms ease-in; */
+  /* -webkit-appearance: none; */
+/* }; */
+
+/* input[type = "range"]::-webkit-slider-thumb { */
+   /* -webkit-appearance: none; */
+   /* -moz-appearance: none;  */
+   /* -webkit-border-radius: 5 px; */
+   /*16x16px adjusted to be same as 14x14px on moz*/
+   /* height: 16 px; */
+   /* width: 16 px; */
+   /* border-radius: 5 px; */
+   /* background: #e7e7e7; */
+   /* border: 1 px solid #c5c5c5; */
+/* } */
+
+</style>
+</head>
+  
+  <body>
+    <!-- <div>
+        <input type="range" class="slider" id="volume" name="volume"
+               min="0" max="10" step="1" value="0">
+        <label for="volume">Volume</label>
+      </div>
+      
+      <div>
+        <input type="range" class="slider" id="cowbell" name="cowbell" 
+               min="0" max="100" value="0" step="10">
+        <label for="cowbell">Cowbell</label>
+      </div>
+      <div class="chrome">
+        <input id="myinput" class="slider" min="0" max="100" type="range" value="0" />
+     </div> -->
+    <script>
+//         document.getElementById("jspsych-html-slider-response-response").oninput = function() {
+//    var value = (this.value - this.min) / (this.max - this.min) * 100
+// //    this.style.background = 'linear-gradient(to right, red 0%, red ' + value + '%, #fff ' + value + '%, white 100%)'
+//    this.style.background = 'linear-gradient(to right, red 0%, red ' + value + '%, #fff ' + value + '%, white 100%)'
+// };
+
+//         document.getElementsByClassName("slider").oninput = function() {
+//    var value = (this.value - this.min) / (this.max - this.min) * 100
+// //    this.style.background = 'linear-gradient(to right, red 0%, red ' + value + '%, #fff ' + value + '%, white 100%)'
+//    this.style.background = 'linear-gradient(to right, red 0%, red ' + value + '%, #fff ' + value + '%, white 100%)'
+// };
+var timeline = [];
+	    
+var id = {
+    type: 'survey-text',
+    questions: [
+        {prompt: "Enter Volunteer ID", 
+        name: 'id', rows: 1, columns: 4, required: true}
+    ],
+    data: {
+//         type: "plp_freq_typical"
+	construct: "id"
+    }
+};	    
+
+var instructions = {
+  type: 'html-button-response',
+  stimulus: 'We understand that phantom limb pain experiences can be variable, in terms of their frequency '+
+  'of occurrence, duration, and intensity of pain or discomfort. We also know that some people '+
+  'experience standout “flare up” episodes that are more intense than their typical phantom limb '+
+  'pain experience. In the following questions, we want to ask you <u>separately</u> about your <b>typical</b> '+
+  'phantom limb pain experiences and any <b>high intensity “flare up” episodes</b> that you may experience.'+
+  '<br><br><br><br>'+
+  'We will <u>first</u> ask you about your <b>typical</b> phantom limb pain experiences and <u>second</u> about your '+
+  'standout <b>high intensity</b> ones. If you have not recently experienced any standout high intensity “flare ups”, '+
+  'then respond to the first question on the basis of all your experiences and respond with “NA” to '+
+  'the second questions.',
+  choices: ["Continue"],
+  data: {type: "instructions"}
+};
+
+timeline.push(instructions);
+
+//PLP typical past day
+
+var plp_freq_typical = {
+    type: 'survey-text',
+    questions: [
+        {prompt: "In the past <b>24 hours</b> how many times/occasions of <u>typical</u> phantom limb pain have you experienced?<br>Please write only the number in the field below.", 
+        name: 'plp_freq_typical', rows: 1, columns: 4, required: true}
+    ],
+    data: {
+//         type: "plp_freq_typical"
+	construct: "plp",
+	rating: "frequency",
+	subtype: "typical",
+	timing: "day",
+	scale: "open-text"
+    }
+};
+
+timeline.push(plp_freq_typical);
+
+timeline.push({
+    type: 'survey-text',
+    questions: [
+        {prompt: "Of those phantom limb pain experiences in the past 24 hours, what was the <b>typical or most common duration</b>, i.e., approximately how long did you experience the phantom limb pain for once it started?<br><br>"+
+        'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.', 
+        name: 'plp_duration_typical', rows: 1, columns: 10, required: true}
+    ],
+    data: {
+//         type: "plp_duration_typical"
+	construct: "plp",
+	rating: "duration",
+	subtype: "typical",
+	timing: "day",
+	scale: "open-text"
+    }
+});
+
+timeline.push({
+    type: 'survey-multi-choice',
+    questions: [
+          {
+            prompt: `Of those occasions of phantom limb pain in the past 24 hours, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall phantom limb pain you experienced?`,
+            options: ["0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: true,
+            required: true,
+            name: `plp_painRating_typical`
+          }],
+     data: {
+	construct: "plp",
+	rating: "overall",
+	subtype: "typical",
+	timing: "day",
+	scale: "nrs"
+     }
+});
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your cursor to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br>`+
+	`Recall that intensity of the pain refers to the "volume" or "loudness" of your pain, while unpleasantness refers to your emotional reaction or how much the pain bothers you.<br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of your phantom limb pain in the past 24 hours.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
+    prompt: "<p></p>",
+     data: {
+	construct: "plp",
+	rating: "intensity",
+	subtype: "typical",
+	timing: "day",
+	scale: "vas"
+     }
+    })
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your cursor to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br>`+
+	`Recall that intensity of the pain refers to the "volume" or "loudness" of your pain, while unpleasantness refers to your emotional reaction or how much the pain bothers you.<br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents the<br>typical or most common <b>unpleasantness</b> of your phantom limb pain in the past 24 hours.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most unpleasant<br>imaginable`, `Not unpleasant<br>at all`],
+    prompt: "<p></p>",
+     data: {
+	construct: "plp",
+	rating: "unpleasantness",
+	subtype: "typical",
+	timing: "day",
+	scale: "vas"
+     }
+    })
+
+// PLP high intensity past week
+
+timeline.push({
+    type: 'survey-text',
+    questions: [
+        {prompt: 'In the past <b>24 hours</b> how many times/occasions of <u>uniquely high intensity "flare up"</u> phantom limb pain have you experienced?<br>'+
+        'Please write only the number in the field below. If you did not have any uniquely high intensity "flare ups", write 0.', 
+        name: 'plp_freq_flares', rows: 1, columns: 4, required: true}
+    ],
+     data: {
+	construct: "plp",
+	rating: "frequency",
+	subtype: "flares",
+	timing: "day",
+	scale: "open-text"
+     }
+});
+
+timeline.push({
+    type: 'survey-text',
+    questions: [
+        {prompt: 'Of those uniquely high intensity "flare up" phantom limb pain experiences in the past 24 hours, what was the <b>typical or most common duration</b>, i.e., approximately how long did you experience the phantom limb pain for once it started?<br><br>'+
+        'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.<br>'+
+        'If you did not have any such experiences, please write "NA".', 
+        name: 'plp_duration_flares', rows: 1, columns: 10, required: true}
+    ],
+     data: {
+	construct: "plp",
+	rating: "duration",
+	subtype: "flares",
+	timing: "day",
+	scale: "open-text"
+     }
+});
+
+timeline.push({
+    type: 'survey-multi-choice',
+    questions: [
+          {
+            prompt: `Of those uniquely high intensity "flare up" occasions of phantom limb pain in the past 24 hours, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall phantom limb pain you experienced?`,
+            options: ["0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: true,
+            required: true,
+            name: `plp_painRating_flares`
+          }],
+     data: {
+	construct: "plp",
+	rating: "overall",
+	subtype: "flares",
+	timing: "day",
+	scale: "nrs"
+     }
+});
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your cursor to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br><br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of those uniquely high intensity<br>"flare up" phantom limb pain experiences in the past 24 hours.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
+    prompt: "<p></p>",
+     data: {
+	construct: "plp",
+	rating: "intensity",
+	subtype: "flares",
+	timing: "day",
+	scale: "vas"
+     }
+    })
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br><br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>unpleasantness</b> of those uniquely high intensity<br>"flare up" phantom limb pain experiences in the past 24 hours.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most unpleasant<br>imaginable`, `Not unpleasant<br>at all`],
+    prompt: "<p></p>",
+     data: {
+	construct: "plp",
+	rating: "unpleasantness",
+	subtype: "flares",
+	timing: "day",
+	scale: "vas"
+     }
+    })
+
+// Residual limb pain past week
+
+timeline.push({
+    type: 'survey-text',
+    questions: [
+        {prompt: "In the past <b>24 hours</b> how many times/occasions of <u>residual limb</u> pain have you experienced?<br>Please write only the number in the field below.", 
+        name: 'residual_freq', rows: 1, columns: 4, required: true}
+    ],
+     data: {
+	construct: "residual_pain",
+	rating: "frequency",
+	timing: "day",
+	scale: "open-text"
+     }
+});
+
+timeline.push({
+    type: 'survey-text',
+    questions: [
+        {prompt: "Of those residual limb pain experiences in the past 24 hours, what was the <b>typical or most common duration</b>, i.e., approximately how long did you experience the residual limb pain for once it started?<br><br>"+
+        'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.', 
+        name: 'residual_duration', rows: 1, columns: 10, required: true}
+    ],
+     data: {
+	construct: "residual_pain",
+	rating: "duration",
+	timing: "day",
+	scale: "open-text"
+     }
+});
+
+timeline.push({
+    type: 'survey-multi-choice',
+    questions: [
+          {
+            prompt: `Of those occasions of residual limb pain in the past 24 hours, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall residual limb pain you experienced?`,
+            options: ["0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: true,
+            required: true,
+            name: `residual_painRating`
+          }],
+     data: {
+	construct: "residual_pain",
+	rating: "overall",
+	timing: "day",
+	scale: "nrs"
+     }
+});
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of your residual limb pain in the past 24 hours.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
+    prompt: "<p></p>",
+     data: {
+	construct: "residual_pain",
+	rating: "intensity",
+	timing: "day",
+	scale: "vas"
+     }
+    })
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>unpleasantness</b> of your residual limb pain in the past day.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most unpleasant<br>imaginable`, `Not unpleasant<br>at all`],
+    prompt: "<p></p>",
+     data: {
+	construct: "residual_pain",
+	rating: "unpleasantness",
+	timing: "day",
+	scale: "vas"
+     }
+    })
+
+// Other pain week
+
+timeline.push({
+    type: 'survey-text',
+    questions: [
+        {prompt: "In the past <b>24 hours</b> have you experienced any <u>other</u> pain (besides your phantom limb and residual limb pain)?<br>"+
+	 "If so, please write where that pain is/describe it in the field below", 
+        name: 'other_description', rows: 1, columns: 30, required: true}
+    ],
+     data: {
+	construct: "other_pain",
+	rating: "description",
+	timing: "day",
+	scale: "open-text"
+     }
+});	    
+	    
+	    
+timeline.push({
+    type: 'survey-text',
+    questions: [
+        {prompt: "In the past <b>24 hours</b> how many times/occasions of <u>other</u> pain (besides your phantom limb and residual limb pain) have you experienced?<br>Please write only the number in the field below.", 
+        name: 'other_freq', rows: 1, columns: 4, required: true}
+    ],
+     data: {
+	construct: "other_pain",
+	rating: "frequency",
+	timing: "day",
+	scale: "open-text"
+     }
+});
+
+timeline.push({
+    type: 'survey-text',
+    questions: [
+        {prompt: "Of those other pain experiences in the past 24 hours, what was the <b>typical or most common duration</b>, i.e., approximately how long did you experience the other pain for once it started?<br>"+
+        'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.<br><br>'+
+	 'If you have not had any experiences of other pain, please write "NA".', 
+        name: 'other_duration', rows: 1, columns: 10, required: true}
+    ],
+     data: {
+	construct: "other_pain",
+	rating: "duration",
+	timing: "day",
+	scale: "open-text"
+     }
+});
+
+timeline.push({
+    type: 'survey-multi-choice',
+    questions: [
+          {
+            prompt: `Of those occasions of other pain in the past 24 hours, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall other pain you experienced?`,
+            options: ["0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: true,
+            required: true,
+            name: `other_painRating`
+          }],
+     data: {
+	construct: "other_pain",
+	rating: "overall",
+	timing: "day",
+	scale: "nrs"
+     }
+});
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of your other pain in the past 24 hours.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
+    prompt: "<p></p>",
+     data: {
+	construct: "other_pain",
+	rating: "intensity",
+	timing: "day",
+	scale: "vas"
+     }
+    })
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>unpleasantness</b> of your other pain in the past 24 hours.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most unpleasant<br>imaginable`, `Not unpleasant<br>at all`],
+    prompt: "<p></p>",
+     data: {
+	construct: "other_pain",
+	rating: "unpleasantness",
+	timing: "day",
+	scale: "vas"
+     }
+    })
+
+// Instructions for shift to current ratings.
+
+timeline.push({
+  type: 'html-button-response',
+  stimulus: 'In the following questions, we are going to ask about your pain experiences <b>right now</b><br><br>',
+  choices: ["Continue"],
+  data: {type: "instructions2"}
+});
+
+// PLP right now
+
+timeline.push({
+    type: 'survey-multi-choice',
+    questions: [
+          {
+            prompt: `Please provide a rating for your overall <b>phantom limb pain</b> <u>right now</u>, from 0 'no pain at all' to 10 'worst pain imaginable'`,
+            options: ["0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: true,
+            required: true,
+            name: `plp_painRating_current`
+          }],
+     data: {
+	construct: "plp",
+	rating: "overall",
+	timing: "current",
+	scale: "nrs"
+     }	
+});
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br><b>intensity</b> of your phantom limb pain <u>right now</u>.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
+    prompt: "<p></p>",
+     data: {
+	construct: "plp",
+	rating: "intensity",
+	timing: "current",
+	scale: "vas"
+     }
+    })
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br<br><p>Please provide a rating on the scale that best represents the<br><b>unpleasantness</b> of your phantom limb pain <u>right now</u>.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most unpleasant<br>imaginable`, `Not unpleasant<br>at all`],
+    prompt: "<p></p>",
+      data: {
+	construct: "plp",
+	rating: "unpleasantness",
+	timing: "current",
+	scale: "vas"
+     }
+    })
+
+// Residual right now
+
+timeline.push({
+    type: 'survey-multi-choice',
+    questions: [
+          {
+            prompt: `Please provide a rating for your overall <b>residual limb pain</b> <u>right now</u>, from 0 'no pain at all' to 10 'worst pain imaginable'`,
+            options: ["0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: true,
+            required: true,
+            name: `residual_painRating_current`
+          }],
+      data: {
+	construct: "residual_pain",
+	rating: "overall",
+	timing: "current",
+	scale: "nrs"
+     }	
+});
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br><br><p>Please provide a rating on the scale that best represents the<br><b>intensity</b> of your residual limb pain <u>right now</u>.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
+    prompt: "<p></p>",
+      data: {
+	construct: "residual_pain",
+	rating: "intensity",
+	timing: "current",
+	scale: "vas"
+     }	
+    })
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents the<br><b>unpleasantness</b> of your residual limb pain <u>right now</u>.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most unpleasant<br>imaginable`, `Not unpleasant<br>at all`],
+    prompt: "<p></p>",
+      data: {
+	construct: "residual_pain",
+	rating: "unpleasantness",
+	timing: "current",
+	scale: "vas"
+     }	
+    })
+
+// Other pain current
+
+timeline.push({
+    type: 'survey-multi-choice',
+    questions: [
+          {
+            prompt: `Please provide a rating for your overall <b>other pain</b> <u>right now</u>, from 0 'no pain at all' to 10 'worst pain imaginable'`,
+            options: ["0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: true,
+            required: true,
+            name: `other_painRating_current`
+          }],
+      data: {
+	construct: "other_pain",
+	rating: "overall",
+	timing: "current",
+	scale: "nrs"
+     }		
+});
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents the<br><b>intensity</b> of your other pain <u>right now</u>.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
+    prompt: "<p></p>",
+      data: {
+	construct: "other_pain",
+	rating: "intensity",
+	timing: "current",
+	scale: "vas"
+     }		
+    })
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents the<br><b>unpleasantness</b> of your other pain <u>right now</u>.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most unpleasant<br>imaginable`, `Not unpleasant<br>at all`],
+    prompt: "<p></p>",
+      data: {
+	construct: "other_pain",
+	rating: "unpleasantness",
+	timing: "current",
+	scale: "vas"
+     }		
+    })
+    
+// Kindness
+
+timeline.push({
+    type: 'survey-multi-choice',
+    questions: [
+          {
+            prompt: `Please provide a rating for how much <b>kindness</b> you feel toward <u>yourself</u>, from 0 "no kindness at all" to 10 "most kindness imaginable"`,
+            options: ["0<br>no kindness<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>most kindness<br>imaginable"],
+            // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: true,
+            required: true,
+            name: "kindness_self_nrs"
+          }],
+      data: {
+	construct: "kindness",
+	rating: "self",
+	scale: "nrs"
+     }			
+});
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents the<br> how much <b>kindness</b> you feel toward <u>yourself</u>.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most kindness<br>imaginable`, `No kindness<br>at all`],
+    prompt: "<p></p>",
+      data: {
+	construct: "kindness",
+	rating: "self",
+	scale: "vas"
+     }		
+    })
+	    
+timeline.push({
+    type: 'survey-multi-choice',
+    questions: [
+          {
+            prompt: `Please provide a rating for how much <b>kindness</b> you feel toward <u>others</u>, from 0 "no kindness at all" to 10 "most kindness imaginable"`,
+            options: ["0<br>no kindness<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>most kindness<br>imaginable"],
+            // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: true,
+            required: true,
+            name: "kindness_others_nrs"
+          }],
+      data: {
+	construct: "kindness",
+	rating: "others",
+	scale: "nrs"
+     }		
+});
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents the<br> how much <b>kindness</b> you feel toward <u>others</u>.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most kindness<br>imaginable`, `No kindness<br>at all`],
+    prompt: "<p></p>",
+      data: {
+	construct: "kindness",
+	rating: "others",
+	scale: "vas"
+     }	
+    })	    
+
+// Stress
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents<br>how much <b>stress</b> you feel right now.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most stress<br>imaginable`, `No stress<br>at all`],
+    prompt: "<p></p>",
+      data: {
+	construct: "stress",
+	scale: "vas"
+     }	
+    })
+
+// Effectiveness
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your mouse to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents<br>how <b>useful/effective</b> you feel the experience of participating in this study was.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most useful/effective<br>imaginable`, `Not useful/effective<br>at all`],
+    prompt: "<p></p>",
+      data: {
+	construct: "effectiveness",
+	scale: "vas"
+     }	
+    })
+
+// test
+// test
+// test
+
+
+
+// var forward = function() {return jsPsych.data.get().last(1).select('response').values[[0]].otherPain};
+
+jsPsych.data.addProperties({userAgent: navigator.userAgent,
+	startTime: new Date(),
+    volID: jsPsych.data.getURLVariable('id'),
+    redcap: jsPsych.data.getURLVariable('redcap'),
+    timepoint: "integration"
+});
+
+jsPsych.init({
+      timeline: timeline,
+	  show_progress_bar: true,
+      on_finish: function () {
+			var endTime = new Date();
+			jsPsych.data.addProperties({endTime: endTime});
+            // jsPsych.data.displayData();
+            // if(forward() == "yes"){
+            //     window.location.href = "https://www.ethanhurwitz.com/VAS2.html";
+            // } else {jsPsych.data.displayData();}
+	      		console.log(jsPsych.data.get().json());
+			SaveData(jsPsych.data.get().csv()); // .json()?
+    }
+    });
+
+    function SaveData(curData) {
+  var dataToServer = {
+    'id': jsPsych.data.getURLVariable('id') + "_integration",
+    'experimenter': 'Ethan',
+    'experimentName': '2101_VAS',
+    'curData': curData
+  }; 
+
+  $.post("https://bradylab.ucsd.edu/turk/save.php",
+    dataToServer,
+    function(data) { 
+			var newDoc = document.open("text/html", "replace");
+			// newDoc.write("All done, thanks! To submit the HIT, paste this code into Turk: " + randCode);
+            newDoc.write("Your responses have been recorded.");
+			newDoc.close();
+    }
+  ).fail(function(data) { 
+			var newDoc = document.open("text/html", "replace");
+			// newDoc.write("All done, thanks! To submit the HIT, paste this code into Turk: " + randCode);
+            newDoc.write("Your responses have been recorded.");
+			newDoc.close();
+	});  
+	
+//   if(forward() == "yes"){
+//     $.post("132.239.36.101/PHRI/save.php",
+//     dataToServer,
+//     FunctionWhenDoneSaving
+//   ).fail(FunctionWhenDoneSaving);
+
+//     function FunctionWhenDoneSaving() {
+//             var urlToRedirect = "https://ucsd-phri.github.io/2101/exps/VAS2.html" 
+//         window.location.href = urlToRedirect;
+//         };
+//   } else {
+//     $.post("https://bradylab.ucsd.edu/turk/save.php",
+//     dataToServer,
+//     function(data) { 
+// 			var newDoc = document.open("text/html", "replace");
+//             newDoc.write("Your responses have been recorded. You may now close this page. Thank you!");
+// 			newDoc.close();
+//     }
+//   ).fail(function(data) { 
+// 			var newDoc = document.open("text/html", "replace");
+//             newDoc.write("Your responses have been recorded. You may now close this page. Thank you!");
+// 			newDoc.close();
+// 	});
+//   }
+  
+};
+  
+
+
+
+    </script>
+  </body>
+</html>
