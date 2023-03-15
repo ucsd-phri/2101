@@ -1091,6 +1091,21 @@ timeline.push({
 // Other pain current
 
 timeline.push({
+    type: 'survey-text',
+    questions: [
+        {prompt: "Are you currently experiencing any <u>other</u> pain (besides your phantom limb and residual limb pain)?<br>"+
+	 "If so, please write where that pain is/describe it in the field below", 
+        name: 'other_description', rows: 1, columns: 30, required: true}
+    ],
+     data: {
+	construct: "other_pain",
+	rating: "description",
+	timing: "current",
+	scale: "open-text"
+     }
+});	 	    
+
+timeline.push({
     type: 'survey-multi-choice',
     questions: [
           {
