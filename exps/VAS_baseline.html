@@ -142,17 +142,17 @@
 // };
 var timeline = [];
 	    
-var id = {
-    type: 'survey-text',
-    questions: [
-        {prompt: "Enter Volunteer ID", 
-        name: 'id', rows: 1, columns: 4, required: true}
-    ],
-    data: {
-//         type: "plp_freq_typical"
-	construct: "id"
-    }
-};	    
+// var id = {
+//     type: 'survey-text',
+//     questions: [
+//         {prompt: "Enter Volunteer ID", 
+//         name: 'id', rows: 1, columns: 4, required: true}
+//     ],
+//     data: {
+// //         type: "plp_freq_typical"
+// 	construct: "id"
+//     }
+// };	    
 
 var instructions = {
   type: 'html-button-response',
@@ -172,6 +172,177 @@ var instructions = {
 
 timeline.push(instructions);
       
+//PLP typical past week
+
+var plp_freq_typical = {
+    type: 'survey-text',
+    questions: [
+        {prompt: "In the past <b>WEEK</b> how many times/occasions of <u>typical</u> phantom limb pain have you experienced?<br>Please write only the number in the field below.", 
+        name: 'plp_freq_typical', rows: 1, columns: 4, required: true}
+    ],
+    data: {
+//         type: "plp_freq_typical"
+	construct: "plp",
+	rating: "frequency",
+	subtype: "typical",
+	timing: "week",
+	scale: "open-text"
+    }
+};
+
+timeline.push(plp_freq_typical);
+
+timeline.push({
+    type: 'survey-text',
+    questions: [
+        {prompt: "Of those phantom limb pain experiences in the past week, what was the <b>typical or most common duration</b>, i.e., approximately how long did you experience the phantom limb pain for once it started?<br><br>"+
+        'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.', 
+        name: 'plp_duration_typical', rows: 1, columns: 10, required: true}
+    ],
+    data: {
+//         type: "plp_duration_typical"
+	construct: "plp",
+	rating: "duration",
+	subtype: "typical",
+	timing: "week",
+	scale: "open-text"
+    }
+});
+
+timeline.push({
+    type: 'survey-multi-choice',
+    questions: [
+          {
+            prompt: `Of those occasions of phantom limb pain in the past week, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall phantom limb pain you experienced?`,
+            options: ["0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
+            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: true,
+            required: true,
+            name: `plp_painRating_typical`
+          }],
+     data: {
+	construct: "plp",
+	rating: "overall",
+	subtype: "typical",
+	timing: "week",
+	scale: "nrs"
+     }
+});
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your cursor to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br>`+
+	`Recall that intensity of the pain refers to the "volume" or "loudness" of your pain, while unpleasantness refers to your emotional reaction or how much the pain bothers you.<br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of your phantom limb pain in the past week.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
+    prompt: "<p></p>",
+     data: {
+	construct: "plp",
+	rating: "intensity",
+	subtype: "typical",
+	timing: "week",
+	scale: "vas"
+     }
+    })
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your cursor to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br>`+
+	`Recall that intensity of the pain refers to the "volume" or "loudness" of your pain, while unpleasantness refers to your emotional reaction or how much the pain bothers you.<br><br><br>`+
+	`<p>Please provide a rating on the scale that best represents the<br>typical or most common <b>unpleasantness</b> of your phantom limb pain in the past week.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most unpleasant<br>imaginable`, `Not unpleasant<br>at all`],
+    prompt: "<p></p>",
+     data: {
+	construct: "plp",
+	rating: "unpleasantness",
+	subtype: "typical",
+	timing: "week",
+	scale: "vas"
+     }
+    })
+
+// PLP high intensity past week
+
+timeline.push({
+    type: 'survey-text',
+    questions: [
+        {prompt: 'In the past <b>WEEK</b> how many times/occasions of <u>uniquely high intensity "flare up"</u> phantom limb pain have you experienced?<br>'+
+        'Please write only the number in the field below. If you did not have any uniquely high intensity "flare ups", write 0.', 
+        name: 'plp_freq_flares', rows: 1, columns: 4, required: true}
+    ],
+     data: {
+	construct: "plp",
+	rating: "frequency",
+	subtype: "flares",
+	timing: "week",
+	scale: "open-text"
+     }
+});
+
+timeline.push({
+    type: 'survey-text',
+    questions: [
+        {prompt: 'Of those uniquely high intensity "flare up" phantom limb pain experiences in the past week, what was the <b>typical or most common duration</b>, i.e., approximately how long did you experience the phantom limb pain for once it started?<br><br>'+
+        'Please include just a number and then unit of measurement. For example, "5 seconds", "15 minutes", "2 hours", etc.<br>'+
+        'If you did not have any such experiences, please write "NA".', 
+        name: 'plp_duration_flares', rows: 1, columns: 10, required: true}
+    ],
+     data: {
+	construct: "plp",
+	rating: "duration",
+	subtype: "flares",
+	timing: "week",
+	scale: "open-text"
+     }
+});
+
+timeline.push({
+    type: 'survey-multi-choice',
+    questions: [
+          {
+            prompt: `Of those uniquely high intensity "flare up" occasions of phantom limb pain in the past week, from 0 'no pain at all' to 10 'worst pain imaginable', what was the <u>typical or most common</u> overall phantom limb pain you experienced?`,
+            options: ["NA <br>(No occasion<br>in the<br>past week)", "0<br>no pain<br>at all", 1, 2, 3, 4, 5, 6, 7, 8, 9, "10<br>worst pain<br>imaginable"],
+            // options: ["<br>Yes, it is a blicket.", "<br>No, it is not a blicket."],
+            values: ["NA", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            horizontal: true,
+            required: true,
+            name: `plp_painRating_flares`
+          }],
+     data: {
+	construct: "plp",
+	rating: "overall",
+	subtype: "flares",
+	timing: "week",
+	scale: "nrs"
+     }
+});
+
+timeline.push({
+    type: 'html-slider-response',
+    stimulus: `<p><i>To provide a rating, please click in the rectangle then drag your cursor to move the scale. <br>If you did not have any such experiences, set the bar to the left.</i></p><br><br><br><br><p>Please provide a rating on the scale that best represents the<br>typical or most common <b>intensity</b> of those uniquely high intensity<br>"flare up" phantom limb pain experiences in the past week.<br></p>`,
+    require_movement: true,
+    slider_start: 0,
+    min: 0,
+    max: 10,
+    step: 0.05,
+    slider_width: 800,
+    labels: [`Most intense<br>pain sensation<br>imaginable`, `No pain<br>sensation`],
+    prompt: "<p></p>",
+     data: {
+	construct: "plp",
 	rating: "intensity",
 	subtype: "flares",
 	timing: "week",
@@ -392,7 +563,7 @@ timeline.push({
 	timing: "week",
 	scale: "vas"
      }
-    })      
+    })
 
 //PLP typical past day
 
