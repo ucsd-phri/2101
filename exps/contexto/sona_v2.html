@@ -268,7 +268,7 @@ let close_enough_on = 0;
     // Function to save data to server
     function SaveData(curData) {
   var dataToServer = {
-    'id': jsPsych.data.getURLVariable('id'),
+    'id': jsPsych.data.getURLVariable('survey_code'),
     'experimenter': 'Ethan',
     'experimentName': 'contexto_sona_v2',
     'curData': curData
