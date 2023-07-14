@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My experiment</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://timbrady.org/turk/TimTurkTools.js"></script>
+<script src="https://www.ethanhurwitz.com/jsPsych/jspsych-6.1.0/jspsych.js"></script>
+<script src="https://www.ethanhurwitz.com/jsPsych/jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
+<script src="https://www.ethanhurwitz.com/jsPsych/jspsych-6.1.0/plugins/jspsych-html-button-response.js"></script>
+<script src="https://www.ethanhurwitz.com/jsPsych/jspsych-6.1.0/plugins/jspsych-image-keyboard-response.js"></script>
+<script src="https://www.ethanhurwitz.com/jsPsych/jspsych-6.1.0/plugins/jspsych-survey-multi-choice.js"></script>
+<script src="https://www.ethanhurwitz.com/jsPsych/jspsych-6.1.0/plugins/jspsych-survey-multi-select.js"></script>
+<script src="https://www.ethanhurwitz.com/jsPsych/jspsych-6.1.0/plugins/jspsych-video-button-response.js"></script>
+<script src="https://www.ethanhurwitz.com/jsPsych/jspsych-6.1.0/plugins/jspsych-survey-text.js"></script>
+<!-- <script src="https://www.ethanhurwitz.com/jsPsych/jspsych-6.1.0/plugins/jspsych-free-sort_update2.js"></script> -->
+<script src="https://www.ethanhurwitz.com/jsPsych/jspsych-6.1.0/plugins/jspsych-free-sort-NEW_updated.js"></script>
+<script src="https://www.ethanhurwitz.com/jsPsych/jspsych-6.1.0/plugins/jspsych-survey-html-form.js"></script>
+<!--audio record 1-->
+<script src="https://www.ethanhurwitz.com/jsPsych/jspsych-6.1.0/plugins/jspsych-html-audio-response_modified.js"></script>
+<!--audio record 2-->
+<script src="https://www.ethanhurwitz.com/jsPsych/jspsych-6.1.0/plugins/jspsych-html-audio-response.js"></script>
+<!--link here-->
+<link href="https://www.ethanhurwitz.com/jsPsych/jspsych-6.1.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+</head>
+  
+<body>
+  <script>
+
+var timeline = [];
+
+var AQ_options = ["Definitely Agree", "Slightly Agree", "Slightly Disagree", "Definitely Disagree"];
+
+var AQ_trial = {
+  type: 'survey-multi-choice',
+  preamble:  "We are going to start by asking you some questions to find out more about you.<br><br>" +
+  "For each statement below, choose one response that best describes how strongly that statement applies to you:<br><br>",
+  questions: [
+    {prompt: "<b>I prefer to do things with others rather than on my own.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ1'}, 
+    {prompt: "<b>I prefer to do things the same way over and over again.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ2'},
+    {prompt: "<b>If I try to imagine something, I find it very easy to create a picture in my mind.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ3'},
+    {prompt: "<b>I frequently get so strongly absorbed in one thing that I lose sight of other things.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ4'},
+    {prompt: "<b>I often notice small sounds when others do not.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ5'},
+    {prompt: "<b>I usually notice car number plates or similar strings of information.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ6'},
+    {prompt: "<b>Other people frequently tell me that what I've said is impolite, even though I think it is polite.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ7'},
+    {prompt: "<b>When I'm reading a story, I can easily imagine what the characters might look like.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ8'},
+    {prompt: "<b>I am fascinated by dates (calendar, not romantic).</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ9'},
+    {prompt: "<b>In a social group, I can easily keep track of several different people's conversations.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ10'},
+    {prompt: "<b>I find social situations easy.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ11'},
+    {prompt: "<b>I tend to notice details that others do not.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ12'},
+    {prompt: "<b>I would rather go to a library than a party.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ13'},
+    {prompt: "<b>I find making up stories easy.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ14'},
+    {prompt: "<b>I find myself drawn more strongly to people than to things.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ15'},
+    {prompt: "<b>I tend to have very strong interests which I get upset about if I can't pursue.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ16'},
+    {prompt: "<b>I enjoy social chit-chat.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ17'},
+    {prompt: "<b>When I talk, it isn't always easy for others to get a word in edgeways.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ18'},
+    {prompt: "<b>I am fascinated by numbers.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ19'},
+    {prompt: "<b>When I'm reading a story, I find it difficult to work out the characters' intentions.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ20'},
+    {prompt: "<b>I don't particularly enjoy reading fiction.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ21'}, 
+    {prompt: "<b>I find it hard to make new friends.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ22'},
+    {prompt: "<b>I notice patterns in things all the time.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ23'},
+    {prompt: "<b>I would rather go to the theatre than a museum.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ24'},
+    {prompt: "<b>It does not upset me if my daily routine is disturbed.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ25'},
+    {prompt: "<b>I frequently find that I don't know how to keep a conversation going.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ26'},
+    {prompt: "<b>I find it easy to 'read between the lines' when someone is talking to me.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ27'},
+    {prompt: "<b>I usually concentrate more on the whole picture, rather than the small details.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ28'},
+    {prompt: "<b>I am not very good at remembering phone numbers.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ29'},
+    {prompt: "<b>I don't usually notice small changes in a situation, or a person's appearance.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ30'},
+    {prompt: "<b>I know how to tell if someone listening to me is getting bored.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ31'},
+    {prompt: "<b>I find it easy to do more than one thing at once.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ32'},
+    {prompt: "<b>When I talk on the phone, I'm not sure when it's my turn to speak.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ33'},
+    {prompt: "<b>I enjoy doing things spontaneously.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ34'},
+    {prompt: "<b>I am often the last to understand the point of a joke.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ35'},
+    {prompt: "<b>I find it easy to work out what someone is thinking or feeling just by looking at their face.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ36'},
+    {prompt: "<b>If there is an interruption, I can switch back to what I was doing very quickly.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ37'},
+    {prompt: "<b>I am good at social chit-chat.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ38'},
+    {prompt: "<b>People often tell me that I keep going on and on about the same thing.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ39'},
+    {prompt: "<b>When I was young, I used to enjoy playing games involving pretending with other children.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ40'},
+    {prompt: "<b>I like to collect information about categories of things.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ41'},
+    {prompt: "<b>I find it difficult to imagine what it would be like to be someone else.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ42'},
+    {prompt: "<b>I like to plan any activities I participate in carefully.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ43'},
+    {prompt: "<b>I enjoy social occasions.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ44'},
+    {prompt: "<b>I find it difficult to work out people's intentions.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ45'},
+    {prompt: "<b>New situations make me anxious.</b>", options: AQ_options, required: true, horizontal: true, values: [4,3,2,1], name: 'AQ46'},
+    {prompt: "<b>I enjoy meeting new people.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ47'},
+    {prompt: "<b>I am a good diplomat.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ48'},
+    {prompt: "<b>I am not very good at remembering people's date of birth.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ49'},
+    {prompt: "<b>I find it very easy to play games with children that involve pretending.</b>", options: AQ_options, required: true, horizontal: true, values: [1,2,3,4], name: 'AQ50'}    
+  ],
+  randomize_question_order: true,
+  data: {
+    type: 'STAI'
+  }
+};
+
+timeline.push(STAI_trial)
+
+//start the experiment
+jsPsych.init({
+      timeline: timeline,
+	  show_progress_bar: true,
+      on_finish: function () {
+			var endTime = new Date();
+			jsPsych.data.addProperties({endTime: endTime});
+			SaveData(jsPsych.data.get().csv()); // .json()?
+    }
+    });
+
+function SaveData(curData) {
+  var dataToServer = {
+    'id': jsPsych.data.getURLVariable("survey_code"),
+    'experimenter': 'Ethan',
+    'experimentName': 'contextoAQ_AQ_v1',
+    'curData': curData
+  }; 
+
+$.post("https://bradylab.ucsd.edu/turk/save.php",
+    dataToServer,
+    FunctionWhenDoneSaving
+  ).fail(FunctionWhenDoneSaving);
+};
+
+function FunctionWhenDoneSaving() {
+        var urlToRedirect = "https://ucsd-phri.github.io/2101/exps/contexto/pilot_v3.html" + "?survey_code=" + jsPsych.data.getURLVariable("survey_code");
+       window.location.href = urlToRedirect;
+      };
+
+</script>
+  </body>
+</html>
