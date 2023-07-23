@@ -408,9 +408,15 @@ We will first start with a training trial so you can get the hang of it.<br><br>
         $("#RAT_AC").hide();
           $("#RAT_trial").html("Find the 4th word that pairs with each of the 3 target words below.<br><br>"+ 
           `<b>${RAT_words[RAT_curTrial][0]}, ${RAT_words[RAT_curTrial][1]}, ${RAT_words[RAT_curTrial][2]}</b><br><br>` + "<br><br><span id='countdown'>60 seconds remaining</span><br><br><br><br>" + "<textarea id='RAT_test_answer' rows='2' cols='12'></textarea>" +
-          '<br><br><br><br><button id="RAT_button" class="button">Continue</button>');
+          '<br><br><br><br><button id="RAT_button" class="button" style="display:none">Continue</button>');
           $("#RAT_trial").show();
           // $("#RAT_continue").show();
+
+          $("#RAT_test_answer").keyup(function(event) {
+                if (event.keyCode === 13 & $("#RAT_test_answer").val() != '') {
+                    $("#RAT_button").click();
+                }
+            });  
 
           $("#RAT_button").on("click", RAT_trialEnd);
         //   RAT_fxn();
