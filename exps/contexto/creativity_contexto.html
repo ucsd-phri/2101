@@ -41,7 +41,7 @@
                     'AUT': {'trial': [],
                             'word': [],
                             'responses': []},
-                    'contexto': {}};
+                    'contexto': []};
     </script>
 
     <div id="intro">
@@ -830,7 +830,7 @@ let close_msg = '<div class="end-msg" id="close-msg">' +
 
 if ((close_enough_on === 1) && !data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) && (Number($(".guess-history").children().get()[0].getAttribute("data-sort")) < close_enough) && (!(Number($(".guess-history").children().get()[0].getAttribute("data-sort")) === 1))) {
   $(close_msg).insertAfter(".top-bar");
-  contexto_data.push(data_temp);
+  data.contexto.push(data_temp);
   counter++;
   // Hide input
   $("input").hide();
@@ -895,7 +895,7 @@ let win_message = '<div class="end-msg">' +
 
 if (position(counter) === 1) {
   $(win_message).insertAfter(".top-bar");
-  contexto_data.push(data_temp);
+  data.contexto.push(data_temp);
   counter++;
   };    
 
@@ -914,7 +914,7 @@ let guess_limit_msg = '<div class="end-msg" id="limit-msg">' +
 
 if ((($('.guess-history').children('div').length) === guess_limit) && !($('.end-msg').length === 1)) {
   $(guess_limit_msg).insertAfter(".top-bar");
-  contexto_data.push(data_temp);
+  data.contexto.push(data_temp);
   counter++;
 };
 
