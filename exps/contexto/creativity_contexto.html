@@ -49,7 +49,7 @@
         After each task, you will see a screen to signal that one task has ended and the next will begin.<br>
         Click the button below to get started!<br><br><br><br>
 
-        <button id="exp_start">
+        <button id="exp_start" class="button">
             Continue
         </button>
     </div>
@@ -58,7 +58,7 @@
         Great work! We're done with the previous task, and will begin a new one on the next page.<br>
         Click the button below to continue.<br><br><br><br>
         
-        <button id="task_start">
+        <button id="task_start" class="button">
             Click here when you are ready to begin the next task
         </button>
     </div>
@@ -67,7 +67,7 @@
         You have now completed all of the tasks. Thank you!<br>
         Please click the button below to complete your participation.<br><br><br><br>
         
-        <button id="exp_end">
+        <button id="exp_end" class="button">
             Finish
         </button>
     </div>
@@ -136,7 +136,7 @@ function FunctionWhenDoneSaving() {
             On each of the following pages, you will be given a different object to come up with creative and original uses for.<br>
             You will have 1 minute each. Please type your different uses in the textbox provided and separate each use with a comma.
         </p>
-        <button id="AUT_start">
+        <button id="AUT_start" class="button">
           Click here when you are ready to start.
         </button>
         </div>
@@ -173,7 +173,7 @@ function FunctionWhenDoneSaving() {
           /* This runs 500ms after ShowTrial is called */
           
           /* set to the right word for this trial */
-          $("#AUT_trial").html("Please list all of the creative, unusual uses for a <b><u>"+ AUT_words[AUT_curTrial] + "</b></u> that you can think of.<br>Please separate each individual response with a comma.<br><br><span id='countdown'>60 seconds remaining</span><br><br><br><br>" + "<textarea id='AUT_answer' rows='4' cols='60'></textarea>"); 
+          $("#AUT_trial").html("Please list all of the creative, unusual uses for a <b><u>"+ AUT_words[AUT_curTrial] + "</b></u> that you can think of.<br>Please separate each individual response with a comma.<br><br><span id='countdown'>60 seconds remaining</span><br><br><br><br>" + "<textarea id='AUT_answer' rows='6' cols='80'></textarea>"); 
           
           $("#AUT_trial").show();
         //   AUT_fxn();
@@ -307,7 +307,7 @@ There will be a text box below the target words for you to write your answer in.
 You will have <b>1 minute</b> for each trial. If you arrive at the answer before then, click the "Continue" button at the bottom to immediately proceed.<br>
 Only click this button if you have arrived at your final answer and want to move on. YOU CANNOT GO BACK.<br>
 We will first start with a training trial so you can get the hang of it.<br><br><br><br>
-        <button id="RAT_start_training">
+        <button id="RAT_start_training" class="button">
             Click here when you are ready to start.
         </button>
         </div>
@@ -335,7 +335,7 @@ We will first start with a training trial so you can get the hang of it.<br><br>
                 <label for="sore">sore</label>
             </div>
             <br><br>
-            <button id="RAT_AC_button">
+            <button id="RAT_AC_button" class="button">
                 Continue
             </button>
         </div>
@@ -354,8 +354,8 @@ We will first start with a training trial so you can get the hang of it.<br><br>
             $("#RAT_instructions").hide();
         //   RAT_ShowTrial();
             $("#RAT_training").show();
-            $("#RAT_training").html(`This is a training trial. Find the 4th word that pairs with each of the 3 target words.<br><br>The words for this trial are:<br><br><br><b>${exampleTriads[0]}, ${exampleTriads[1]}, ${exampleTriads[2]}</b><br>` + "<br><br><span id='RAT_countdown'>60 seconds remaining</span><br><br><br><br>" + "<textarea id='RAT_training_answer' rows='2' cols='12'></textarea>" +
-    '<br><br><br><button id="RAT_continue">Continue</button>');
+            $("#RAT_training").html(`This is a training trial. Find the 4th word that pairs with each of the 3 target words.<br><br>The words for this trial are:<br><br><br><b>${exampleTriads[0]}, ${exampleTriads[1]}, ${exampleTriads[2]}</b><br>` + "<br><br><span id='RAT_countdown'>60 seconds remaining</span><br><br><br><br>" + "<textarea id='RAT_training_answer' rows='2' cols='25'></textarea>" +
+    '<br><br><br><button id="RAT_continue" class="button">Continue</button>');
     $("#RAT_continue").on("click", RAT_AC);
 
     var timeleft = 59;
@@ -397,7 +397,7 @@ We will first start with a training trial so you can get the hang of it.<br><br>
         $("#RAT_AC").hide();
           $("#RAT_trial").html("Find the 4th word that pairs with each of the 3 target words below.<br><br>"+ 
           `<b>${RAT_words[RAT_curTrial][0]}, ${RAT_words[RAT_curTrial][1]}, ${RAT_words[RAT_curTrial][2]}</b><br><br>` + "<br><br><span id='countdown'>60 seconds remaining</span><br><br><br><br>" + "<textarea id='RAT_test_answer' rows='2' cols='12'></textarea>" +
-          '<br><br><br><br><button id="RAT_button">Continue</button>');
+          '<br><br><br><br><button id="RAT_button" class="button>Continue</button>');
           $("#RAT_trial").show();
 
           $("#RAT_button").on("click", RAT_trialEnd);
