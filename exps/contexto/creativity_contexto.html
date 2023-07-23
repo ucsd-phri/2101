@@ -204,7 +204,7 @@ function FunctionWhenDoneSaving() {
         function AUT_trialEnd() {
             // Store trial data
             data.AUT.word.push(AUT_words[AUT_curTrial]);
-            data.AUT.answer.push($("#AUT_answer").val());
+            data.AUT.responses.push($("#AUT_answer").val());
             data.AUT.trial.push(AUT_curTrial+1)
             /* Calculate reaction time */
             var AUT_curTime = new Date();
