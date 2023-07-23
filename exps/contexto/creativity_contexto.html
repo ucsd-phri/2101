@@ -86,14 +86,14 @@
           };
         } ;
 
-        $("#exp_end").on("click", SaveData(JSON.stringify(data)))
+        $("#exp_end").on("click", SaveData)
 
-        function SaveData(curData) {
+        function SaveData() {
   var dataToServer = {
     'id': jsPsych.data.getURLVariable('id'), // UPDATE
     'experimenter': 'Ethan',
     'experimentName': 'contexto_creativity_v1',
-    'curData': curData
+    'curData': JSON.stringify(data)
   }; 
 
   $.post("https://bradylab.ucsd.edu/turk/save.php",
