@@ -184,7 +184,7 @@ function FunctionWhenDoneSaving() {
           
           $("#AUT_trial").show();
         //   AUT_fxn();
-        var timeleft = 60;
+        var timeleft = 59;
         var AUT_timer = setInterval(function(){
         if(timeleft <= 0){
             clearInterval(AUT_timer);
@@ -367,7 +367,13 @@ We will first start with a training trial so you can get the hang of it.<br><br>
     '<br><br><br><button id="RAT_continue" class="button" style="display:none">Continue</button>');
 
             $("#RAT_continue").on("click", RAT_AC);
-            
+
+            // Automatically click into the textarea
+            $(document).ready(function() {
+                $('#RAT_training_answer').focus();
+            });
+
+            // Set up listener to trigger button on "enter" press and move to next trial.
             $("#RAT_training_answer").keyup(function(event) {
                 if (event.keyCode === 13 & $("#RAT_training_answer").val() != '') {
                     $("#RAT_continue").click();
@@ -422,6 +428,13 @@ We will first start with a training trial so you can get the hang of it.<br><br>
           // $("#RAT_continue").show();
             
           $("#RAT_button").on("click", RAT_trialEnd);
+
+          // Automatically click into the textarea
+          $(document).ready(function() {
+               $('#RAT_test_answer').focus();
+          });
+
+          // Set up listener to trigger button on "enter" press and move to next trial.
             
           $("#RAT_test_answer").keyup(function(event) {
                 if (event.keyCode === 13 & $("#RAT_test_answer").val() != '') {
