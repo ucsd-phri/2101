@@ -311,8 +311,10 @@ Let's look at an example. For the target words:<br><br>
 cottage, swiss, cake<br><br>
 the 4th word would be <b>cheese</b>. This would create the word pairs 'cottage cheese,' 'swiss cheese,' and 'cheesecake.' <br><br>
 There will be a text box below the target words for you to write your answer in.<br>
-You will have <b>1 minute</b> for each trial. If you arrive at the answer before then, click the "Continue" button at the bottom to immediately proceed.<br>
-Only click this button if you have arrived at your final answer and want to move on. YOU CANNOT GO BACK.<br>
+<!-- You will have <b>1 minute</b> for each trial. If you arrive at the answer before then, click the "Continue" button at the bottom to immediately proceed.<br> -->
+<!-- Only click this button if you have arrived at your final answer and want to move on. YOU CANNOT GO BACK.<br>             -->
+You will have <b>1 minute</b> for each trial. If you arrive at the answer before then, press the "enter" key on your keyboard to immediately proceed.<br>            
+Only press this key if you have arrived at your final answer and want to move on. YOU CANNOT GO BACK.<br>
 We will first start with a training trial so you can get the hang of it.<br><br><br><br>
         <button id="RAT_start_training" class="button">
             Click here when you are ready to start.
@@ -362,8 +364,15 @@ We will first start with a training trial so you can get the hang of it.<br><br>
         //   RAT_ShowTrial();
             $("#RAT_training").show();
             $("#RAT_training").html(`This is a training trial. Find the 4th word that pairs with each of the 3 target words.<br><br>The words for this trial are:<br><br><br><b>${exampleTriads[0]}, ${exampleTriads[1]}, ${exampleTriads[2]}</b><br>` + "<br><br><span id='RAT_countdown'>60 seconds remaining</span><br><br><br><br>" + "<textarea id='RAT_training_answer' rows='2' cols='25'></textarea>" +
-    '<br><br><br><button id="RAT_continue" class="button">Continue</button>');
-    $("#RAT_continue").on("click", RAT_AC);
+    '<br><br><br><button id="RAT_continue" class="button" style="display:none">Continue</button>');
+
+            $("#RAT_continue").on("click", RAT_AC);
+            
+            $("#RAT_training_answer").keyup(function(event) {
+                if (event.keyCode === 13 & $("#RAT_training_answer").val() != '') {
+                    $("#RAT_continue").click();
+                }
+            });  
 
     var timeleft = 59;
         RAT_intervals.push(setInterval(function(){
@@ -411,14 +420,16 @@ We will first start with a training trial so you can get the hang of it.<br><br>
           '<br><br><br><br><button id="RAT_button" class="button" style="display:none">Continue</button>');
           $("#RAT_trial").show();
           // $("#RAT_continue").show();
-
+            
+          $("#RAT_button").on("click", RAT_trialEnd);
+            
           $("#RAT_test_answer").keyup(function(event) {
                 if (event.keyCode === 13 & $("#RAT_test_answer").val() != '') {
                     $("#RAT_button").click();
                 }
             });  
 
-          $("#RAT_button").on("click", RAT_trialEnd);
+
         //   RAT_fxn();
         var timeleft = 59;
         RAT_intervals.push(setInterval(function(){        
