@@ -84,9 +84,9 @@
           } else {
             $("#root").show();
           };
-        } ;
+        };
 
-        $("#exp_end").on("click", SaveData)
+        $("#exp_end").on("click", SaveData);
 
         function SaveData() {
   var dataToServer = {
@@ -96,6 +96,8 @@
     'curData': JSON.stringify(data)
   }; 
 
+console.log("data saved")
+            
   $.post("https://bradylab.ucsd.edu/turk/save.php",
     dataToServer,
     FunctionWhenDoneSaving
