@@ -162,6 +162,7 @@ function FunctionWhenDoneSaving() {
   
         var AUT_words = ["brick", "paper clip", "newspaper", "rubberband", "spoon"];        
         AUT_words = jsPsych.randomization.repeat(AUT_words, 1);
+        AUT_words = AUT_words.slice(0,3) // get the first 3 words from the shuffled array
 
         
         /* This gets called when they click the button 
@@ -282,22 +283,23 @@ var RAT_words = [
 // ['coin', 'quick', 'spoon'],
 ['demon', 'limit', 'way'],
 // ['broken', 'clear', 'eye'], XXX
-['pike', 'coat', 'signal'],
+// ['pike', 'coat', 'signal'],
 ['lift', 'card', 'mask'],
 ['due', 'life', 'tense'],
 // ['strike', 'same', 'tennis'], XXX
-['loser', 'throat', 'spot'], //new
-['rocking', 'wheel', 'high'], //new
-['time', 'hair', 'stretch'],
+// ['loser', 'throat', 'spot'], //new
+// ['rocking', 'wheel', 'high'], //new
+// ['time', 'hair', 'stretch'],
 ['pine', 'crab', 'sauce'],
 ['speak', 'money', 'street'],
 ['mail', 'board', 'lung'],
 ['water', 'tobacco', 'stove'],
 ['tooth', 'potato', 'heart'],
 ['chest', 'car', 'store'],
-['land', 'hand', 'house'],
+// ['land', 'hand', 'house'],
 ['high', 'book', 'sour'],
-['bump', 'egg', 'step']];
+// ['bump', 'egg', 'step']
+];
 
 var RAT_words = Shuffle(RAT_words);
 var RAT_intervals = [];
