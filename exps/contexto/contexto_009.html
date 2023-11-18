@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Guess That Word!</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/jspsych.js"></script>
+  <!-- <script defer="defer" src="static/js/main.341327a7.js"></script> -->
+  <link href="css/main.css" rel="stylesheet">
+  
+</head>
+<body>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="js/lemmatizer.js"></script>
+  
+    <script>
+      var lemmatizer = new Lemmatizer();
+    </script>	
+  
+  <script>
+  // Create Exp Variables:
+  var num_guesses = 0
+
+  // Create Data Variable
+  var data = {
+    'id': "009",
+    'date': new Date(),
+    'data': [
+  ]
+  };
+
+  var data_temp;
+
+</script>
+
+<script>
+// List of target words:
+
+// var targets = ["frog", "king"];
+
+// targets = jsPsych.randomization.repeat(targets, 1);
+	
+var setA = ['moose', 'car', 'cookie', 'flower'];
+setA = jsPsych.randomization.repeat(setA, 1);
+
+var targets = {'word': [""],
+               'start': [""]};
+
+    
+targets.word = setA;
+	
+    // target words and starting word -- if giving a word to start with
+// var targets = {'word': ['church', 'wizard', 'fairy', 'damp', 'seaweed', 'harp', 
+// 	'corpse', 'blaze', 'clock', 'barbecue', 'pleasure', 
+// 	'honest', 'society', 'warmth', 'helpful', 'anger', 
+// 	'justice', 'horror', 'attractive', 'pathetic'],
+//                'start': ['']};
+
+// function shuffle(obj1, obj2) {
+//   var index = obj1.length;
+//   var rnd, tmp1, tmp2;
+
+//   while (index) {
+//     rnd = Math.floor(Math.random() * index);
+//     index -= 1;
+//     tmp1 = obj1[index];
+//     tmp2 = obj2[index];
+//     obj1[index] = obj1[rnd];
+//     obj2[index] = obj2[rnd];
+//     obj1[rnd] = tmp1;
+//     obj2[rnd] = tmp2;
+//   }
+// };
+
+// shuffle(targets.word, targets.start);
+
+// Load in json files of word similarity vectors
+
+for (let i=0; i < targets.word.length; i++){
+  // window[targets[i]] = [];
+
+  $.getJSON('vector_files/' + targets.word[i] + '.json', function(data) {
+    window[targets.word[i]] = data
+  }) 
+  
+};
+
+  // var frog = [];
+
+  // $.getJSON('frog.json', function(data) {
+  //   frog = data
+  // })
+
+  // find numerical position of any particular guess:
+  // frog.word.indexOf("monkey")
+
+  // Update guess counter:
+  var update_guess_counter = function() {
+
+    $('#guess-count').html(num_guesses)
+  }
+</script>  
+
+<script>
+  const GREEN_THRESHOLD = 300;
+  const YELLOW_THRESHOLD = 1500;
+  // Functions for formatting guess history
+  const getBarWidth = (distance) => {
+  const total = 40000;
+  const lambda = 0.5;
+  const pdf = (x) => lambda * Math.exp(-lambda * x);
+  const startX = 0;
+  const endX = 100;
+  const startY = pdf(startX);
+  const endY = pdf(endX);
+  const x = (distance / total) * (endX - startX);
+  let result = ((pdf(x) - endY) / (startY - endY)) * 100;
+  if (result < 1) {
+    result = 1;
+  }
+  return `${result}%`;
+};
+
+const getBarColor = (distance) => {
+  if (distance < GREEN_THRESHOLD) {
+    return 'var(--green)';
+  }
+  if (distance < YELLOW_THRESHOLD) {
+    return 'var(--yellow)';
+  }
+  return 'var(--red)';
+};
+
+// Above are from contexto. Below are novel.
+
+// const set_guess_limit = (n) => {
+//     return n;
+// };
+
+</script>
+
+<div id="root">
+  <div class="wrapper">
+    <div class="top-bar">
+      <div class="title">
+        <h1>
+          Guess That Word!
+          <br><br>
+        </h1>
+      </div>
+      <div style="position: relative;">
+        <!-- <button class="btn">
+        </button> -->
+      </div>
+
+    </div>
+
+    <div class="info-bar">
+      <span class="label">
+        Trial:
+      </span>
+      <span class="trial_num">
+        <!-- Trial Inserted Here -->         
+      </span>
+      &nbsp;
+      <span class="label">
+        Guesses: 
+      </span>
+      <span>
+        <!-- Guess tracker code -->
+        <span id="guess-count">0</span>
+      </span>
+    </div>
+  
+  <!-- <form> -->
+    <input class="word" type="text" name="word" placeholder="type a word" autocapitalize="off" autocomplete="off" value>
+  <!-- </form> -->
+
+<script>
+  // Function to sort divs
+
+var $container = [];
+var divs = [];
+var $sortedDivs = [];
+
+  var sort_guesses = function(){
+    var $container = $('.guess-history');
+    var divs = $container.children('#guesses').get();
+    divs.sort(function(div1, div2) {
+      function getValue(div) { return parseInt($(div)[0].getAttribute('data-sort'), 10); }
+      var val1 = getValue(div1), val2 = getValue(div2);
+      return (val1 > val2) ? 1 : ((val1 < val2) ? -1 : 0);
+    });
+    var $sortedDivs = $(divs);
+
+    $container.append($sortedDivs);
+  };
+
+</script>
+<script>
+  // Function to find word position
+  var position = function(n) {
+    // TEMP: Replace "frog" with trial target word
+    // return targets[n].word.indexOf($('.word').val().toLowerCase()) + 1
+    return window[targets.word[n]].word.indexOf(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) + 1  
+  };
+</script>
+
+<script>
+// Function to change class of guesses
+var change_class = function() {
+  $('.guess-history').children().removeClass().addClass('row-wrapper');
+}
+</script>
+
+<script>
+// Template to hold trial data
+  var data_temp = {'target': '',
+      'trial': '',
+      'responses': [],
+      'similarity': [],	   
+      'time': []}
+
+var time1 = new Date();
+var time_temp = new Date();
+let counter = 0;
+let guess_limit = 30;
+let close_enough = 30;
+let close_enough_on = 0;	
+</script>
+
+<script>
+    // Function to save data to server
+    function SaveData(curData) {
+  var dataToServer = {
+    'id': "009",
+    'experimenter': 'Ethan',
+    'experimentName': 'contexto_testo',
+    'curData': curData
+  }; 
+
+  $.post("https://bradylab.ucsd.edu/turk/save.php",
+    dataToServer,
+    function(data) { 
+        //    var urlToRedirect = "https://my.ctri.ucsd.edu/surveys/?s=" + jsPsych.data.getURLVariable('redcap')
+        //    window.location.href = urlToRedirect;
+// 			var newDoc = document.open("text/html", "replace");
+// 			// newDoc.write("All done, thanks! To submit the HIT, paste this code into Turk: " + randCode);
+//             newDoc.write("Your responses have been recorded.");
+// 			newDoc.close();
+    }
+  ).fail(function(data) { 
+	//    var urlToRedirect = "https://my.ctri.ucsd.edu/surveys/?s=" + jsPsych.data.getURLVariable('redcap')
+    //        window.location.href = urlToRedirect;
+// 			var newDoc = document.open("text/html", "replace");
+// 			// newDoc.write("All done, thanks! To submit the HIT, paste this code into Turk: " + randCode);
+//             newDoc.write("Your responses have been recorded.");
+// 			newDoc.close();
+	});      
+};
+</script>
+
+  <script>
+  var game = function() {
+    
+    // Reset things for pseudo-loop
+    $('.word').off();
+    num_guesses = 0;
+    time_temp = new Date();
+    data_temp = {'target': targets.word[counter],
+      'trial': counter + 1,
+      'responses': [],
+      'similarity': [],
+      'time': []};
+    // Remove the previous guesses and messages -- Reset to beginning state
+    $('#guess-count').html(0);
+    $('.guess-history').empty();
+    $('.message').empty();
+    $('.end-msg').remove();
+    $("input").show();
+    $(".how-to-play").hide();	  
+
+    // If they are finished with all the trials, show ending screen and save data to server.
+
+    let finish_msg = '<div class="end-msg" id="finish-msg">' +
+  '<p class="bigger"><span>You are now done with this part of the study. <br>Thank you!</span></p>' +
+    '</div>'
+
+    if (counter === targets.word.length) {
+        $(finish_msg).insertAfter(".top-bar");
+        SaveData(JSON.stringify(data)); 
+//         console.log(JSON.stringify(data));
+        return;
+    };    
+  
+    // Start all the shit that is basically a trial:
+    $('.trial_num').html("#" + (counter + 1))
+  // document.querySelector('.word').addEventListener('keypress', function (e) {
+    $('.word').on('keypress', function (e) {    
+    if (e.key === 'Enter') {
+      // console.log($('.word').val().toLowerCase())
+      // Add response time and add to + update guess counter *if it exists and is new*
+      if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) && (position(counter) > 0)) {
+        // if(data_temp.time.length === 0){
+        //   time_temp = new Date();
+        //   data_temp.time.push(time_temp);
+        //   // console.log("first time entry");
+        // } else {
+        //   // Get time difference (time between response entries) in milliseconds
+        //   data_temp.time.push((new Date()) - time_temp);
+        //   // console.log((new Date()) - time_temp);
+        //   time_temp = new Date();
+        // }
+
+        data_temp.time.push(new Date());
+        
+
+        num_guesses++;
+        update_guess_counter();
+
+    };
+
+        // Create template row to add to guess history
+      let row_template = '<div class="row-wrapper current" id="guesses" data-sort=' + position(counter) + '>'+
+        '<div class="outer-bar">'+
+          '<div class="inner-bar" style="width: ' + getBarWidth(position(counter)) + '; background-color: '+getBarColor(position(counter))+';"></div>'+
+        //   <!-- Width% and color vary based on word similarity!-->
+        '</div>'+
+        '<div class="row">'+
+          '<span>'+
+            lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0] +
+          '</span>'+
+          '<span>'+
+            // <!-- Similarity of Most Recent Guess - Need to use IIFE because embedding in HTML, can't use addition -->
+                  //TEMP: replace everything before `.word` with name of target word for trial
+            // (() => {
+            //   return frog.word.indexOf($('.word').val().toLowerCase()) + 1 // +1 because -based index
+            //   })();
+            position(counter);
+          '</span>'+
+        '</div>'+
+      '</div>'
+
+      // Change class of all existing guesses:
+    change_class();  
+
+    // Add row to guess history *only if it is new AND in the word list*
+    if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) && (position(counter) > 0)) {
+      $('.guess-history').append(row_template);
+    };
+    
+    // Sort the guess history by similarity
+    sort_guesses();
+
+    // Code for getting close enough:
+    let close_msg = '<div class="end-msg" id="close-msg">' +
+      '<p class="bigger"><span>Nice work! This is close enough to move on to the next trial.</span></p>' +
+  '<p><span>The target word was</span> <u>' + targets.word[counter] + '</u></p>'+
+  '<div>' +
+     '<div style="position: relative; padding: 15px 0px;">' +
+        '<button type="button" class="button" onclick="game()">'+
+           '<div style="min-width: 104px;">Next Trial</div>' +
+        '</button>' +
+     '</div>' +
+  '</div>' +
+'</div>'
+
+    if ((close_enough_on === 1) && !data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) && (Number($(".guess-history").children().get()[0].getAttribute("data-sort")) < close_enough) && (!(Number($(".guess-history").children().get()[0].getAttribute("data-sort")) === 1))) {
+      $(close_msg).insertAfter(".top-bar");
+      data.data.push(data_temp);
+      counter++;
+      // Hide input
+      $("input").hide();
+    };
+    
+    // Create template for Message History
+    let message_template = '<div class="row-wrapper current" id="guesses" data-sort=' + position(counter) + '>'+
+        '<div class="outer-bar">'+
+          '<div class="inner-bar" style="width: ' + getBarWidth(position(counter)) + '; background-color: '+getBarColor(position(counter))+';"></div>'+
+        //   <!-- Width% and color vary based on word similarity!-->
+        '</div>'+
+        '<div class="row">'+
+          '<span>'+
+            lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0] +
+          '</span>'+
+          '<span>'+
+            // <!-- Similarity of Most Recent Guess - Need to use IIFE because embedding in HTML, can't use addition -->
+                  //TEMP: replace everything before `.word` with name of target word for trial
+
+            // (() => {
+            //   return frog.word.indexOf($('.word').val().toLowerCase()) + 1 // +1 because -based index
+            //   })();
+            position(counter);
+          '</span>'+
+        '</div>'+
+      '</div>'
+
+    let message_repeat = '<div class="message-text">The word <u>' + lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0] + '</u> was already guessed.</div>' 
+    let message_unknown = `<div class="message-text">I'm sorry, I don't know this word.</div>`
+
+    // Add Message
+    if (data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0])) {
+      $('.message').html(message_repeat);
+    } else if (position(counter) === 0) {
+      $('.message').html(message_unknown);
+    } else {
+      $('.message').html(message_template);
+    }
+
+    // Save response *only if it is new and exists!*
+    if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) && (position(counter) > 0)) {
+      data_temp.responses.push(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]);
+      data_temp.similarity.push(position(counter));    
+    };
+
+    // Add screen to begin next trial:
+    let win_message = '<div class="end-msg">' +
+  '<p class="bigger"><span>Congrats!</span></p>' +
+  '<p><span>You got the</span> word <u>' + targets.word[counter] + '</u><br>in <u>' + data_temp.responses.length + '</u> guesses.</p>'+
+  '<div class="chart-wrapper">' +
+     '<div class="chart"></div>' +
+  '</div>' +
+  '<div>' +
+     '<div style="position: relative; padding: 15px 0px;">' +
+        '<button type="button" class="button" onclick="game()">'+
+           
+           '<div style="min-width: 104px;">Next Trial</div>' +
+        '</button>' +
+     '</div>' +
+  '</div>' +
+'</div>'
+
+  if (position(counter) === 1) {
+      $(win_message).insertAfter(".top-bar");
+      data.data.push(data_temp);
+      counter++;
+      };    
+
+    // Code for instating a guess limit:
+    let guess_limit_msg = '<div class="end-msg" id="limit-msg">' +
+      '<p class="bigger"><span>You have reached the maximum number of guesses allowed for this word!</span></p>' +
+  '<p><span>The target word was</span> <u>' + targets.word[counter] + '</u></p>'+
+  '<div>' +
+     '<div style="position: relative; padding: 15px 0px;">' +
+        '<button type="button" class="button" onclick="game()">'+
+           '<div style="min-width: 104px;">Next Trial</div>' +
+        '</button>' +
+     '</div>' +
+  '</div>' +
+'</div>'
+
+    if ((($('.guess-history').children('div').length) === guess_limit) && !($('.end-msg').length === 1)) {
+      $(guess_limit_msg).insertAfter(".top-bar");
+      data.data.push(data_temp);
+      counter++;
+    };
+
+    // Clear input field
+    // TEMP: Will want this to be an if/then -- only clear if guess is valid?
+    $('.word').val('');
+    
+
+    }
+});
+};
+
+// game();
+
+</script>
+	  
+<script>
+    $("input").hide();
+</script>
+<div class="how-to-play">
+    <div>
+       <div class="modal-title">
+          <h1>How to play:</h1>
+       </div>
+       <p>On each trial, there is a randomly selected secret word.<br>Your goal is to try and figure out that secret word.</p> 
+       <p>The secret word will always be a noun. You have a maximum of <u>30</u> guesses per trial.</p>
+       <p>The words were sorted by an artificial intelligence algorithm according to how similar they were to the secret word.</p>
+       <p>After submitting a word, you will see its position. The secret word is number 1.</p>
+       <!-- <p>The algorithm analyzed thousands of texts. It uses the context in which words are used to calculate the similarity between them.</p> -->
+       <p>You will earn points based on the closest word you can get on each trial.<br>If you get the secret word, you will earn a bonus for that trial.</p>
+    </div>
+    <div style="position: relative; padding: 15px 0px;">
+        <button type="button" class="button" style="margin:0 auto; display:block;" onclick="game()">
+           <div style="min-width: 104px;">Begin</div>
+        </button>
+     </div>    
+ </div>	  
+
+<!-- Only have message show up after first guess -->
+  <div class="message">
+  </div>
+
+  <div class="guess-history">
+  </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
