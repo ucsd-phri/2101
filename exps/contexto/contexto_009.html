@@ -80,7 +80,7 @@ targets.word = setA;
 for (let i=0; i < targets.word.length; i++){
   // window[targets[i]] = [];
 
-  $.getJSON('vector_files/' + targets.word[i] + '.json', function(data) {
+  $.getJSON('vector_files/denoised/' + targets.word[i] + '.json', function(data) {
     window[targets.word[i]] = data
   }) 
   
