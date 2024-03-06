@@ -29,7 +29,6 @@
         <!-- <link href="css/main.css" rel="stylesheet"> -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-        
         <style>
           .container {
             width: 400px; /* Set width of the container */
@@ -219,18 +218,9 @@
           // Test to see if people remember the correct profiles before they can move on
           // Test to see if people remember the correct profiles before they can move on
 
-          var intro = {
-            type: 'html-button-response',
-            stimulus: "Through recent technological advances in the last 50 years, there are more ways than ever to make money now.<br>In this part of the task, we are interested in people's thoughts about different professions.<br><br>",
-            choices: ["Continue"],
-            data: {type: "intro"}
-            }
-
-          timeline.push(iat_instr)
-
           var iat_instr = {
             type: 'html-button-response',
-            stimulus: 'First, you will complete an Implicit Association Test (IAT)<br>in which you will be asked to sort words into groups as fast as you can.<br><br>',
+            stimulus: 'In this task you will complete an Implicit Association Test (IAT)<br>in which you will be asked to sort words into groups as fast as you can.<br><br>',
             choices: ["Continue"],
             data: {type: "iat_instr"}
             }
@@ -830,7 +820,7 @@
         // situations intro:
         var situations_instr = {
             type: 'html-button-response',
-            stimulus: "For the following questions, imagine that you are asked to help in a variety of situations.<br>Based on a person's occupation title, you will rank how suitable you think each person would be to help with the given situation.<br><br>",
+            stimulus: 'For the following questions, you will be asked to rank people in various lines of work<br>in order of who you would choose to help you with an array of tasks.',
             choices: ["Continue"],
             data: {type: "situations_instr"}
             };
@@ -892,7 +882,7 @@
 
         var SDO = {
           type: 'survey-multi-choice',
-          preamble: "Show how much you favor or oppose each idea below by selecting a response on the scale below.<br>You can work quickly; your first feeling is generally best.<br><br>",
+          preamble: "Show how much you favor or oppose each idea below by selecting a number from 1 to 7 on the scale below.<br>You can work quickly; your first feeling is generally best.<br><br>",
           questions: [
             {prompt: "<b>An ideal society requires some groups to be on top and others to be on the bottom.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values, name: 'PD_1'}, 
             {prompt: "<b>Some groups of people are simply inferior to other groups.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values, name: 'PD_2'},
