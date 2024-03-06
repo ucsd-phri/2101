@@ -52,6 +52,45 @@
 
           var timeline = [];
 
+          var human_words = ['people', 'citizen', 'individual', 'rational', 'culture', 
+                            'society', 'mind', 'us'];
+          var animal_words = ['animal', 'nature', 'bodies', 'tame', 'pet', 
+                              'creature', 'feral', 'them'];
+
+          var human_animal_words = [];
+
+          for (i=0; i<human_words.length; i++) {
+            human_animal_words.push(human_words[i])
+          };
+          for (i=0; i<animal_words.length; i++) {
+            human_animal_words.push(animal_words[i])
+          };
+
+          Shuffle(human_animal_words);
+
+          var labels = [["human", "animal"],
+                        ["upper class", "lower class"]];
+
+                    var jobs = ['sex worker',
+                      'slaughterhouse worker',
+                      'narcotics dealer',
+                      'truck driver',
+                      'panhandler',
+                      'police officer',
+                      'defense lawyer',
+                      'fashion designer',
+                      'barista',
+                      'cashier',
+                      'insurance agent',
+                      'administrative assistant',
+                      'massage therapist',
+                      'crime scene cleaner',
+                      'mortician',
+                      'influencer'];
+
+          Shuffle(jobs);
+
+
           var intro = {
             type: 'html-button-response',
             stimulus: "Through recent technological advances in the last 50 years, there are more ways than ever to make money now.<br>In this part of the task, we are interested in people's thoughts about different professions.<br><br>",
@@ -69,6 +108,93 @@
             };
 
           timeline.push(iat_instr);
+
+            //
+            //
+            //
+            //
+            //
+            //
+
+        // SDO
+        var SDO_options = ["Strongly<br>Oppose<br>", "Somewhat<br>Oppose", "Slightly<br>Oppose", "Neutral", "Slightly<br>Favor", "Somewhat<br>Favor", "Strongly<br>Favor"];
+        var SDO_values = [1,2,3,4,5,6,7];
+        var SDO_values_reverse = [7,6,5,4,3,2,1];
+
+        var SDO = {
+          type: 'survey-multi-choice',
+          preamble: "Show how much you favor or oppose each idea below by selecting a response on the scale below.<br>You can work quickly; your first feeling is generally best.<br><br>",
+          questions: [
+            {prompt: "<b>An ideal society requires some groups to be on top and others to be on the bottom.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values, name: 'PD_1'}, 
+            {prompt: "<b>Some groups of people are simply inferior to other groups.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values, name: 'PD_2'},
+            {prompt: "<b>No one group should dominate in society.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values_reverse, name: 'CD_1'}, //R
+            {prompt: "<b>Groups at the bottom are just as deserving as groups at the top.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values_reverse, name: 'CD_2'}, //R
+            {prompt: "<b>Group equality should not be our primary goal.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values, name: 'PAG_1'},
+            {prompt: "<b>It is unjust to try to make groups equal.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values, name: 'PAG_2'},
+            {prompt: "<b>We should do what we can to equalize conditions for different groups.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values_reverse, name: 'CAG_1'}, //R
+            {prompt: "<b>We should work to give all groups an equal chance to succeed.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values_reverse, name: 'CAG_2'} //R
+          ],
+          randomize_question_order: true,
+          data: {
+            type: 'SDO'
+          }
+        };
+
+        timeline.push(SDO);
+
+        // RWA
+        var RWA_options = ["Very Strongly<br>Disagree<br>", "Strongly<br>Disagree", "Somewhat<br>Disagree", "Slightly<br>Disagree", "Unsure or Neutral", "Slightly<br>Agree", "Somewhat<br>Agree", "Strongly<br>Agree", "Very Strongly<br>Agree"];
+        // var RWA_values = [-4,-3,-2,-1,0,1,2,3,4];
+        // var RWA_values_reverse = [4,3,2,1,0,-1,-2,-3,-4];
+        var RWA_values = [1,2,3,4,5,6,7,8,9];
+        var RWA_values_reverse = [9,8,7,6,5,4,3,2,1];
+
+        var RWA = {
+          type: 'survey-multi-choice',
+          preamble: "Please indicate how much you agree or disagree with the statements below.<br><br>",
+          questions: [
+            {prompt: "<b>It's great that many young people today are prepared to defy authority.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'CAS_1'}, //R
+            {prompt: "<b>What our country needs most is discipline, with everyone following our leaders in unity.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'CAS_2'},
+            {prompt: "<b>God's laws about abortion, pornography, and marriage must be strictly followed before it is too late.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'TC_1'},
+            {prompt: "<b>There is nothing wrong with premarital sexual intercourse.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'TC_2'}, //R
+            {prompt: "<b>Our society does NOT need tougher government and stricter laws.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'AAR_1'}, //R
+            {prompt: "<b>The facts on crime and the recent public disorders show we have to crack down harder on troublemakers, if we are going to preserve law and order</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'AAR_2'}
+          ],
+          randomize_question_order: true,
+          data: {
+            type: 'RWA'
+          }
+        };
+
+        timeline.push(SDO);
+
+        // DWB
+        var DWB_options = ["Strongly<br>Disagree<br>", "Somewhat<br>Disagree", "Slightly<br>Disagree", "Neutral", "Slightly<br>Agree", "Somewhat<br>Agree", "Strongly<br>Agree"];
+        var DWB_values = [1,2,3,4,5,6,7];
+        var DWB_values_reverse = [7,6,5,4,3,2,1];
+
+        var DWB = {
+          type: 'survey-multi-choice',
+          preamble: "Please indicate how much you agree or disagree with the statements below.<br><br>",
+          questions: [
+            {prompt: "<b>My knowledge and experience tells me that the social world we live in<br>is basically a safe, stable and secure place<br>in which most people are fundamentally good.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values_reverse, name: 'DWB1'}, //R
+            {prompt: "<b>It seems that every year there are fewer and fewer truly respectable people,<br>and more and more persons with no morals at all who threaten everyone else.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values, name: 'DWB2'},
+            {prompt: "<b>Although it may appear that things are constantly getting<br> more dangerous and chaotic, it really isn't so. Every era has its problems, and a person's chances<br>of living a safe, untroubled life are better today than ever before.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values_reverse, name: 'DBW3'}, //R
+            {prompt: "<b>Any day now chaos and anarchy could erupt around us.<br>All the signs are pointing to it.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values, name: 'DWB4'},
+            {prompt: "<b>There are many dangerous people in our society who will attack someone<br> out of pure meanness, for no reason at all.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values, name: 'DWB5'},
+            {prompt: "<b>The 'end' is not near. People who think that earthquakes, wars, and famines mean<br>God might be about to destroy the world are being foolish.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values_reverse, name: 'DWB6'}, //R
+            {prompt: "<b>My knowledge and experience tells me that the social world we live in<br>is basically a dangerous and unpredictable place, in which good, decent and moral people's<br>values and way of life are threatened and disrupted by bad people.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values, name: 'DWB7'},
+            {prompt: "<b>Despite what one hears about 'crime in the street,'<br>there probably isn't any more now than there ever has been.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values_reverse, name: 'DWB8'}, //R
+            {prompt: "<b>If a person takes a few sensible precautions, nothing bad is likely to happen to him or her;<br>we do not live in a dangerous world.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values_reverse, name: 'DWB9'}, //R
+            {prompt: "<b>Every day as society become more lawless and bestial,<br>a person's chances of being robbed, assaulted, and even murdered go up and up.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values, name: 'DWB10'}
+          ],
+          randomize_question_order: true,
+          data: {
+            type: 'DWB'
+          }
+        };
+
+        timeline.push(DWB);
 
         jsPsych.data.addProperties({userAgent: navigator.userAgent,
           startTime: startTime,
