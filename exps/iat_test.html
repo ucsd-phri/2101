@@ -116,6 +116,83 @@
             //
             //
             //
+            
+          // human-animal words IAT trials:
+          // human-animal words IAT trials:
+          // human-animal words IAT trials:
+          // human-animal words IAT trials:
+          // human-animal words IAT trials:
+          // human-animal words IAT trials:
+
+          var block1_instr = {
+            type: 'html-keyboard-response',
+            stimulus: 'In this section, you will press the "D" key for items that belong to the category <b>Human</b><br>'+
+            'and press the "K" key for items that belong to the category <b>Animal</b>.<br><br>'+
+            'Items will appear one at a time.<br><br>'+
+            '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
+            'Press the <b>space bar</b> when you are ready to start.',
+            choices: ['space'],
+        };
+          timeline.push(block1_instr);
+
+          var block1 = [];
+          for (i=0; i < human_animal_words.length; i++) {
+            block1.push(human_animal_words[i])
+          };
+          for (i=0; i < human_animal_words.length; i++) {
+            block1.push(human_animal_words[i])
+          };
+
+          Shuffle(block1);
+
+          var iat_trial_count = 0
+          // Create the temp trial block variable
+          var iat_trial_block = [];
+
+          // For loop to create the human-animal word IAT trials
+          for(i=0; i < human_animal_words.length; i++) {
+            iat_trial_count += 1
+
+            iat_trial_block.push({
+              type: 'iat-html',
+              stimulus: `${block1[i]}`,
+              stim_key_association: human_words.includes(block1[i]) ? "left" : "right",
+              // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+              bottom_instructions: '',
+              // bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+              force_correct_key_press: false,
+              display_feedback: false,
+              trial_duration: 100, //Only if display_feedback is false
+              left_category_key: 'd',
+              right_category_key: 'k',
+              left_category_label: ['human'],
+              right_category_label: ['animal'],
+              response_ends_trial: true,
+              data: {type: "iat_trial",
+                    block: "block1_human_animal",
+                    trial: iat_trial_count,
+                    stimulus: block1[i],
+                    d: 'human',
+                    k: 'animal'}
+            });
+            // Randomize the order of the trials within the word pair block
+            // By doing this, the trial order gets fucked up. Need to fix -- possibly by adding the trial number afterwards
+              // var temp = jsPsych.data.get().filter({type: "iat_trial"}).values()
+              // for (i=0; i < temp.length; i++) {
+              //   temp[i]["trial"] = i
+              // }
+            }
+            // Shuffle(iat_trial_block);
+              // Add trials to timeline
+            for (i=0; i < iat_trial_block.length; i++) {
+              timeline.push(iat_trial_block[i])
+          };
+            //
+            //
+            //
+            //
+            //
+            //
                     // situations intro:
         var situations_instr = {
             type: 'html-button-response',
@@ -173,13 +250,6 @@
             }
           })
         };
-            
-            //
-            //
-            //
-            //
-            //
-            //
 
         // SDO
         var SDO_options = ["Strongly<br>Oppose<br>", "Somewhat<br>Oppose", "Slightly<br>Oppose", "Neutral", "Slightly<br>Favor", "Somewhat<br>Favor", "Strongly<br>Favor"];
