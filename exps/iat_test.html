@@ -109,6 +109,71 @@
 
           timeline.push(iat_instr);
 
+
+            //
+            //
+            //
+            //
+            //
+            //
+                    // situations intro:
+        var situations_instr = {
+            type: 'html-button-response',
+            stimulus: "For the following questions, imagine that you are asked to help in a variety of situations.<br>Based on a person's occupation title, you will rank how suitable you think each person would be to help with the given situation.<br><br>",
+            choices: ["Continue"],
+            data: {type: "situations_instr"}
+            };
+
+        timeline.push(situations_instr);
+
+        var situations = [["You are asked to complete sets of mathematical problems.", 'competence'],
+                          ["You are asked to give a motivational speech to at-risk youth.", 'higher'],
+                        ["You are asked to call potential donors to raise money for a charity.", 'compassion'],
+                        ["You are asked to coach a children's sports team.", 'compassion'],
+                        ["You are asked to model for a fashion collection.", 'spicy'],
+                        ["You are asked to help clean portable toilets at a construction site.", 'disgust'],
+                        ["You are asked to clean up roadkill (rotting animal carcasses) from the side of a highway.", 'disgust'],
+                        ["You are asked to write a persuasive letter to local government officials.", 'competence'],
+                        ["You are asked to perform in a talent show.", 'higher'],
+                        ["You are asked to provide basic medical care to survivors of a natural disaster.", 'compassion'],
+                        ["You are asked to take care of and bathe elderly residents of a nursing home.", 'disgust'],
+                        ["You are aksed to organize and participate in a speed dating event.", 'spicy'],
+                        ["You are asked to steal cars.", 'spicy']];
+
+        Shuffle(situations);                
+
+        var jobs_subset = ['sex worker',
+                      'slaughterhouse worker',
+                      'narcotics dealer',
+                      'panhandler',
+                      'police officer',
+                      'defense lawyer',
+                      'barista',
+                      'massage therapist',
+                      'crime scene cleaner',
+                      'mortician'];
+
+        function shuffleArray(array) {
+            let shuffledArray = array.slice(); // Create a copy of the array to avoid modifying the original
+            for (let i = shuffledArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+            }
+            return shuffledArray;
+        };
+
+        for (i=0; i < situations.length; i++) {
+          let shuffled_jobs = shuffleArray(jobs_subset);
+          timeline.push({
+            type: "rank-order",
+            options: shuffled_jobs,
+            prompt: situations[i][0],
+            data: {
+              category: situations[i][1]
+            }
+          })
+        };
+            
             //
             //
             //
