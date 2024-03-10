@@ -449,7 +449,8 @@ var preloadImages = [];
 
 jsPsych.data.addProperties({userAgent: navigator.userAgent,
 	startTime: startTime,
-	randCode: randCode
+  id: jsPsych.data.getURLVariable('id'),
+  AA_set: jsPsych.data.getURLVariable('set')
 });
 
 jsPsych.init({
@@ -466,9 +467,9 @@ jsPsych.init({
 
     function SaveData(curData) {
   var dataToServer = {
-    'id': randCode,
+    'id': jsPsych.data.getURLVariable('id'),
     'experimenter': 'Ethan',
-    'experimentName': 'CogFlex_jumps_CD_v2',
+    'experimentName': 'CD_set1_v1',
     'curData': curData
   }; 
 	
@@ -487,7 +488,7 @@ jsPsych.init({
 
 
 // $.post("https://madlab.ucsd.edu/mturk/save.php",
-$.post("https://madlab-research.ucsd.edu/savePentagon.php",
+$.post("https://bradylab.ucsd.edu/turk/save.php",
     dataToServer,
     FunctionWhenDoneSaving
   ).fail(FunctionWhenDoneSaving);

@@ -984,8 +984,8 @@
               on_finish: function () {
               var endTime = new Date();
               jsPsych.data.addProperties({endTime: endTime});
-                    jsPsych.data.displayData();
-              // SaveData(jsPsych.data.get().csv()); // .json()?
+                    // jsPsych.data.displayData();
+              SaveData(jsPsych.data.get().csv()); // .json()?
             }
             });
 
