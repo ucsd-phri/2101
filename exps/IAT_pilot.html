@@ -868,7 +868,7 @@
           timeline.push({
             type: "rank-order",
             options: shuffled_jobs,
-            prompt: situations[i][0],
+            prompt: `${situations.length - (i+1)} questions remaining in this section<br><br>` + situations[i][0],
             data: {
               category: situations[i][1]
             }
@@ -972,6 +972,8 @@
 
         jsPsych.data.addProperties({userAgent: navigator.userAgent,
           startTime: startTime,
+          id: jsPsych.data.getURLVariable('id'),
+          AA_set: jsPsych.data.getURLVariable('set')
           // randCode: randCode
         });
 
@@ -989,9 +991,9 @@
 
             function SaveData(curData) {
           var dataToServer = {
-            'id': randCode,
+            'id': jsPsych.data.getURLVariable('id'),
             'experimenter': 'Ethan',
-            'experimentName': 'repeated_admin_pilot_v1',
+            'experimentName': 'IAT_pilot_v1',
             'curData': curData
           }; 
 
@@ -1003,8 +1005,15 @@
         };
 
         function FunctionWhenDoneSaving() {
-                var urlToRedirect = "https://ucsd.sona-systems.com/webstudy_credit.aspx?experiment_id=2079&credit_token=82002d4286dc4451a327871aa536edab&survey_code=" +
-                jsPsych.data.getURLVariable('survey_code');
+                // var urlToRedirect = "https://ucsd.sona-systems.com/webstudy_credit.aspx?experiment_id=2079&credit_token=82002d4286dc4451a327871aa536edab&survey_code=" +
+                // jsPsych.data.getURLVariable('survey_code');
+                if(jsPsych.data.getURLVariable('set') == 2) {
+                  var urlToRedirect = "https://ucsd-phri.github.io/2101/exps/CD_set2.html?set=2&id=" + jsPsych.data.getURLVariable('id')
+                } else if(jsPsych.data.getURLVariable('set') == 3) {
+                  var urlToRedirect = "https://ucsd-phri.github.io/2101/exps/CD_set3.html?set=3&id=" + jsPsych.data.getURLVariable('id')
+                } else if(jsPsych.data.getURLVariable('set') == 1) {
+                  var urlToRedirect = "https://ucsd-phri.github.io/2101/exps/CD_set1.html?set=1&id=" + jsPsych.data.getURLVariable('id')
+                };
               window.location.href = urlToRedirect;
               };
 
