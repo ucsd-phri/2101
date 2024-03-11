@@ -86,7 +86,7 @@
           Shuffle(human_animal_words);
 
           var labels = [["human", "animal"],
-                        ["upper class", "lower class"]];
+                        ["high competence", "low competence"]];
 
           // Shuffle(iat_words);
 
@@ -218,14 +218,23 @@
           // Test to see if people remember the correct profiles before they can move on
           // Test to see if people remember the correct profiles before they can move on
 
+          var intro = {
+            type: 'html-button-response',
+            stimulus: "Through recent technological advances in the last 50 years, there are more ways than ever to make money now.<br>In this part of the task, we are interested in people's thoughts about different professions.<br><br>",
+            choices: ["Continue"],
+            data: {type: "intro"}
+            };
+
+          timeline.push(intro);
+
           var iat_instr = {
             type: 'html-button-response',
-            stimulus: 'In this task you will complete an Implicit Association Test (IAT)<br>in which you will be asked to sort words into groups as fast as you can.<br><br>',
+            stimulus: 'First, you will complete an Implicit Association Test (IAT)<br>in which you will be asked to sort words into groups as fast as you can.<br><br>',
             choices: ["Continue"],
             data: {type: "iat_instr"}
-            }
+            };
 
-          timeline.push(iat_instr)
+          timeline.push(iat_instr);
 
           // var iat_trial_count = 0
 
@@ -355,8 +364,8 @@
 
           var block2_instr = {
             type: 'html-keyboard-response',
-            stimulus: 'In this section, you will press the "D" key for items that belong to the category <b>Upper Class</b><br>'+
-            'and press the "K" key for items that belong to the category <b>Lower Class</b>.<br><br>'+
+            stimulus: 'In this section, you will press the "D" key for items that belong to the category <b>High Competence</b><br>'+
+            'and press the "K" key for items that belong to the category <b>Low Competence</b>.<br><br>'+
             'Items will appear one at a time.<br><br>'+
             '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
             'Press the <b>space bar</b> when you are ready to start.',
@@ -394,15 +403,15 @@
               trial_duration: 100, //Only if display_feedback is false
               left_category_key: 'd',
               right_category_key: 'k',
-              left_category_label: ['upper class'],
-              right_category_label: ['lower class'],
+              left_category_label: ['high competence'],
+              right_category_label: ['low competence'],
               response_ends_trial: true,
               data: {type: "iat_trial",
                     block: "block2_jobs",
                     trial: iat_trial_count,
                     stimulus: block2[i],
-                    d: 'upper_class',
-                    k: 'lower_class'}
+                    d: 'high_competence',
+                    k: 'low_competence'}
             });
             // Randomize the order of the trials within the word pair block
             // By doing this, the trial order gets fucked up. Need to fix -- possibly by adding the trial number afterwards
@@ -426,8 +435,8 @@
 
           var block3_instr = {
             type: 'html-keyboard-response',
-            stimulus: 'In this section, you will press the "D" key for <b>Human</b> and for <b>Upper Class</b><br>'+
-            'and press the "K" key for <b>Animal</b> and for <b>Lower Class</b>.<br><br>'+
+            stimulus: 'In this section, you will press the "D" key for <b>Human</b> and for <b>High Competence</b><br>'+
+            'and press the "K" key for <b>Animal</b> and for <b>Low Competence</b>.<br><br>'+
             'Each item belongs to only one category.<br>'+
             'Items will appear one at a time.<br><br>'+
             '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
@@ -469,15 +478,15 @@
               trial_duration: 100, //Only if display_feedback is false
               left_category_key: 'd',
               right_category_key: 'k',
-              left_category_label: ['human', 'upper class'],
-              right_category_label: ['animal', 'lower class'],
+              left_category_label: ['human', 'high competence'],
+              right_category_label: ['animal', 'low competence'],
               response_ends_trial: true,
               data: {type: "iat_trial",
                     block: "block3",
                     trial: iat_trial_count,
                     stimulus: block3[i],
-                    d: 'human_upper_class',
-                    k: 'animal_lower_class'}
+                    d: 'human_high_competence',
+                    k: 'animal_low_competence'}
             });
             }
             // Shuffle(iat_trial_block);
@@ -496,8 +505,8 @@
           var block4_instr = {
             type: 'html-keyboard-response',
             stimulus: 'This section will be the same as the previous part.<br>'+
-            'Press the "D" key for <b>Human</b> and for <b>Upper Class</b>.<br>'+
-            'Press the "K" key for <b>Animal</b> and for <b>Lower Class</b>.<br><br>'+
+            'Press the "D" key for <b>Human</b> and for <b>High Competence</b>.<br>'+
+            'Press the "K" key for <b>Animal</b> and for <b>Low Competence</b>.<br><br>'+
             'Items will appear one at a time.<br>'+
             'Each item belongs to only one category.<br><br>'+
             '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
@@ -543,15 +552,15 @@
               trial_duration: 100, //Only if display_feedback is false
               left_category_key: 'd',
               right_category_key: 'k',
-              left_category_label: ['human', 'upper class'],
-              right_category_label: ['animal', 'lower class'],
+              left_category_label: ['human', 'high competence'],
+              right_category_label: ['animal', 'low competence'],
               response_ends_trial: true,
               data: {type: "iat_trial",
                     block: "block4",
                     trial: iat_trial_count,
                     stimulus: block4[i],
-                    d: 'human_upper_class',
-                    k: 'animal_lower_class'}
+                    d: 'human_high_competence',
+                    k: 'animal_low_competence'}
             });
             // Randomize the order of the trials within the word pair block
             // By doing this, the trial order gets fucked up. Need to fix -- possibly by adding the trial number afterwards
@@ -647,8 +656,8 @@
 
           var block6_instr = {
             type: 'html-keyboard-response',
-            stimulus: 'Press the "D" key for <b>Animal</b> and for <b>Upper Class</b>.<br>'+
-            'Press the "K" key for <b>Human</b> and for <b>Lower Class</b>.<br><br>'+
+            stimulus: 'Press the "D" key for <b>Animal</b> and for <b>High Competence</b>.<br>'+
+            'Press the "K" key for <b>Human</b> and for <b>Low Competence</b>.<br><br>'+
             'Items will appear one at a time.<br>'+
             'Each item belongs to only one category.<br><br>'+
             '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
@@ -694,15 +703,15 @@
               trial_duration: 100, //Only if display_feedback is false
               left_category_key: 'd',
               right_category_key: 'k',
-              left_category_label: ['animal', 'upper class'],
-              right_category_label: ['human', 'lower class'],
+              left_category_label: ['animal', 'high competence'],
+              right_category_label: ['human', 'low competence'],
               response_ends_trial: true,
               data: {type: "iat_trial",
                     block: "block6",
                     trial: iat_trial_count,
                     stimulus: block6[i],
-                    d: 'animal_upper_class',
-                    k: 'human_lower_class'}
+                    d: 'animal_high_competence',
+                    k: 'human_low_competence'}
             });
             }
             // Shuffle(iat_trial_block);
@@ -723,8 +732,8 @@
           var block7_instr = {
             type: 'html-keyboard-response',
             stimulus: 'This section will be the same as the previous part.<br>'+
-            'Press the "D" key for <b>Animal</b> and for <b>Upper Class</b>.<br>'+
-            'Press the "K" key for <b>Human</b> and for <b>Lower Class</b>.<br><br>'+
+            'Press the "D" key for <b>Animal</b> and for <b>High Competence</b>.<br>'+
+            'Press the "K" key for <b>Human</b> and for <b>Low Competence</b>.<br><br>'+
             'Items will appear one at a time.<br>'+
             'Each item belongs to only one category.<br><br>'+
             '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
@@ -778,15 +787,15 @@
               trial_duration: 100, //Only if display_feedback is false
               left_category_key: 'd',
               right_category_key: 'k',
-              left_category_label: ['animal', 'upper class'],
-              right_category_label: ['human', 'lower class'],
+              left_category_label: ['animal', 'high competence'],
+              right_category_label: ['human', 'low competence'],
               response_ends_trial: true,
               data: {type: "iat_trial",
                     block: "block7",
                     trial: iat_trial_count,
                     stimulus: block7[i],
-                    d: 'animal_upper_class',
-                    k: 'human_lower_class'}
+                    d: 'animal_high_competence',
+                    k: 'human_low_competence'}
             });
             }
             // Shuffle(iat_trial_block);
@@ -912,12 +921,12 @@
           type: 'survey-multi-choice',
           preamble: "Please indicate how much you agree or disagree with the statements below.<br><br>",
           questions: [
-            {prompt: "<b>It's great that many young people today are prepared to defy authority.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'CAS_1'}, //R
-            {prompt: "<b>What our country needs most is discipline, with everyone following our leaders in unity.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'CAS_2'},
-            {prompt: "<b>God's laws about abortion, pornography, and marriage must be strictly followed before it is too late.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'TC_1'},
-            {prompt: "<b>There is nothing wrong with premarital sexual intercourse.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'TC_2'}, //R
-            {prompt: "<b>Our society does NOT need tougher government and stricter laws.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'AAR_1'}, //R
-            {prompt: "<b>The facts on crime and the recent public disorders show we have to crack down harder on troublemakers, if we are going to preserve law and order</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'AAR_2'}
+            {prompt: "<b><span style='font-size: 12px;'>It's great that many young people today are prepared to defy authority.</span></b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'CAS_1'}, //R
+            {prompt: "<b><span style='font-size: 12px;'>What our country needs most is discipline, with everyone following our leaders in unity.</span></b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'CAS_2'},
+            {prompt: "<b><span style='font-size: 12px;'>God's laws about abortion, pornography, and marriage must be strictly followed before it is too late.</span></b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'TC_1'},
+            {prompt: "<b><span style='font-size: 12px;'>There is nothing wrong with premarital sexual intercourse.</span></b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'TC_2'}, //R
+            {prompt: "<b><span style='font-size: 12px;'>Our society does NOT need tougher government and stricter laws.</span></b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'AAR_1'}, //R
+            {prompt: "<b><span style='font-size: 12px;'>The facts on crime and the recent public disorders show we have to crack down harder on troublemakers, if we are going to preserve law and order.</span></b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'AAR_2'}
           ],
           randomize_question_order: true,
           data: {
