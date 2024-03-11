@@ -911,7 +911,15 @@
         timeline.push(SDO);
 
         // RWA
-        var RWA_options = ["Very Strongly<br>Disagree<br>", "Strongly<br>Disagree", "Somewhat<br>Disagree", "Slightly<br>Disagree", "Unsure or Neutral", "Slightly<br>Agree", "Somewhat<br>Agree", "Strongly<br>Agree", "Very Strongly<br>Agree"];
+        var RWA_options = ["<span style='font-size: 12px;'>Very Strongly<br>Disagree<br></span>", 
+        "<span style='font-size: 12px;'>Strongly<br>Disagree</span>", 
+        "<span style='font-size: 12px;'>Somewhat<br>Disagree</span>", 
+        "<span style='font-size: 12px;'>Slightly<br>Disagree</span>", 
+        "<span style='font-size: 12px;'>Unsure or Neutral</span>", 
+        "<span style='font-size: 12px;'>Slightly<br>Agree</span>", 
+        "<span style='font-size: 12px;'>Somewhat<br>Agree</span>", 
+        "<span style='font-size: 12px;'>Strongly<br>Agree</span>", 
+        "<span style='font-size: 12px;'>Very Strongly<br>Agree</span>"];
         // var RWA_values = [-4,-3,-2,-1,0,1,2,3,4];
         // var RWA_values_reverse = [4,3,2,1,0,-1,-2,-3,-4];
         var RWA_values = [1,2,3,4,5,6,7,8,9];
@@ -921,12 +929,12 @@
           type: 'survey-multi-choice',
           preamble: "Please indicate how much you agree or disagree with the statements below.<br><br>",
           questions: [
-            {prompt: "<b><span style='font-size: 12px;'>It's great that many young people today are prepared to defy authority.</span></b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'CAS_1'}, //R
-            {prompt: "<b><span style='font-size: 12px;'>What our country needs most is discipline, with everyone following our leaders in unity.</span></b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'CAS_2'},
-            {prompt: "<b><span style='font-size: 12px;'>God's laws about abortion, pornography, and marriage must be strictly followed before it is too late.</span></b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'TC_1'},
-            {prompt: "<b><span style='font-size: 12px;'>There is nothing wrong with premarital sexual intercourse.</span></b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'TC_2'}, //R
-            {prompt: "<b><span style='font-size: 12px;'>Our society does NOT need tougher government and stricter laws.</span></b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'AAR_1'}, //R
-            {prompt: "<b><span style='font-size: 12px;'>The facts on crime and the recent public disorders show we have to crack down harder on troublemakers, if we are going to preserve law and order.</span></b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'AAR_2'}
+            {prompt: "<b>It's great that many young people today are prepared to defy authority.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'CAS_1'}, //R
+            {prompt: "<b>What our country needs most is discipline, with everyone following our leaders in unity.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'CAS_2'},
+            {prompt: "<b>God's laws about abortion, pornography, and marriage must be strictly followed before it is too late.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'TC_1'},
+            {prompt: "<b>There is nothing wrong with premarital sexual intercourse.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'TC_2'}, //R
+            {prompt: "<b>Our society does NOT need tougher government and stricter laws.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'AAR_1'}, //R
+            {prompt: "<b>The facts on crime and the recent public disorders show we have to crack down harder on troublemakers, if we are going to preserve law and order.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'AAR_2'}
           ],
           randomize_question_order: true,
           data: {
