@@ -437,7 +437,7 @@
             type: 'html-keyboard-response',
             stimulus: 'In this section, you will press the "D" key for <b>Human</b> and for <b>High Competence</b><br>'+
             'and press the "K" key for <b>Animal</b> and for <b>Low Competence</b>.<br><br>'+
-            'Each item belongs to only one category.<br>'+
+            'Each item belongs to only one category. Sort the items according to the categories used in the first two blocks of trials.<br>'+
             'Items will appear one at a time.<br><br>'+
             '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
             'Press the <b>space bar</b> when you are ready to start.',
@@ -508,7 +508,7 @@
             'Press the "D" key for <b>Human</b> and for <b>High Competence</b>.<br>'+
             'Press the "K" key for <b>Animal</b> and for <b>Low Competence</b>.<br><br>'+
             'Items will appear one at a time.<br>'+
-            'Each item belongs to only one category.<br><br>'+
+            'Each item belongs to only one category. Sort the items according to the categories used in the first two blocks of trials.<br><br>'+
             '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
             'Press the <b>space bar</b> when you are ready to start.',
             choices: ['space'],
@@ -659,7 +659,7 @@
             stimulus: 'Press the "D" key for <b>Animal</b> and for <b>High Competence</b>.<br>'+
             'Press the "K" key for <b>Human</b> and for <b>Low Competence</b>.<br><br>'+
             'Items will appear one at a time.<br>'+
-            'Each item belongs to only one category.<br><br>'+
+            'Each item belongs to only one category. Sort the items according to the categories used in the first two blocks of trials.<br><br>'+
             '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
             'Press the <b>space bar</b> when you are ready to start.',
             choices: ['space'],
@@ -735,7 +735,7 @@
             'Press the "D" key for <b>Animal</b> and for <b>High Competence</b>.<br>'+
             'Press the "K" key for <b>Human</b> and for <b>Low Competence</b>.<br><br>'+
             'Items will appear one at a time.<br>'+
-            'Each item belongs to only one category.<br><br>'+
+            'Each item belongs to only one category. Sort the items according to the categories used in the first two blocks of trials.<br><br>'+
             '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
             'Press the <b>space bar</b> when you are ready to start.',
             choices: ['space'],
@@ -836,19 +836,19 @@
 
         timeline.push(situations_instr);
 
-        var situations = [["You are asked to complete sets of mathematical problems.", 'competence'],
-                          ["You are asked to give a motivational speech to at-risk youth.", 'higher'],
-                        ["You are asked to call potential donors to raise money for a charity.", 'compassion'],
-                        ["You are asked to coach a children's sports team.", 'compassion'],
-                        ["You are asked to model for a fashion collection.", 'spicy'],
-                        ["You are asked to help clean portable toilets at a construction site.", 'disgust'],
-                        ["You are asked to clean up roadkill (rotting animal carcasses) from the side of a highway.", 'disgust'],
-                        ["You are asked to write a persuasive letter to local government officials.", 'competence'],
-                        ["You are asked to perform in a talent show.", 'higher'],
-                        ["You are asked to provide basic medical care to survivors of a natural disaster.", 'compassion'],
-                        ["You are asked to take care of and bathe elderly residents of a nursing home.", 'disgust'],
-                        ["You are aksed to organize and participate in a speed dating event.", 'spicy'],
-                        ["You are asked to steal cars.", 'spicy']];
+        var situations = [["You are asked to complete sets of mathematical problems.", 'competence', 'math_problems'],
+                          ["You are asked to give a motivational speech to at-risk youth.", 'higher', 'motivational_speech'],
+                        ["You are asked to call potential donors to raise money for a charity.", 'compassion', 'charity'],
+                        ["You are asked to coach a children's sports team.", 'compassion', 'coach_sports'],
+                        ["You are asked to model for a fashion collection.", 'spicy', 'model'],
+                        ["You are asked to help clean portable toilets at a construction site.", 'disgust', 'clean_toilets'],
+                        ["You are asked to clean up roadkill (rotting animal carcasses) from the side of a highway.", 'disgust', 'roadkill'],
+                        ["You are asked to write a persuasive letter to local government officials.", 'competence', 'local_government'],
+                        ["You are asked to perform in a talent show.", 'higher', 'talent_show'],
+                        ["You are asked to provide basic medical care to survivors of a natural disaster.", 'compassion', 'natural_disaster'],
+                        ["You are asked to take care of and bathe elderly residents of a nursing home.", 'disgust', 'bathe_elderly'],
+                        ["You are aksed to organize and participate in a speed dating event.", 'spicy', 'speed_dating'],
+                        ["You are asked to steal cars.", 'spicy', 'steal_cars']];
 
         Shuffle(situations);                
 
@@ -877,9 +877,14 @@
           timeline.push({
             type: "rank-order",
             options: shuffled_jobs,
-            prompt: `${situations.length - (i+1)} questions remaining in this section<br><br>` + situations[i][0],
+            prompt: `${situations.length - (i+1)} questions remaining in this section<br><br>` + 
+            "Rank in order who you would choose to help you when...<br><br>" +
+            situations[i][0],
             data: {
-              category: situations[i][1]
+              category: situations[i][1],
+              stimulus: situations[i][2],
+              type: "situations",
+              trial: i
             }
           })
         };
@@ -955,7 +960,7 @@
           questions: [
             {prompt: "<b>My knowledge and experience tells me that the social world we live in<br>is basically a safe, stable and secure place<br>in which most people are fundamentally good.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values_reverse, name: 'DWB1'}, //R
             {prompt: "<b>It seems that every year there are fewer and fewer truly respectable people,<br>and more and more persons with no morals at all who threaten everyone else.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values, name: 'DWB2'},
-            {prompt: "<b>Although it may appear that things are constantly getting<br> more dangerous and chaotic, it really isn't so. Every era has its problems, and a person's chances<br>of living a safe, untroubled life are better today than ever before.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values_reverse, name: 'DBW3'}, //R
+            {prompt: "<b>Although it may appear that things are constantly getting<br> more dangerous and chaotic, it really isn't so. Every era has its problems, and a person's chances<br>of living a safe, untroubled life are better today than ever before.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values_reverse, name: 'DWB3'}, //R
             {prompt: "<b>Any day now chaos and anarchy could erupt around us.<br>All the signs are pointing to it.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values, name: 'DWB4'},
             {prompt: "<b>There are many dangerous people in our society who will attack someone<br> out of pure meanness, for no reason at all.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values, name: 'DWB5'},
             {prompt: "<b>The 'end' is not near. People who think that earthquakes, wars, and famines mean<br>God might be about to destroy the world are being foolish.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values_reverse, name: 'DWB6'}, //R
@@ -971,6 +976,22 @@
         };
 
         timeline.push(DWB);
+
+        var know_jobs = {
+          type: "survey-multi-select",
+          questions: [
+            {
+              prompt: "We're curious about whether you personally know someone working in the jobs we asked you about earlier.<br><br>" +
+              "Please select below to indicate whether you know someone in those jobs.",
+              options: jobs,
+              horizontal: false,
+              required: true,
+              name: "know_jobs"
+            }
+          ]
+        };
+
+        timeline.push(know_jobs);
 
         // Stop Trial for debugging
         // Stop Trial for debugging
