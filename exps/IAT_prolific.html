@@ -72,22 +72,22 @@
           //                 ["human", "animal"],
           //                 ["animal", "human"]];
 
-          var human_words = ['<span style="color:#7C05BE">people</span>', 
-                             '<span style="color:#7C05BE">citizen</span>', 
-                             '<span style="color:#7C05BE">individual</span>', 
-                             '<span style="color:#7C05BE">rational</span>', 
-                             '<span style="color:#7C05BE">culture</span>', 
-                            '<span style="color:#7C05BE">society</span>', 
-                             '<span style="color:#7C05BE">mind</span>', 
-                             '<span style="color:#7C05BE">us</span>'];
-          var animal_words = ['<span style="color:#7C05BE">animal</span>', 
-                              '<span style="color:#7C05BE">nature</span>', 
-                              '<span style="color:#7C05BE">bodies</span>', 
-                              '<span style="color:#7C05BE">tame</span>', 
-                              '<span style="color:#7C05BE">pet</span>', 
-                              '<span style="color:#7C05BE">creature</span>', 
-                              '<span style="color:#7C05BE">feral</span>', 
-                              '<span style="color:#7C05BE">them</span>'];
+          var human_words = ['<span style="color:#F76D12">people</span>', 
+                             '<span style="color:#F76D12">citizen</span>', 
+                             '<span style="color:#F76D12">individual</span>', 
+                             '<span style="color:#F76D12">rational</span>', 
+                             '<span style="color:#F76D12">culture</span>', 
+                            '<span style="color:#F76D12">society</span>', 
+                             '<span style="color:#F76D12">mind</span>', 
+                             '<span style="color:#F76D12">us</span>'];
+          var animal_words = ['<span style="color:#F76D12">animal</span>', 
+                              '<span style="color:#F76D12">nature</span>', 
+                              '<span style="color:#F76D12">bodies</span>', 
+                              '<span style="color:#F76D12">tame</span>', 
+                              '<span style="color:#F76D12">pet</span>', 
+                              '<span style="color:#F76D12">creature</span>', 
+                              '<span style="color:#F76D12">feral</span>', 
+                              '<span style="color:#F76D12">them</span>'];
 
           var human_animal_words = [];
 
@@ -115,22 +115,22 @@
 
           // var jobs = ["construction worker", "lawyer", "nurse", "farmer", "custodian", "house keeper",
           //           "financial advisor", "chef"];
-          var jobs = ['<span style="color:#F76D12">sex worker</span>',
-                      '<span style="color:#F76D12">slaughterhouse worker</span>',
-                      '<span style="color:#F76D12">narcotics dealer</span>',
-                      '<span style="color:#F76D12">truck driver</span>',
-                      '<span style="color:#F76D12">panhandler</span>',
-                      '<span style="color:#F76D12">police officer</span>',
-                      '<span style="color:#F76D12">defense lawyer</span>',
-                      '<span style="color:#F76D12">fashion designer</span>',
-                      '<span style="color:#F76D12">barista</span>',
-                      '<span style="color:#F76D12">cashier</span>',
-                      '<span style="color:#F76D12">insurance agent</span>',
-                      '<span style="color:#F76D12">administrative assistant</span>',
-                      '<span style="color:#F76D12">massage therapist</span>',
-                      '<span style="color:#F76D12">crime scene cleaner</span>',
-                      '<span style="color:#F76D12">mortician</span>',
-                      '<span style="color:#F76D12">influencer</span>'];
+          var jobs = ['<span style="color:#7C05BE">sex worker</span>',
+                      '<span style="color:#7C05BE">slaughterhouse worker</span>',
+                      '<span style="color:#7C05BE">narcotics dealer</span>',
+                      '<span style="color:#7C05BE">truck driver</span>',
+                      '<span style="color:#7C05BE">panhandler</span>',
+                      '<span style="color:#7C05BE">police officer</span>',
+                      '<span style="color:#7C05BE">defense lawyer</span>',
+                      '<span style="color:#7C05BE">fashion designer</span>',
+                      '<span style="color:#7C05BE">barista</span>',
+                      '<span style="color:#7C05BE">cashier</span>',
+                      '<span style="color:#7C05BE">insurance agent</span>',
+                      '<span style="color:#7C05BE">administrative assistant</span>',
+                      '<span style="color:#7C05BE">massage therapist</span>',
+                      '<span style="color:#7C05BE">crime scene cleaner</span>',
+                      '<span style="color:#7C05BE">mortician</span>',
+                      '<span style="color:#7C05BE">influencer</span>'];
           
           // var uc_jobs = [];
           // var lc_jobs = ['sex worker',
@@ -309,7 +309,7 @@
           var block1_instr = {
             type: 'html-keyboard-response',
             stimulus: 'In this section, you will press the "D" key for items that belong to the category <span style="color:#F76D12"><b>Human</b></span><br>'+
-            'and press the "K" key for items that belong to the category <span style="color:#F76D12"><b>Animal</b></span.<br><br>'+
+            'and press the "K" key for items that belong to the category <span style="color:#F76D12"><b>Animal</b></span>.<br><br>'+
             'Items will appear one at a time.<br><br>'+
             '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
             'Press the <b>space bar</b> when you are ready to start.',
@@ -337,7 +337,7 @@
 
             iat_trial_block.push({
               type: 'iat-html',
-              stimulus: `${block1[i]}`,
+              stimulus: '<b>'+`${block1[i]}`+'</b>',
               stim_key_association: human_words.includes(block1[i]) ? "left" : "right",
               // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
               bottom_instructions: '',
@@ -408,7 +408,7 @@
 
             iat_trial_block.push({
               type: 'iat-html',
-              stimulus: `${block2[i]}`,
+              stimulus: '<b>'+`${block2[i]}`+'</b>',
               stim_key_association: "left",
               // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
               bottom_instructions: '',
@@ -452,7 +452,7 @@
             type: 'html-keyboard-response',
             stimulus: 'In this section, you will press the "D" key for <span style="color:#F76D12"><b>Human</b></span> and for <span style="color:#7C05BE"><b>High Competence</b></span><br>'+
             'and press the "K" key for <span style="color:#F76D12"><b>Animal</b></span> and for <span style="color:#7C05BE"><b>Low Competence</b></span>.<br><br>'+
-            'Each item belongs to only one category. Sort the items according to the categories used in the first two blocks of trials.<br>'+
+            'Each item belongs to only one category.<br>'+
             'Items will appear one at a time.<br><br>'+
             '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
             'Press the <b>space bar</b> when you are ready to start.',
@@ -483,7 +483,7 @@
 
             iat_trial_block.push({
               type: 'iat-html',
-              stimulus: `${block3[i]}`,
+              stimulus: '<b>'+`${block3[i]}`+'</b>',
               stim_key_association: human_words.includes(block3[i]) ? "left" : "right",
               // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
               bottom_instructions: '',
@@ -523,7 +523,7 @@
             'Press the "D" key for <span style="color:#F76D12"><b>Human</b></span> and for <span style="color:#7C05BE"><b>High Competence</b></span>.<br>'+
             'Press the "K" key for <span style="color:#F76D12"><b>Animal</b></span> and for <span style="color:#7C05BE"><b>Low Competence</b></span>.<br><br>'+
             'Items will appear one at a time.<br>'+
-            'Each item belongs to only one category. Sort the items according to the categories used in the first two blocks of trials.<br><br>'+
+            'Each item belongs to only one category.<br><br>'+
             '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
             'Press the <b>space bar</b> when you are ready to start.',
             choices: ['space'],
@@ -557,7 +557,7 @@
 
             iat_trial_block.push({
               type: 'iat-html',
-              stimulus: `${block4[i]}`,
+              stimulus: '<b>'+`${block4[i]}`+'</b>',
               stim_key_association: human_words.includes(block4[i]) ? "left" : "right",
               // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
               bottom_instructions: '',
@@ -629,7 +629,7 @@
 
             iat_trial_block.push({
               type: 'iat-html',
-              stimulus: `${block5[i]}`,
+              stimulus: '<b>'+`${block5[i]}`+'</b>',
               stim_key_association: human_words.includes(block5[i]) ? "right" : "left",
               // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
               bottom_instructions: '',
@@ -674,7 +674,7 @@
             stimulus: 'Press the "D" key for <span style="color:#F76D12"><b>Animal</b></span> and for <span style="color:#7C05BE"><b>High Competence</b></span>.<br>'+
             'Press the "K" key for <span style="color:#F76D12"><b>Human</b></span> and for <span style="color:#7C05BE"><b>Low Competence</b></span>.<br><br>'+
             'Items will appear one at a time.<br>'+
-            'Each item belongs to only one category. Sort the items according to the categories used in the first two blocks of trials.<br><br>'+
+            'Each item belongs to only one category.<br><br>'+
             '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
             'Press the <b>space bar</b> when you are ready to start.',
             choices: ['space'],
@@ -708,7 +708,7 @@
 
             iat_trial_block.push({
               type: 'iat-html',
-              stimulus: `${block6[i]}`,
+              stimulus: '<b>'+`${block6[i]}`+'</b>',
               stim_key_association: human_words.includes(block6[i]) ? "right" : "left",
               // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
               bottom_instructions: '',
@@ -750,7 +750,7 @@
             'Press the "D" key for <span style="color:#F76D12"><b>Animal</b></span> and for <span style="color:#7C05BE"><b>High Competence</b></span>.<br>'+
             'Press the "K" key for <span style="color:#F76D12"><b>Human</b></span> and for <span style="color:#7C05BE"><b>Low Competence</b></span>.<br><br>'+
             'Items will appear one at a time.<br>'+
-            'Each item belongs to only one category. Sort the items according to the categories used in the first two blocks of trials.<br><br>'+
+            'Each item belongs to only one category.<br><br>'+
             '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
             'Press the <b>space bar</b> when you are ready to start.',
             choices: ['space'],
@@ -792,7 +792,7 @@
 
             iat_trial_block.push({
               type: 'iat-html',
-              stimulus: `${block7[i]}`,
+              stimulus: '<b>'+`${block7[i]}`+'</b>',
               stim_key_association: human_words.includes(block7[i]) ? "right" : "left",
               // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
               bottom_instructions: '',
