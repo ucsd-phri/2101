@@ -387,7 +387,7 @@ jsPsych.init({
 
     function SaveData(curData) {
   var dataToServer = {
-    'id': randCode,
+    'id': jsPsych.data.getURLVariable('PROLIFIC_PID'),
     'experimenter': 'Ethan',
     'experimentName': 'CD_set2_pilot',
     'curData': curData
