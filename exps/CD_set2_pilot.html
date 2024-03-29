@@ -327,33 +327,33 @@ var AC_CD2 = {
 
 // Demographics:
 
-var demographics = {
-  type: 'survey-multi-choice',
-  questions: [
-    {prompt: "<strong>Are you colorblind?</strong>", options: ["Yes, I am colorblind.","No, I am not colorblind"], values: ["Colorblind", "Not-Colorblind"], required: true, horizontal: false, name: 'Demo_Colorblind'}, 
-    {prompt: "<strong>What gender do you identify as?</strong>", options: ["Male", "Female", "Additional gender category/identity not listed", "Prefer not to answer"], values: ["Male", "Female", "Other", "No-Answer"], required: true, horizontal: false, name: 'Demo_Gender'},
-    {prompt: "<strong>What is your race/ethnicity?</strong>", options: ["Native American or Alaska Native", "Asian", "Pacific Islander", "Black or African American", "White", "Multi-racial / Multi-ethnic", "Other"], values: ["Native", "Asian", "Pacific-Islander", "Black", "White", "Multi", "Other"], required: true, horizontal: false, name: 'Demo_Race'},
-    {prompt: "<strong>Do you identify as Hispanic or Latino/a?</strong>", options: ["Yes, I identify as either Hispanic or Latino/a","No, I do not identify as either Hispanic or Latino/a"], values: ["Hispanic", "Not-Hispanic"], required: true, horizontal: false, name: 'Demo_Hispanic'}
-  ],
-  data: {
-			type: "demographics"}
-};
+// var demographics = {
+//   type: 'survey-multi-choice',
+//   questions: [
+//     {prompt: "<strong>Are you colorblind?</strong>", options: ["Yes, I am colorblind.","No, I am not colorblind"], values: ["Colorblind", "Not-Colorblind"], required: true, horizontal: false, name: 'Demo_Colorblind'}, 
+//     {prompt: "<strong>What gender do you identify as?</strong>", options: ["Male", "Female", "Additional gender category/identity not listed", "Prefer not to answer"], values: ["Male", "Female", "Other", "No-Answer"], required: true, horizontal: false, name: 'Demo_Gender'},
+//     {prompt: "<strong>What is your race/ethnicity?</strong>", options: ["Native American or Alaska Native", "Asian", "Pacific Islander", "Black or African American", "White", "Multi-racial / Multi-ethnic", "Other"], values: ["Native", "Asian", "Pacific-Islander", "Black", "White", "Multi", "Other"], required: true, horizontal: false, name: 'Demo_Race'},
+//     {prompt: "<strong>Do you identify as Hispanic or Latino/a?</strong>", options: ["Yes, I identify as either Hispanic or Latino/a","No, I do not identify as either Hispanic or Latino/a"], values: ["Hispanic", "Not-Hispanic"], required: true, horizontal: false, name: 'Demo_Hispanic'}
+//   ],
+//   data: {
+// 			type: "demographics"}
+// };
 
-timeline.push(demographics);
+// timeline.push(demographics);
 
-var demographics2 = {
-  type: 'survey-text',
-  questions: [
-    {prompt: "What is your current age?", name: 'Age', rows: 1, columns: 2, required: true},
-    {prompt: "In your own words, please tell us about what you have seen, and what you had to do, in this study so far:", name: 'ParticipationSummary', rows: 10, columns: 70, required: true}, 
-    {prompt: "If you had to guess, what do you think this study was about?", name: 'MotivationGuess', rows: 10, columns: 70, required: true}, 
-    {prompt: "During your participation, did you encounter any issues or technical difficulties?", name: 'TechnicalIssues', rows: 10, columns: 70, required: true}
-  ],
-  data: {
-			type: "demographics2"}
-};
+// var demographics2 = {
+//   type: 'survey-text',
+//   questions: [
+//     {prompt: "What is your current age?", name: 'Age', rows: 1, columns: 2, required: true},
+//     {prompt: "In your own words, please tell us about what you have seen, and what you had to do, in this study so far:", name: 'ParticipationSummary', rows: 10, columns: 70, required: true}, 
+//     {prompt: "If you had to guess, what do you think this study was about?", name: 'MotivationGuess', rows: 10, columns: 70, required: true}, 
+//     {prompt: "During your participation, did you encounter any issues or technical difficulties?", name: 'TechnicalIssues', rows: 10, columns: 70, required: true}
+//   ],
+//   data: {
+// 			type: "demographics2"}
+// };
 
-timeline.push(demographics2);
+// timeline.push(demographics2);
 
 
 
