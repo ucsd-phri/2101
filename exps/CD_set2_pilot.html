@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SONA experiment</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://timbrady.org/turk/TimTurkTools.js"></script>
+<script src="../jsPsych/jspsych-6.1.0/jspsych.js"></script>
+<script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
+<script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-html-button-response.js"></script>
+<script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-image-keyboard-response.js"></script>
+<script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-survey-multi-choice.js"></script>
+<script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-survey-multi-select.js"></script>
+<script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-video-button-response.js"></script>
+<script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-survey-text.js"></script>
+<script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-survey-html-form.js"></script>
+<link href="../jsPsych/jspsych-6.1.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+
+<style>
+    .CDmask {
+        height: 550px;
+        width: 550px;
+    }
+    .CDimage {
+        height: 500px;
+        width: 500px;
+    }
+
+</style>
+</head>
+  
+  <body>
+    <script>
+
+// var randCode = "COG" + Math.round(Math.random()*1000) + "420" + Math.round(Math.random()*1000) + "FLEX";
+
+Shuffle = function (o) {
+    for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+};
+
+var startTime = new Date();
+
+var timeline = [];
+
+var consent = {
+  type: 'html-button-response',
+  stimulus: '<p style="text-align: center;"><span style="display: none;">&nbsp;</span><u><strong><span style="font-size:19px;"><span style="font-family:arial,helvetica,sans-serif;">UNIVERSITY OF CALIFORNIA, SAN DIEGO<br />'+
+'Adult Consent to Participate in Research</span></span></strong></u></p>'+
+'<p style="text-align: center;">&nbsp;</p>'+
+'<p>The purpose of this form is to provide you with information about taking part in a research study.If you have any questions, please ask us &ndash; you can call us at 858-534-7713 or email us at MaDlab@ucsd.edu.</p>'+
+'<p>Taking part in this study is up to you. If you decide to take part in this study, we will ask you to complete this form. Our research team is the Mind and Development Lab, and the person in charge of this study is Prof. Adena Schachner &ndash; you can reach her at schachner@ucsd.edu.</p>' +
+'<span style="font-size:19px;"><strong>Why is this study being done?</strong></span> Prof. Adena Schachner is conducting this study to find out more about adults&rsquo; understanding of the social and physical world. The study explores how we reason about social things, like faces or actions, and non-social things, like objects or natural events. How do we use our abstract knowledge of the social world to represent and categorize events, people, and objects? How are these mental concepts structured? How does our reasoning about the meaning of social and physical events inform our decisions? &nbsp;<br />'+
+'<br />'+
+'You have been asked to participate in this study because we are currently investigating adult reasoning. Over several years, this study will include approximately 5,000 participants in the online version of this study and 8,000 participants total.<br />'+
+'<br />'+
+'<span style="font-size:19px;"><strong>How long will this study take?</strong></span> Your participation will involve just one session, which may take up to 1 hour.<br />'+
+'<br />'+
+'<span style="font-size:19px;"><strong>What will happen if I take part in this study?</strong></span> In this research study, you will participate in one or more short activity on a computer. For example, you may be asked to sort objects into categories, interact with a game, or answer questions about objects, videos or events you have seen.<br />'+
+'<br />'+
+'<span style="font-size:19px;"><strong>Study Participation and Withdrawal.</strong></span> Taking part in this study is your choice. You are free not to take part or to withdraw at any time for any reason. No matter what you decide, there will be no penalty or loss of any benefit to which you are entitled.<br />'+
+'If you decide to withdraw from this study, the information that you have already provided will be kept confidential.If you later decide that you do not want the data that has been collected from your participation to be used for future research purposes, you may notify Prof. Adena Schachner, and she will make her best effort to stop any additional data use for studies. However, in some cases, if your data has been deidentified, she may be unable to locate and stop such future usage of this data.<br />'+
+'<br />'+
+'<span style="font-size:19px;"><strong>What are the risks of taking part in this study?</strong></span> The study does not involve any risks or discomforts beyond those experienced in everyday life. There is a risk of becoming bored, but we try to avoid this by designing tasks to be engaging, and keeping sessions short in length. As with any study, there is a risk of loss of confidentiality, so we take many steps to ensure that the records of this study and your participation are kept confidential. Since this is an investigational study there may be some unknown risks that are currently unforeseeable. You will be informed of any significant new findings.<br />'+
+'<br />'+
+'<span style="font-size:19px;"><strong>How will you keep my study records confidential?</strong></span> We will keep the records of this study confidential by storing them on our secure and password protected server, on a password-protected computer in a locked room, and/or in a locked cabinet; by identifying participants by ID codes rather than names; and by allowing nobody other than laboratory personnel access to research materials. Publications and conference presentations of the data will not identify individuals and will present results of the group as a whole.<br />'+
+'<br />'+
+'<span style="font-size:19px;"><strong>Are there any benefits of being in this study?</strong></span> You may enjoy learning about this research on cognition. Your participation will increase knowledge of how adults understand and reason about their social and physical environment.<br />'+
+'<br />'+
+'<span style="font-size:19px;"><strong>Will I be paid for taking part in this study?</strong></span> You will receive course credit through the SONA system for your participation. You will receive 0.5 credit for a study session lasting 30 minutes or less, and 1 credit for a study session lasting between 30 minutes and 1 hour.<br />'+
+'<br />'+
+'<span style="font-size:19px;"><strong>What will it cost me to take part in this study?</strong></span> Aside from time, there are no known costs to you for participating in this research study.<br />'+
+'<br />'+
+'<span style="font-size:19px;"><strong>If I have any questions or concerns about this study, who can I talk to?</strong></span> If you have questions or concerns regarding this research, either now or at any time in the future, please feel free to contact our research team (858-534-7713 or MaDlab@ucsd.edu) or Prof. Adena Schachner (schachner@ucsd.edu). You may also obtain information about your rights as a research participant by contacting the Human Research Protections Program Office at 858-246-4777.<br />'+
+'<br />'+
+'<span style="font-size:19px;"><strong>Statement of Consent</strong></span><br />'+
+'I have read the information in this consent form, including risks and possible benefits. I have been given an opportunity to ask questions, and my questions have been answered to my satisfaction. I have been given a copy of this form, or given the opportunity to print or save a copy of this electronic form:',
+  choices: ["I agree"],
+  data: {type: "consent"}
+};
+
+timeline.push(consent);
+
+var introCD = {
+    type: 'html-keyboard-response',
+    stimulus: 'In this task you will be shown a series of trials that contain images made up of a purple part and a yellow part.<br><br>'+
+    '<u><b>Pay very close attention to only the YELLOW part.</b></u><br><br>'+
+    `You will be asked whether the <b>YELLOW</b> part is new or has been shown on a previous trial.<br>`+
+    'You will also be asked if the picture within each trial changes.<br><br>',
+    choices: ['space'],
+    prompt: "<p>Press the spacebar when you are ready to begin</p>",
+    data: {type: 'CD_Instr',
+            exp: 'changeDetection'}
+};
+
+timeline.push(introCD);
+
+CDcueTrials = [];
+
+CDtestTrials = [];
+
+CDcueTrialList = [["A_1", "A_2"],
+            ["A_3", "A_4"],
+            ["A_5", "A_6"],
+            ["A_7", "A_8"],
+            ["A_9", "A_10"]];//,
+            //[1, 2],
+            //[3, 4],
+            // [5, 6]];
+
+// CDcueTrialList = Shuffle(CDcueTrialList); // shuffle within as well?
+
+CDtestTrialList = [["A_11", "A_12", 'cue'],
+["A_13", "A_14", 'cue'],
+["A_15", "A_16", 'cue'],
+["A_17", "A_18", 'cue'],
+["A_19", "A_20", 'cue'],
+["A_21", "A_22", 'uncue'],
+["A_23", "A_24", 'uncue'],
+["A_25", "A_26", 'uncue'],
+["A_27", "A_28", 'uncue'],
+["A_29", "A_30", 'uncue'],
+["A_31", "A_31", 'none'],
+["A_32", "A_32", 'none'],
+["A_33", "A_33", 'none'],
+["A_34", "A_34", 'none'], // originally 37/38 but this actually is a change.
+["A_35", "A_35", 'none']];
+
+CDtestTrialList = Shuffle(CDtestTrialList); // shuffle within as well?
+
+var CDchange = {
+
+};
+
+
+
+for (i=0; i < CDcueTrialList.length; i++){
+    CDcueTrials.push(//fixation
+            {
+        type: 'html-keyboard-response',
+        stimulus: '<div style="font-size:60px;">+</div>',
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 1000,
+        data: {
+            type: 'fixationPoint',
+            exp: 'changeDetection',
+            trial: i+1,
+        }
+}
+    );
+
+    CDcueTrials.push(//first image
+    {type: 'html-keyboard-response',
+        // stimulus: `<img class="CDimage" src='stimuli/${CDcueTrialList[i][0]}.png' width='689' height='720'>`,
+        stimulus: `<img class="CDimage" src='stimuli/CD/set2/${CDcueTrialList[i][0]}.png'>`,        
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 1000,
+        data: {exp: 'changeDetection',
+               trial: i+1,
+               image: CDcueTrialList[i][0],
+               cueOrTest: 'cue',
+               type: 'image'}}
+    );
+
+    CDcueTrials.push(//mask image
+        {
+    type: 'html-keyboard-response',
+    stimulus: `<img class='CDmask' src='stimuli/CD/mask.png'>`,
+    choices: jsPsych.NO_KEYS,
+    trial_duration: 500,
+    data: {
+        type: 'CDmask',
+        exp: 'changeDetection',
+                trial: i+1,
+    }
+    }
+    );
+
+    CDcueTrials.push(//second image
+    {type: 'html-keyboard-response',
+        stimulus: `<img class="CDimage" src='stimuli/CD/set2/${CDcueTrialList[i][1]}.png'>`,
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 1000,
+        data: {exp: 'changeDetection',
+                trial: i+1,
+                image: CDcueTrialList[i][1],
+                cueOrTest: 'cue',
+                type: 'image'}}
+    );
+
+    CDcueTrials.push(//familiarity judgment
+    {type: 'html-keyboard-response',
+    stimulus: `Press S if the YELLOW image is familiar and K if the YELLOW image is new.`,
+    choices: ['s', 'k'],
+    prompt: "",
+    data: {exp: 'changeDetection',
+          cueOrTest: 'cue',
+          type: 'familiarityJudgment',
+          trial: i+1,
+          imagePair: [CDcueTrialList[i][0], CDcueTrialList[i][1]]}}
+    );
+
+    CDcueTrials.push(//change detection
+    {type: 'html-keyboard-response',
+    stimulus: `Did the image change? Press S if yes and K if no.`,
+    choices: ['s', 'k'],
+    prompt: "",
+    data: {exp: 'changeDetection',
+           cueOrTest: 'cue',
+           type: 'changeDetection',
+           trial: i+1,
+           imagePair: [CDcueTrialList[i][0], CDcueTrialList[i][1]]}}
+    );
+}
+
+for(i=0; i < CDcueTrials.length; i++) {
+    timeline.push(CDcueTrials[i])
+};
+
+for (i=0; i < CDtestTrialList.length; i++){
+    CDtestTrials.push(//fixation
+    {
+        type: 'html-keyboard-response',
+        stimulus: '<div style="font-size:60px;">+</div>',
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 1000,
+        data: {
+            type: 'fixationPoint',
+            exp: 'changeDetection',
+            trial: i+1,
+        }
+}
+    );
+
+    CDtestTrials.push(//first image
+    {type: 'html-keyboard-response',
+        stimulus: `<img class="CDimage" src='stimuli/CD/set2/${CDtestTrialList[i][0]}.png'>`,
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 1000,
+        data: {exp: 'changeDetection',
+           trial: i+1,
+           image: CDtestTrialList[i][0],
+           cueOrTest: 'test',
+           type: 'image',
+           imageChange: CDtestTrialList[i][2]}}
+    );
+
+    CDtestTrials.push(//mask image
+    {
+    type: 'html-keyboard-response',
+    stimulus: `<img class='CDmask' src='stimuli/CD/mask.png'>`,
+    choices: jsPsych.NO_KEYS,
+    trial_duration: 500,
+    data: {
+        type: 'CDmask',
+        exp: 'changeDetection',
+                trial: i+1,
+    }
+    }
+    );
+
+    CDtestTrials.push(//second image
+    {type: 'html-keyboard-response',
+    stimulus: `<img class="CDimage" src='stimuli/CD/set2/${CDtestTrialList[i][1]}.png'>`,
+    choices: jsPsych.NO_KEYS,
+    trial_duration: 1000,
+    data: {exp: 'changeDetection',
+        trial: i+1,
+        image: CDtestTrialList[i][1],
+        cueOrTest: 'test',
+        type: 'image',
+        imageChange: CDtestTrialList[i][2]}}
+    );
+
+    CDtestTrials.push(//familiarity judgment
+        {type: 'html-keyboard-response',
+        stimulus: `Press S if the YELLOW image is familiar and K if the YELLOW image is new.`,
+        choices: ['s', 'k'],
+        prompt: "",
+        data: {exp: 'changeDetection',
+          cueOrTest: 'test',
+          type: 'familiarityJudgment',
+          trial: i+1,
+          imageChange: CDtestTrialList[i][2],
+          imagePair: [CDtestTrialList[i][0], CDtestTrialList[i][1]]}}
+    );
+
+    CDtestTrials.push(//change detection
+        {type: 'html-keyboard-response',
+        stimulus: `Did the image change? Press S if yes and K if no.`,
+        choices: ['s', 'k'],
+        prompt: "",
+        data: {exp: 'changeDetection',
+            cueOrTest: 'test',
+            type: 'changeDetection',
+            trial: i+1,
+            imageChange: CDtestTrialList[i][2],
+            imagePair: [CDtestTrialList[i][0], CDtestTrialList[i][1]]}}
+    ); 
+}
+
+for(i=0; i < CDtestTrials.length; i++) {
+    timeline.push(CDtestTrials[i])
+}
+
+var AC_CD1 = {
+  type: 'survey-multi-choice',
+  questions: [
+    {prompt: "On the previous pages, which key did you need to press if the image <b>DID</b> change?", options: ["s","k"], values: [1, 0], required: true, horizontal: false, name: 'AC_CD1'}
+  ],
+  data: {exp: 'changeDetection',
+			type: "AC_CD"}
+};
+
+var AC_CD2 = {
+  type: 'survey-multi-choice',
+  questions: [
+    {prompt: "On the previous pages, which key did you need to press if the image <b>DID NOT</b> change?", options: ["s","k"], values: [0, 1], required: true, horizontal: false, name: 'AC_CD2'}
+  ],
+  data: {exp: 'changeDetection',
+			type: "AC_CD"}
+};
+
+// Demographics:
+
+var demographics = {
+  type: 'survey-multi-choice',
+  questions: [
+    {prompt: "<strong>Are you colorblind?</strong>", options: ["Yes, I am colorblind.","No, I am not colorblind"], values: ["Colorblind", "Not-Colorblind"], required: true, horizontal: false, name: 'Demo_Colorblind'}, 
+    {prompt: "<strong>What gender do you identify as?</strong>", options: ["Male", "Female", "Additional gender category/identity not listed", "Prefer not to answer"], values: ["Male", "Female", "Other", "No-Answer"], required: true, horizontal: false, name: 'Demo_Gender'},
+    {prompt: "<strong>What is your race/ethnicity?</strong>", options: ["Native American or Alaska Native", "Asian", "Pacific Islander", "Black or African American", "White", "Multi-racial / Multi-ethnic", "Other"], values: ["Native", "Asian", "Pacific-Islander", "Black", "White", "Multi", "Other"], required: true, horizontal: false, name: 'Demo_Race'},
+    {prompt: "<strong>Do you identify as Hispanic or Latino/a?</strong>", options: ["Yes, I identify as either Hispanic or Latino/a","No, I do not identify as either Hispanic or Latino/a"], values: ["Hispanic", "Not-Hispanic"], required: true, horizontal: false, name: 'Demo_Hispanic'}
+  ],
+  data: {
+			type: "demographics"}
+};
+
+timeline.push(demographics);
+
+var demographics2 = {
+  type: 'survey-text',
+  questions: [
+    {prompt: "What is your current age?", name: 'Age', rows: 1, columns: 2, required: true},
+    {prompt: "In your own words, please tell us about what you have seen, and what you had to do, in this study so far:", name: 'ParticipationSummary', rows: 10, columns: 70, required: true}, 
+    {prompt: "If you had to guess, what do you think this study was about?", name: 'MotivationGuess', rows: 10, columns: 70, required: true}, 
+    {prompt: "During your participation, did you encounter any issues or technical difficulties?", name: 'TechnicalIssues', rows: 10, columns: 70, required: true}
+  ],
+  data: {
+			type: "demographics2"}
+};
+
+timeline.push(demographics2);
+
+
+
+var preloadImages = [];
+
+//  for (i = 1; i < 40; i++) {
+ for (i = 1; i < 36; i++) {     
+   preloadImages.push(`stimuli/CD/set2/A_${i}.png`)
+ };
+
+  preloadImages.push(`stimuli/CD/mask.png`);
+
+  jsPsych.data.addProperties({userAgent: navigator.userAgent,
+	startTime: startTime,
+  id: jsPsych.data.getURLVariable('PROLIFIC_PID'),
+  studyID: jsPsych.data.getURLVariable('STUDY_ID'),
+  sessionID: jsPsych.data.getURLVariable('SESSION_ID'),
+});
+
+jsPsych.init({
+      timeline: timeline,
+      preload_images: preloadImages,
+	  show_progress_bar: true,
+      on_finish: function () {
+			var endTime = new Date();
+			jsPsych.data.addProperties({endTime: endTime});
+            // jsPsych.data.displayData();
+			 SaveData(jsPsych.data.get().csv()); // .json()?
+    }
+    });
+
+    function SaveData(curData) {
+  var dataToServer = {
+    'id': randCode,
+    'experimenter': 'Ethan',
+    'experimentName': 'CD_set2_pilot',
+    'curData': curData
+  }; 
+	
+//   $.post("https://madlab.ucsd.edu/mturk/save.php",
+//     dataToServer,
+//     function(data) { 
+// 			var newDoc = document.open("text/html", "replace");
+// 			newDoc.write("All done, thanks! To submit the HIT, paste this code into Turk: " + randCode);
+// 			newDoc.close();
+//     }
+//   ).fail(function(data) { 
+// 			var newDoc = document.open("text/html", "replace");
+// 			newDoc.write("All done, thanks! To submit the HIT, paste this code into Turk: " + randCode);
+// 			newDoc.close();
+// 	});  
+
+
+// $.post("https://madlab-research.ucsd.edu/savePentagon.php",
+$.post("https://bradylab.ucsd.edu/turk/save.php",
+    dataToServer,
+    FunctionWhenDoneSaving
+  ).fail(FunctionWhenDoneSaving);
+};
+
+function FunctionWhenDoneSaving() {
+        var urlToRedirect = "https://ucsd.co1.qualtrics.com/jfe/form/SV_diEniTICk0VW6Y6?PROLIFIC_PID=" +
+        jsPsych.data.getURLVariable('PROLIFIC_PID') + "&STUDY_ID=" + jsPsych.data.getURLVariable("STUDY_ID") +
+        "&SESSION_ID=" + jsPsych.data.getURLVariable('SESSION_ID');
+       window.location.href = urlToRedirect;
+      };
+
+
+
+
+    </script>
+  </body>
+</html>
