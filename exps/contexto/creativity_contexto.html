@@ -40,7 +40,9 @@
     //    var subjectId = "test"
        var data = {'id': jsPsych.data.getURLVariable("id"),
                     'task_order': task_order,
-                    'date': new Date(),
+                    'start_time': new Date(),
+                   'end_time': "",
+                   'duration': "",
                     'RAT': {'AC': [],
                             'trial': [],
                             'triad': [],
@@ -96,6 +98,8 @@
         $("#exp_end").on("click", SaveData);
 
         function SaveData() {
+            data.end_time = new Date();
+            data.duration = data.end_time - data.start_time;
   var dataToServer = {
     'id': jsPsych.data.getURLVariable('id'), // UPDATE
     'experimenter': 'Ethan',
