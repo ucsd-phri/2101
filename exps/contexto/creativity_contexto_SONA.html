@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My experiment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://timbrady.org/turk/TimTurkTools.js"></script>
+    <script src="../../jsPsych/jspsych-6.3.1/jspsych.js"></script>
+    <link href="css/main.css" rel="stylesheet">
+
+    <style>
+    #intro, #task_finish, #AUT, #RAT {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 40px;
+        text-align: center;
+        width:80%;
+        }
+    .row {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+    textarea {
+    padding: 5px;
+    }
+    </style>
+</head>
+<body>
+
+    <script>
+        // var task_order = ["AUT", "RAT", "contexto"];
+        var task_order = ["RAT", "AUT", "contexto"];
+       task_order = jsPsych.randomization.repeat(task_order, 1); 
+       
+       var curTask = 0;
+    //    var subjectId = "test"
+       var data = {'id': jsPsych.data.getURLVariable("id"),
+                    'task_order': task_order,
+                    'start_time': new Date(),
+                   'end_time': "",
+                   'duration': "",
+                    'RAT': {'AC': [],
+                            'trial': [],
+                            'triad': [],
+                            'answer': []},
+                    'AUT': {'trial': [],
+                            'word': [],
+                            'responses': []},
+                    'contexto': []};
+    </script>
+
+    <div id="intro">
+        You are going to complete three different tasks today.<br>
+        After each task, you will see a screen to signal that one task has ended and the next will begin.<br>
+        Click the button below to get started!<br><br><br><br>
+
+        <button id="exp_start" class="button">
+            Continue
+        </button>
+    </div>
+
+    <div id="task_finish" style="display:none">
+        Great work! We're done with the previous task, and will begin a new one on the next page.<br>
+        Click the button below to continue.<br><br><br><br>
+        
+        <button id="task_start" class="button">
+            Click here when you are ready to begin the next task
+        </button>
+    </div>
+
+    <div id="end" style="display:none">
+        You have now completed all of the tasks. Thank you!<br>
+        Please click the button below to complete your participation.<br><br><br><br>
+        
+        <button id="exp_end" class="button">
+            Finish
+        </button>
+    </div>
+
+    <script>
+        $("#exp_start").on("click", exp_start);
+
+        function exp_start() {
+          $("#intro").hide();
+          if(task_order[0] == "AUT") {
+            $("#AUT_instructions").show();
+          } else if (task_order[0] == "RAT") {
+            $("#RAT_instructions").show();
+          } else {
+            $("#root").show();
+          };
+        };
+
+        $("#exp_end").on("click", SaveData);
+
+        function SaveData() {
+            data.end_time = new Date();
+            data.duration = data.end_time - data.start_time;
+  var dataToServer = {
+    'id': jsPsych.data.getURLVariable('id'), // UPDATE
+    'experimenter': 'Ethan',
+    'experimentName': 'contexto_creativity_v2',
+    'curData': JSON.stringify(data)
+  }; 
+
+console.log("data saved")
+            
+  $.post("https://bradylab.ucsd.edu/turk/save.php",
+    dataToServer,
+    FunctionWhenDoneSaving
+  ).fail(FunctionWhenDoneSaving);
+};
+
+function FunctionWhenDoneSaving() {
+      var urlToRedirect = "https://ucsd.sona-systems.com/webstudy_credit.aspx?experiment_id=2660&credit_token=5e09b9959ed04e48a3cb05e66f63f5b7&survey_code="+ //UPDATE                          
+      jsPsych.data.getURLVariable('survey_code'); // UPDATE
+    // var urlToRedirect = "https://www.google.com" //UPDATE
+      window.location.href = urlToRedirect;
+      };
+
+        function exp_end() {
+
+        }
+    </script>
+
+<!-- AUT -->
+<!-- AUT -->
+<!-- AUT -->
+<!-- AUT -->
+<!-- AUT -->
+<!-- AUT -->
+<!-- AUT -->
+<!-- AUT -->
+
+    <!-- Instructions DIV is hidden once they 
+    click the button -->
+    <div id ="AUT">
+        <div id="AUT_instructions" style="display:none">
+        <p>
+            For this task, you'll be asked to come up with as many original and creative uses as you can for different objects.<br>
+            The goal is to come up with creative ideas, which are ideas that strike people as clever, unusual, interesting, uncommon, humorous, innovative, or different.<br>
+            Your ideas don't have to be practical or realistic; they can be silly or strange, even, so long as they are CREATIVE uses rather than ordinary uses.<br>
+            On each of the following pages, you will be given a different object to come up with creative and original uses for.<br>
+            You will have 1 minute each. Please type your different uses in the textbox provided and separate each use with a comma.
+        </p>
+        <button id="AUT_start" class="button">
+          Click here when you are ready to start.
+        </button>
+        </div>
+  
+      <!-- This is the list of trials, each with class 
+        "trial" and with unique IDs, we will hide and show
+        these throughout the experiment -->
+      <div id="AUT_trial">
+        
+      </div>
+  
+      <script>
+        var AUT_curTrial = 0; /* we want to use this as 
+            index into trialList, so start at 0 */
+        var AUT_curTrialTimeStarted = 0;
+  
+        var AUT_words = ["brick", "paper clip", "newspaper", "rubberband", "spoon"];        
+        AUT_words = jsPsych.randomization.repeat(AUT_words, 1);
+        AUT_words = AUT_words.slice(0,3) // get the first 3 words from the shuffled array
+
+        
+        /* This gets called when they click the button 
+          on the instructions page */
+        function AUT_start() {
+          $("#AUT_instructions").hide();
+          AUT_ShowTrial();
+        }
+  
+        function AUT_ShowTrial() {
+          setTimeout(AUT_RunsAfterTrial, 1000);
+          $("#AUT_trial").show()
+        }
+  
+        function AUT_RunsAfterTrial() {
+          /* This runs 500ms after ShowTrial is called */
+          
+          /* set to the right word for this trial */
+          $("#AUT_trial").html("Please list all of the creative, unusual uses for a <b><u>"+ AUT_words[AUT_curTrial] + "</b></u> that you can think of.<br>Please separate each individual response with a comma.<br><br><span id='countdown'>60 seconds remaining</span><br><br><br><br>" + "<textarea id='AUT_answer' rows='6' cols='80'></textarea>"); 
+          
+          $("#AUT_trial").show();
+        //   AUT_fxn();
+        var timeleft = 59;
+        var AUT_timer = setInterval(function(){
+        if(timeleft <= 0){
+            clearInterval(AUT_timer);
+            // document.querySelector('#countdown').innerHTML = "0:00"; // Replace this with code to go to the next trial!
+            AUT_trialEnd()
+        } else {
+            document.querySelector('#countdown').innerHTML = timeleft + " seconds remaining"
+        }
+        timeleft -= 1;
+        }, 1000);
+          AUT_curTrialTimeStarted = new Date();
+  
+          /* Set up key listener */
+        //   $(document).on("keydown.wordOrNot", PressedKey);
+        }
+  
+        function AUT_trialEnd() {
+            // Store trial data
+            data.AUT.word.push(AUT_words[AUT_curTrial]);
+            data.AUT.responses.push($("#AUT_answer").val());
+            data.AUT.trial.push(AUT_curTrial+1)
+            /* Calculate reaction time */
+            var AUT_curTime = new Date();
+            AUT_words[AUT_curTrial].RT = AUT_curTime - AUT_curTrialTimeStarted;
+            
+            /* Hide current word and stop listening for keys */
+            $("#AUT_trial").hide();
+            // $(document).off("keydown.wordOrNot");
+  
+            /* Are there more trials left? */
+            AUT_curTrial = AUT_curTrial + 1;
+            if (AUT_curTrial < AUT_words.length) {
+              setTimeout(AUT_ShowTrial, 1000);
+            } else {
+              setTimeout(AUT_finish, 1000);
+            }
+          }
+  
+        function AUT_finish() {
+        //     var dataToServer = {
+        //     id: subjectId,
+        //     experimenter: "TimClassTest",
+        //     experimentName: "WordOrNonWord",
+        //     // curData: JSON.stringify(trialList)
+        //   };
+        //   $.post("https://psyc241.ucsd.edu/Turk/save.php",
+        //     dataToServer);
+
+            curTask = curTask +1
+            if(curTask < 3) {
+                $("#task_finish").show();
+            } else {
+                $("#end").show()
+            }
+        };
+
+        $("#AUT_start").on("click", AUT_start);
+      </script>  
+    </div>
+
+<!-- RAT -->
+<!-- RAT -->
+<!-- RAT -->
+<!-- RAT -->
+<!-- RAT -->
+<!-- RAT -->    
+<!-- RAT -->
+
+    <script>
+
+Shuffle = function (o) {
+    for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+};
+//         var exampleTriads = [
+//     ['dew', 'comb', 'bee'],
+// // ['loser', 'throat', 'spot'],
+// ['night', 'wrist', 'stop']//,
+// // ['rocking', 'wheel', 'high']
+// ];
+
+var exampleTriads = ["dew", "comb", "bee"];
+
+var exampleTriadsAnswers = ['honey', 'sore', 'watch', 'horse'];
+
+var RAT_words = [
+    // ['chocolate', 'fortune', 'tin'],
+// ['safety', 'cushion', 'point'],
+// ['dust', 'cereal', 'fish'],
+// ['print', 'berry', 'bird'],
+// ['widow', 'bite', 'monkey'], XXX
+// ['date', 'alley', 'fold'],
+// ['wagon', 'break', 'radio'],
+// ['hound', 'pressure', 'shot'],
+// ['coin', 'quick', 'spoon'],
+['demon', 'limit', 'way'],
+// ['broken', 'clear', 'eye'], XXX
+// ['pike', 'coat', 'signal'],
+['lift', 'card', 'mask'],
+['due', 'life', 'tense'],
+// ['strike', 'same', 'tennis'], XXX
+// ['loser', 'throat', 'spot'], //new
+// ['rocking', 'wheel', 'high'], //new
+// ['time', 'hair', 'stretch'],
+['pine', 'crab', 'sauce'],
+['speak', 'money', 'street'],
+['mail', 'board', 'lung'],
+['water', 'tobacco', 'stove'],
+['tooth', 'potato', 'heart'],
+['chest', 'car', 'store'],
+// ['land', 'hand', 'house'],
+['high', 'book', 'sour'],
+// ['bump', 'egg', 'step']
+];
+
+var RAT_words = Shuffle(RAT_words);
+var RAT_intervals = [];
+    </script>
+
+    <div id="RAT">
+        <div id="RAT_instructions" style="display:none">
+            On each of the following pages, you will be shown 3 target words.<br>
+Your goal is to attempt to generate a fourth word which, when combined with <br><b>each of the three target words</b>, will result in word pairs that make up a common compound word or phrase.<br>
+Let's look at an example. For the target words:<br><br>
+cottage, swiss, cake<br><br>
+the 4th word would be <b>cheese</b>. This would create the word pairs 'cottage cheese,' 'swiss cheese,' and 'cheesecake.' <br><br>
+There will be a text box below the target words for you to write your answer in.<br>
+<!-- You will have <b>1 minute</b> for each trial. If you arrive at the answer before then, click the "Continue" button at the bottom to immediately proceed.<br> -->
+<!-- Only click this button if you have arrived at your final answer and want to move on. YOU CANNOT GO BACK.<br>             -->
+You will have <b>1 minute</b> for each trial. If you arrive at the answer before then, press the "enter" key on your keyboard to immediately proceed.<br>            
+Only press this key if you have arrived at your final answer and want to move on. YOU CANNOT GO BACK.<br>
+We will first start with a training trial so you can get the hang of it.<br><br><br><br>
+        <button id="RAT_start_training" class="button">
+            Click here when you are ready to start.
+        </button>
+        </div>
+
+        <div id="RAT_training">
+            
+        </div>
+
+        <div id="RAT_AC" style="display:none">
+            On the previous page, which of the following words did you see?<br><br>
+            <div>
+                <input type="radio" id="moon" name="rat_AC" value="moon">
+                <label for="moon">moon</label>
+            </div>          
+            <div>
+                <input type="radio" id="wheel" name="rat_AC" value="wheel">
+                <label for="wheel">wheel</label>
+            </div>
+            <div>
+                <input type="radio" id="day" name="rat_AC" value="day">
+                <label for="day">day</label>
+            </div>
+            <div>
+                <input type="radio" id="sore" name="rat_AC" value="sore">
+                <label for="sore">sore</label>
+            </div>
+            <br><br>
+            <button id="RAT_AC_button" class="button">
+                Continue
+            </button>
+        </div>
+
+        <div id="RAT_trial">
+
+        </div>
+<script>
+      var RAT_curTrial = 0; /* we want to use this as 
+            index into trialList, so start at 0 */
+        var RAT_curTrialTimeStarted = 0;
+        
+        /* This gets called when they click the button 
+          on the instructions page */
+        function RAT_start_training() {
+            $("#RAT_instructions").hide();
+        //   RAT_ShowTrial();
+            $("#RAT_training").show();
+            $("#RAT_training").html(`This is a training trial. Find the 4th word that pairs with each of the 3 target words.<br><br>The words for this trial are:<br><br><br><b>${exampleTriads[0]}, ${exampleTriads[1]}, ${exampleTriads[2]}</b><br>` + "<br><br><span id='RAT_countdown'>60 seconds remaining</span><br><br><br><br>" + "<textarea id='RAT_training_answer' rows='2' cols='25'></textarea>" +
+    '<br><br><br><button id="RAT_continue" class="button" style="display:none">Continue</button>');
+
+            $("#RAT_continue").on("click", RAT_AC);
+
+            // Automatically click into the textarea
+            $(document).ready(function() {
+                $('#RAT_training_answer').focus();
+            });
+
+            // Set up listener to trigger button on "enter" press and move to next trial.
+            $("#RAT_training_answer").keyup(function(event) {
+                if (event.keyCode === 13 & $("#RAT_training_answer").val() != '') {
+                    $("#RAT_continue").click();
+                }
+            });  
+
+    var timeleft = 59;
+        RAT_intervals.push(setInterval(function(){
+        if(timeleft <= 0){
+            RAT_intervals.forEach(clearInterval);
+            // document.querySelector('#countdown').innerHTML = "0:00"; // Replace this with code to go to the next trial!
+            RAT_AC()
+        } else {
+            document.querySelector('#RAT_countdown').innerHTML = timeleft + " seconds remaining"
+        }
+        timeleft -= 1;
+        }, 1000));
+          RAT_curTrialTimeStarted = new Date();
+        };
+
+        function RAT_AC() {
+            RAT_intervals.forEach(clearInterval);
+            // Store data from training trial
+            data.RAT.triad.push([exampleTriads[0], exampleTriads[1], exampleTriads[2]]);
+            data.RAT.answer.push($("#RAT_training_answer").val());
+            data.RAT.trial.push("training")
+            $("#RAT_training").hide();
+            $("#RAT_AC").show();
+            $("#moon").show();
+            $("#wheel").show();
+            $("#day").show();
+            $("#sore").show();
+        };
+
+        // function RAT_
+  
+        function RAT_ShowTrial() {
+        //   setTimeout(RAT_RunsAfterTrial, 0);
+        //   $("#RAT_AC").hide();
+        //   $("#RAT_trial").show();
+
+        if(RAT_curTrial == 0) {
+            data.RAT.AC.push($('input[name=rat_AC]:checked').val())
+        };
+
+        RAT_intervals.forEach(clearInterval);
+        $("#RAT_AC").hide();
+          $("#RAT_trial").html("Find the 4th word that pairs with each of the 3 target words below.<br><br>"+ 
+          `<b>${RAT_words[RAT_curTrial][0]}, ${RAT_words[RAT_curTrial][1]}, ${RAT_words[RAT_curTrial][2]}</b><br><br>` + "<br><br><span id='RAT_countdown_test'>60 seconds remaining</span><br><br><br><br>" + "<textarea id='RAT_test_answer' rows='2' cols='12'></textarea>" +
+          '<br><br><br><br><button id="RAT_button" class="button" style="display:none">Continue</button>');
+          $("#RAT_trial").show();
+          // $("#RAT_continue").show();
+            
+          $("#RAT_button").on("click", RAT_trialEnd);
+
+          // Automatically click into the textarea
+          $(document).ready(function() {
+               $('#RAT_test_answer').focus();
+          });
+
+          // Set up listener to trigger button on "enter" press and move to next trial.
+            
+          $("#RAT_test_answer").keyup(function(event) {
+                if (event.keyCode === 13 & $("#RAT_test_answer").val() != '') {
+                    $("#RAT_button").click();
+                }
+            });  
+
+
+        //   RAT_fxn();
+        var timeleft = 59;
+        RAT_intervals.push(setInterval(function(){        
+        // var RAT_timer = setInterval(function(){
+        if(timeleft <= 0){
+            // clearInterval(RAT_timer);
+            RAT_intervals.forEach(clearInterval);
+            RAT_trialEnd()
+        } else {
+            document.querySelector('#RAT_countdown_test').innerHTML = timeleft + " seconds remaining"
+        }
+        timeleft -= 1;
+        }, 1000));
+          RAT_curTrialTimeStarted = new Date();
+        };
+
+        // function RAT_RunsAfterTrial() {
+        //  $("#RAT_AC").hide();
+        //   $("#RAT_trial").html("Find the 4th word that pairs with each of the 3 target words below.<br><br>"+ 
+        //   `<b>${RAT_words[RAT_curTrial][0]}, ${RAT_words[RAT_curTrial][1]}, ${RAT_words[RAT_curTrial][2]}</b><br><br>` + "<br><br><span id='countdown'>60 seconds remaining</span><br><br><br><br>" + "<textarea id='' rows='2' cols='12'></textarea>" +
+        //   '<br><br><br><br><button id="RAT_button">Continue</button>');
+        //   $("#RAT_trial").show();
+
+        //   $("#RAT_button").on("click", RAT_trialEnd);
+        // //   RAT_fxn();
+        // var timeleft = 10;
+        // var RAT_timer = setInterval(function(){
+        // if(timeleft <= 0){
+        //     clearInterval(RAT_timer);
+        //     // document.querySelector('#countdown').innerHTML = "0:00"; // Replace this with code to go to the next trial!
+        //     RAT_trialEnd()
+        // } else {
+        //     document.querySelector('#countdown').innerHTML = timeleft + " seconds remaining"
+        // }
+        // timeleft -= 1;
+        // }, 1000);
+        //   RAT_curTrialTimeStarted = new Date();
+  
+        //   /* Set up key listener */
+        // //   $(document).on("keydown.wordOrNot", PressedKey);
+        // }
+  
+        function RAT_trialEnd() {
+            RAT_intervals.forEach(clearInterval); //clear the saved timers so they don't overlap
+            // Store the trial data
+            data.RAT.triad.push([RAT_words[RAT_curTrial][0], RAT_words[RAT_curTrial][1], RAT_words[RAT_curTrial][2]]);
+            data.RAT.answer.push($("#RAT_test_answer").val());
+            data.RAT.trial.push(RAT_curTrial+1)
+
+            $("#RAT_AC").hide();
+            /* Calculate reaction time */
+            var RAT_curTime = new Date();
+            RAT_words[RAT_curTrial].RT = RAT_curTime - RAT_curTrialTimeStarted;
+            
+            /* Hide current trial */
+            $("#RAT_trial").hide();
+            $("#RAT_continue").hide();
+  
+            /* Are there more trials left? */
+            RAT_curTrial = RAT_curTrial + 1;
+            if (RAT_curTrial < RAT_words.length) {
+              setTimeout(RAT_ShowTrial, 0);
+            } else {
+              setTimeout(RAT_finish, 0);
+            }
+          }
+  
+        function RAT_finish() {
+            RAT_intervals.forEach(clearInterval);
+        //     var dataToServer = {
+        //     id: subjectId,
+        //     experimenter: "TimClassTest",
+        //     experimentName: "WordOrNonWord",
+        //     // curData: JSON.stringify(trialList)
+        //   };
+        //   $.post("https://psyc241.ucsd.edu/Turk/save.php",
+        //     dataToServer);            
+
+          curTask = curTask +1
+            if(curTask < 3) {
+                $("#task_finish").show();
+            } else {
+                $("#end").show()
+            }
+          
+        }
+        $("#RAT_start_training").on("click", RAT_start_training);
+        $("#RAT_continue").on("click", RAT_AC);
+        $("#RAT_AC_button").on("click", RAT_ShowTrial);
+        
+</script>        
+
+    </div>
+
+<!-- contexto -->
+<!-- contexto -->
+<!-- contexto -->
+<!-- contexto -->
+<!-- contexto -->
+<!-- contexto -->
+<!-- contexto -->
+<!-- contexto -->
+
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="js/lemmatizer.js"></script>
+
+<script>
+  var lemmatizer = new Lemmatizer();
+</script>	
+
+<script>
+// Create Exp Variables:
+var num_guesses = 0
+
+// Create Data Variable
+var contexto_data = [];
+
+var data_temp;
+
+</script>
+
+<script>
+// List of target words:
+
+// var targets = ["frog", "king"];
+
+// targets = jsPsych.randomization.repeat(targets, 1);
+
+var targets = {'word': [],
+           'start': []};
+
+targets.word = jsPsych.randomization.repeat(["cookie", "moose", "flower", "pencil", "car"], 1);
+
+// Load in json files of word similarity vectors
+
+for (let i=0; i < targets.word.length; i++){
+// window[targets[i]] = [];
+
+$.getJSON('vector_files/denoised/' + targets.word[i] + '.json', function(data) {
+window[targets.word[i]] = data
+}) 
+
+};
+
+// var frog = [];
+
+// $.getJSON('frog.json', function(data) {
+//   frog = data
+// })
+
+// find numerical position of any particular guess:
+// frog.word.indexOf("monkey")
+
+// Update guess counter:
+var update_guess_counter = function() {
+
+$('#guess-count').html(num_guesses)
+}
+</script>  
+
+<script>
+const GREEN_THRESHOLD = 300;
+const YELLOW_THRESHOLD = 1500;
+// Functions for formatting guess history
+const getBarWidth = (distance) => {
+const total = 40000;
+const lambda = 0.5;
+const pdf = (x) => lambda * Math.exp(-lambda * x);
+const startX = 0;
+const endX = 100;
+const startY = pdf(startX);
+const endY = pdf(endX);
+const x = (distance / total) * (endX - startX);
+let result = ((pdf(x) - endY) / (startY - endY)) * 100;
+if (result < 1) {
+result = 1;
+}
+return `${result}%`;
+};
+
+const getBarColor = (distance) => {
+if (distance < GREEN_THRESHOLD) {
+return 'var(--green)';
+}
+if (distance < YELLOW_THRESHOLD) {
+return 'var(--yellow)';
+}
+return 'var(--red)';
+};
+
+// Above are from contexto. Below are novel.
+
+// const set_guess_limit = (n) => {
+//     return n;
+// };
+
+</script>
+
+<div id="root" style="display:none">
+<div class="wrapper">
+<div class="top-bar">
+  <div class="title">
+    <h1>
+      Guess That Word!
+      <br><br>
+    </h1>
+  </div>
+  <div style="position: relative;">
+    <!-- <button class="btn">
+    </button> -->
+  </div>
+
+</div>
+
+<div class="info-bar">
+  <span class="label">
+    Trial:
+  </span>
+  <span class="trial_num">
+    <!-- Trial Inserted Here -->         
+  </span>
+  &nbsp;
+  <span class="label">
+    Guesses: 
+  </span>
+  <span>
+    <!-- Guess tracker code -->
+    <span id="guess-count">0</span>
+  </span>
+</div>
+
+<!-- <form> -->
+<input class="word" type="text" name="word" placeholder="type a word" autocapitalize="off" autocomplete="off" value>
+<!-- </form> -->
+
+<script>
+// Function to sort divs
+
+var $container = [];
+var divs = [];
+var $sortedDivs = [];
+
+var sort_guesses = function(){
+var $container = $('.guess-history');
+var divs = $container.children('#guesses').get();
+divs.sort(function(div1, div2) {
+  function getValue(div) { return parseInt($(div)[0].getAttribute('data-sort'), 10); }
+  var val1 = getValue(div1), val2 = getValue(div2);
+  return (val1 > val2) ? 1 : ((val1 < val2) ? -1 : 0);
+});
+var $sortedDivs = $(divs);
+
+$container.append($sortedDivs);
+};
+
+</script>
+<script>
+// Function to find word position
+var position = function(n) {
+// TEMP: Replace "frog" with trial target word
+// return targets[n].word.indexOf($('.word').val().toLowerCase()) + 1
+return window[targets.word[n]].word.indexOf(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) + 1  
+};
+</script>
+
+<script>
+// Function to change class of guesses
+var change_class = function() {
+$('.guess-history').children().removeClass().addClass('row-wrapper');
+}
+</script>
+
+<script>
+// Template to hold trial data
+var data_temp = {'target': '',
+  'trial': '',
+  'responses': [],
+  'similarity': [],	   
+  'time': []}
+
+var time1 = new Date();
+var time_temp = new Date();
+let counter = 0;
+let guess_limit = 20;
+let close_enough = 30;
+let close_enough_on = 0;	
+</script>
+
+<script>
+// Function to save data to server
+// function SaveData(curData) {
+// var dataToServer = {
+// 'id': jsPsych.data.getURLVariable('id'),
+// 'experimenter': 'Ethan',
+// 'experimentName': 'contexto_testo',
+// 'curData': curData
+// }; 
+
+// // $.post("https://bradylab.ucsd.edu/turk/save.php",
+// // dataToServer,
+// // function(data) { 
+
+// // }
+// // ).fail(function(data) { 
+
+// // });      
+// };
+</script>
+
+<script>
+var game = function() {
+
+// Reset things for pseudo-loop
+$('.word').off();
+num_guesses = 0;
+time_temp = new Date();
+data_temp = {'target': targets.word[counter],
+  'trial': counter + 1,
+  'responses': [],
+  'similarity': [],
+  'time': []};
+// Remove the previous guesses and messages -- Reset to beginning state
+$('#guess-count').html(0);
+$('.guess-history').empty();
+$('.message').empty();
+$('.end-msg').remove();
+$("input").show();
+$(".how-to-play").hide();	  
+
+// If they are finished with all the trials, show ending screen and save data to server.
+
+let finish_msg = '<div class="end-msg" id="finish-msg">' +
+'<p class="bigger"><span>You are now done with this part of the study. <br>Thank you!</span></p>' +
+'</div>'
+
+if (counter === targets.word.length) {
+    // $(finish_msg).insertAfter(".top-bar");
+    $("#root").hide();
+    // SaveData(JSON.stringify(data));
+
+    curTask = curTask +1
+    if(curTask < 3) {
+        $("#task_finish").show();
+    } else {
+        $("#end").show()
+    }
+//         console.log(JSON.stringify(data));
+    return;
+};    
+
+// Start all the shit that is basically a trial:
+$('.trial_num').html("#" + (counter + 1))
+// document.querySelector('.word').addEventListener('keypress', function (e) {
+$('.word').on('keypress', function (e) {    
+if (e.key === 'Enter') {
+  // console.log($('.word').val().toLowerCase())
+  // Add response time and add to + update guess counter *if it exists and is new*
+  if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) && (position(counter) > 0)) {
+    // if(data_temp.time.length === 0){
+    //   time_temp = new Date();
+    //   data_temp.time.push(time_temp);
+    //   // console.log("first time entry");
+    // } else {
+    //   // Get time difference (time between response entries) in milliseconds
+    //   data_temp.time.push((new Date()) - time_temp);
+    //   // console.log((new Date()) - time_temp);
+    //   time_temp = new Date();
+    // }
+
+    data_temp.time.push(new Date());
+    
+
+    num_guesses++;
+    update_guess_counter();
+
+};
+
+    // Create template row to add to guess history
+  let row_template = '<div class="row-wrapper current" id="guesses" data-sort=' + position(counter) + '>'+
+    '<div class="outer-bar">'+
+      '<div class="inner-bar" style="width: ' + getBarWidth(position(counter)) + '; background-color: '+getBarColor(position(counter))+';"></div>'+
+    //   <!-- Width% and color vary based on word similarity!-->
+    '</div>'+
+    '<div class="row">'+
+      '<span>'+
+        lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0] +
+      '</span>'+
+      '<span>'+
+        // <!-- Similarity of Most Recent Guess - Need to use IIFE because embedding in HTML, can't use addition -->
+              //TEMP: replace everything before `.word` with name of target word for trial
+        // (() => {
+        //   return frog.word.indexOf($('.word').val().toLowerCase()) + 1 // +1 because -based index
+        //   })();
+        position(counter);
+      '</span>'+
+    '</div>'+
+  '</div>'
+
+  // Change class of all existing guesses:
+change_class();  
+
+// Add row to guess history *only if it is new AND in the word list*
+if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) && (position(counter) > 0)) {
+  $('.guess-history').append(row_template);
+};
+
+// Sort the guess history by similarity
+sort_guesses();
+
+// Code for getting close enough:
+let close_msg = '<div class="end-msg" id="close-msg">' +
+  '<p class="bigger"><span>Nice work! This is close enough to move on to the next trial.</span></p>' +
+'<p><span>The target word was</span> <u>' + targets.word[counter] + '</u></p>'+
+'<div>' +
+ '<div style="position: relative; padding: 15px 0px;">' +
+    '<button type="button" class="button" onclick="game()">'+
+       '<div style="min-width: 104px;">Next Trial</div>' +
+    '</button>' +
+ '</div>' +
+'</div>' +
+'</div>'
+
+if ((close_enough_on === 1) && !data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) && (Number($(".guess-history").children().get()[0].getAttribute("data-sort")) < close_enough) && (!(Number($(".guess-history").children().get()[0].getAttribute("data-sort")) === 1))) {
+  $(close_msg).insertAfter(".top-bar");
+  data.contexto.push(data_temp);
+  counter++;
+  // Hide input
+  $("input").hide();
+};
+
+// Create template for Message History
+let message_template = '<div class="row-wrapper current" id="guesses" data-sort=' + position(counter) + '>'+
+    '<div class="outer-bar">'+
+      '<div class="inner-bar" style="width: ' + getBarWidth(position(counter)) + '; background-color: '+getBarColor(position(counter))+';"></div>'+
+    //   <!-- Width% and color vary based on word similarity!-->
+    '</div>'+
+    '<div class="row">'+
+      '<span>'+
+        lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0] +
+      '</span>'+
+      '<span>'+
+        // <!-- Similarity of Most Recent Guess - Need to use IIFE because embedding in HTML, can't use addition -->
+              //TEMP: replace everything before `.word` with name of target word for trial
+
+        // (() => {
+        //   return frog.word.indexOf($('.word').val().toLowerCase()) + 1 // +1 because -based index
+        //   })();
+        position(counter);
+      '</span>'+
+    '</div>'+
+  '</div>'
+
+let message_repeat = '<div class="message-text">The word <u>' + lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0] + '</u> was already guessed.</div>' 
+let message_unknown = `<div class="message-text">I'm sorry, I don't know this word.</div>`
+
+// Add Message
+if (data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0])) {
+  $('.message').html(message_repeat);
+} else if (position(counter) === 0) {
+  $('.message').html(message_unknown);
+} else {
+  $('.message').html(message_template);
+}
+
+// Save response *only if it is new and exists!*
+if (!data_temp.responses.includes(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]) && (position(counter) > 0)) {
+  data_temp.responses.push(lemmatizer.only_lemmas($('.word').val().toLowerCase(), "noun")[0]);
+  data_temp.similarity.push(position(counter));    
+};
+
+// Add screen to begin next trial:
+let win_message = '<div class="end-msg">' +
+'<p class="bigger"><span>Congrats!</span></p>' +
+'<p><span>You got the</span> word <u>' + targets.word[counter] + '</u><br>in <u>' + data_temp.responses.length + '</u> guesses.</p>'+
+'<div class="chart-wrapper">' +
+ '<div class="chart"></div>' +
+'</div>' +
+'<div>' +
+ '<div style="position: relative; padding: 15px 0px;">' +
+    '<button type="button" class="button" onclick="game()">'+
+       
+       '<div style="min-width: 104px;">Next Trial</div>' +
+    '</button>' +
+ '</div>' +
+'</div>' +
+'</div>'
+
+if (position(counter) === 1) {
+  $(win_message).insertAfter(".top-bar");
+  data.contexto.push(data_temp);
+  counter++;
+  };    
+
+// Code for instating a guess limit:
+let guess_limit_msg = '<div class="end-msg" id="limit-msg">' +
+  '<p class="bigger"><span>You have reached the maximum number of guesses allowed for this word!</span></p>' +
+'<p><span>The target word was</span> <u>' + targets.word[counter] + '</u></p>'+
+'<div>' +
+ '<div style="position: relative; padding: 15px 0px;">' +
+    '<button type="button" class="button" onclick="game()">'+
+       '<div style="min-width: 104px;">Next Trial</div>' +
+    '</button>' +
+ '</div>' +
+'</div>' +
+'</div>'
+
+if ((($('.guess-history').children('div').length) === guess_limit) && !($('.end-msg').length === 1)) {
+  $(guess_limit_msg).insertAfter(".top-bar");
+  data.contexto.push(data_temp);
+  counter++;
+};
+
+// Clear input field
+// TEMP: Will want this to be an if/then -- only clear if guess is valid?
+$('.word').val('');
+
+
+}
+});
+};
+
+// game();
+
+</script>
+  
+<script>
+$("input").hide();
+</script>
+<div class="how-to-play">
+<div>
+   <div class="modal-title">
+      <h1>How to play:</h1>
+   </div>
+   <p>On each trial, there is a randomly selected secret word.<br>Your goal is to try and figure out that secret word.</p> 
+   <p>The secret word will always be a noun. You have a maximum of <u>20</u> guesses per trial.</p>
+   <p>The words were sorted by an artificial intelligence algorithm according to how similar they were to the secret word.</p>
+   <p>After submitting a word, you will see its position. The secret word is number 1.</p>
+   <!-- <p>The algorithm analyzed thousands of texts. It uses the context in which words are used to calculate the similarity between them.</p> -->
+   <p>You will earn points based on the closest word you can get on each trial.<br>If you get the secret word, you will earn a bonus for that trial.</p>
+</div>
+<div style="position: relative; padding: 15px 0px;">
+    <button type="button" class="button" style="margin:0 auto; display:block;" onclick="game()">
+       <div style="min-width: 104px;">Begin</div>
+    </button>
+ </div>    
+</div>	  
+
+<!-- Only have message show up after first guess -->
+<div class="message">
+</div>
+
+<div class="guess-history">
+</div>
+
+</div>
+
+</div>
+
+
+
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<script>
+    var next_task = function() {
+        $("#task_finish").hide();
+        if(task_order[curTask] == "AUT") {
+            $("#AUT_instructions").show()
+        } else if(task_order[curTask] == "RAT") {
+            $("#RAT_instructions").show()
+        } else {
+            $("#root").show()
+        }
+    }; 
+    $("#task_start").on("click", next_task);
+</script>    
+
+</body>
+</html>
