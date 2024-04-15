@@ -186,34 +186,35 @@ function FunctionWhenDoneSaving() {
 
     Shuffle(questions);
 
-    function generate_BFI_trials(){
-        for (let i=0; i<questions.length; i++) {
-            document.getElementById("surveyQuestions").innerHTML += `<div id="${questions[i].name}" style="display:none">
+    function generate_BFI_trials() {
+    for (let i = 0; i < questions.length; i++) {
+        document.getElementById("surveyQuestions").innerHTML += `
+            <div id="${questions[i].name}" style="display:none">
                 ${questions[i].prompt}<br><br>
                 <div>
-                    <input type="radio" id="${open_options[0]}" name="${questions[i].name}" value="1">
-                    <label for="${open_options[0]}">${open_options[0]}</label>
-                </div>          
-                <div>
-                    <input type="radio" id="${open_options[1]}" name="${questions[i].name}" value="2">
-                    <label for="${open_options[1]}">${open_options[1]}</label>
+                    <input type="radio" id="${questions[i].name}_1" name="${questions[i].name}" value="1">
+                    <label for="${questions[i].name}_1">${open_options[0]}</label>
                 </div>
                 <div>
-                    <input type="radio" id="${open_options[2]}" name="${questions[i].name}" value="3">
-                    <label for="${open_options[2]}">${open_options[2]}</label>
+                    <input type="radio" id="${questions[i].name}_2" name="${questions[i].name}" value="2">
+                    <label for="${questions[i].name}_2">${open_options[1]}</label>
                 </div>
                 <div>
-                    <input type="radio" id="${open_options[3]}" name="${questions[i].name}" value="4">
-                    <label for="${open_options[3]}">${open_options[3]}</label>
+                    <input type="radio" id="${questions[i].name}_3" name="${questions[i].name}" value="3">
+                    <label for="${questions[i].name}_3">${open_options[2]}</label>
                 </div>
                 <div>
-                    <input type="radio" id="${open_options[4]}" name="${questions[i].name}" value="5">
-                    <label for="${open_options[4]}">${open_options[4]}</label>
+                    <input type="radio" id="${questions[i].name}_4" name="${questions[i].name}" value="4">
+                    <label for="${questions[i].name}_4">${open_options[3]}</label>
+                </div>
+                <div>
+                    <input type="radio" id="${questions[i].name}_5" name="${questions[i].name}" value="5">
+                    <label for="${questions[i].name}_5">${open_options[4]}</label>
                 </div>
                 <br>
-            </div>`
-        }
-    };
+            </div>`;
+    }
+};
 
       function BFI_start() {
           $("#BFI_instructions").hide();
