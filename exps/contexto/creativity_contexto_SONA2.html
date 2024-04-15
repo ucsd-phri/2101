@@ -250,9 +250,6 @@ function FunctionWhenDoneSaving() {
             }
       if (!allQuestionsAnswered) {
         alert("Please answer all questions before continuing.");
-        $("#BFI_trials").hide();
-        $("#surveyQuestions").hide();  
-        $("#BFI_finish").show();
         return;
     }
         addBFIResponses(response);
