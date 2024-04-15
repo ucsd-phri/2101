@@ -187,10 +187,9 @@ function FunctionWhenDoneSaving() {
     Shuffle(questions);
 
     function generate_BFI_trials() {
-        console.log("test1")
     for (let i = 0; i < questions.length; i++) {
         document.getElementById("surveyQuestions").innerHTML += `
-            <div id="${questions[i].name}" style="display:none">
+            <div id="${questions[i].name}">
                 ${questions[i].prompt}<br><br>
                 <div>
                     <input type="radio" id="${questions[i].name}_1" name="${questions[i].name}" value="1">
@@ -221,7 +220,6 @@ function FunctionWhenDoneSaving() {
           $("#BFI_instructions").hide();
           generate_BFI_trials();
           $("#BFI_trials").show();
-          console.log("test2")
         }        
         
     function BFI_finish() {
