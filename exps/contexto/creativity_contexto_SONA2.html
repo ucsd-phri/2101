@@ -167,7 +167,7 @@ function FunctionWhenDoneSaving() {
           $("#BFI_instructions").hide();
           $("#BFI_trials").show();
         }
-
+    document.addEventListener('DOMContentLoaded', function() {
     var open_options = ["Disagree<br>strongly<br>", "Disagree<br>a little", "Neither agree<br>nor disagree", "Agree<br>a little", "Agree<br>strongly"];
     var BFI_values = [1, 2, 3, 4, 5];
 
@@ -223,7 +223,8 @@ function FunctionWhenDoneSaving() {
       // Here you can process the form data (e.g., send it to a server)
       BFI_finish();
     });
-
+    };
+        
     function BFI_finish() {
         curTask = curTask +1
         if(curTask < 4) {
