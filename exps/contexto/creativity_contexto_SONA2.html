@@ -155,16 +155,16 @@ function FunctionWhenDoneSaving() {
       </button>
     </div>
 
-    <form id="BFI_trials" style="display:none">
+    <div id="BFI_trials" style="display:none">
       <div id="surveyQuestions">
 
 
           
       </div>
-      <button type="submit">
+      <button id="BFI_finish" class="button">
         Submit
       </button>
-    </form>
+    </div>
     
     <script>
     
@@ -213,10 +213,6 @@ function FunctionWhenDoneSaving() {
                 <br>
             </div>`
         }
-        document.getElementById("surveyQuestions").innerHTML += `
-                <button id="BFI_finish" class="button">
-                    Continue
-                </button>`
     };
 
       function BFI_start() {
