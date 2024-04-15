@@ -148,7 +148,7 @@ function FunctionWhenDoneSaving() {
   <div id="BFI">
     <div id="BFI_instructions" style="display:none">
       <p>
-        For this task, you are going to be asked to answer a few questions. Please select the option you believe describes yourself the best."
+        For this task, you are going to be asked to answer a few questions. Please select the option you believe describes yourself the best.
       </p>
       <button id="BFI_start" class="button">
         Click here when you are ready to start.
@@ -210,12 +210,13 @@ function FunctionWhenDoneSaving() {
                     <input type="radio" id="${open_options[4]}" name="${questions.name[i]}" value="5">
                     <label for="${open_options[4]}">${open_options[4]}</label>
                 </div>
-                <br><br>
-                <button id="RAT_AC_button" class="button">
-                    Continue
-                </button>
+                <br>
             </div>`
         }
+        document.getElementById("surveyQuestions").innerHTML += `
+                <button id="BFI_finish" class="button">
+                    Continue
+                </button>`
     };
 
       function BFI_start() {
@@ -225,6 +226,7 @@ function FunctionWhenDoneSaving() {
         }        
         
     function BFI_finish() {
+        $("BFI_finish").hide();
         curTask = curTask +1
         if(curTask < 4) {
             $("#task_finish").show();
@@ -232,6 +234,10 @@ function FunctionWhenDoneSaving() {
             $("#end").show()
         }
     };  
+
+    $("#BFI_start").on("click", BFI_start);
+    $("#BFI_finish").on("click", BFI_finish);
+     
     </script>
   </div>
   
