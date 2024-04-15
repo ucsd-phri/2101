@@ -188,26 +188,26 @@ function FunctionWhenDoneSaving() {
 
     function generate_BFI_trials(){
         for (let i=0; i<questions.length; i++) {
-            document.getElementById("surveyQuestions").innerHTML += `<div id="${questions.name[i]}" style="display:none">
-                ${questions.prompt[i]}<br><br>
+            document.getElementById("surveyQuestions").innerHTML += `<div id="${questions[i].name}" style="display:none">
+                ${questions[i].prompt}<br><br>
                 <div>
-                    <input type="radio" id="${open_options[0]}" name="${questions.name[i]}" value="1">
+                    <input type="radio" id="${open_options[0]}" name="${questions[i].name}" value="1">
                     <label for="${open_options[0]}">${open_options[0]}</label>
                 </div>          
                 <div>
-                    <input type="radio" id="${open_options[1]}" name="${questions.name[i]}" value="2">
+                    <input type="radio" id="${open_options[1]}" name="${questions[i].name}" value="2">
                     <label for="${open_options[1]}">${open_options[1]}</label>
                 </div>
                 <div>
-                    <input type="radio" id="${open_options[2]}" name="${questions.name[i]}" value="3">
+                    <input type="radio" id="${open_options[2]}" name="${questions[i].name}" value="3">
                     <label for="${open_options[2]}">${open_options[2]}</label>
                 </div>
                 <div>
-                    <input type="radio" id="${open_options[3]}" name="${questions.name[i]}" value="4">
+                    <input type="radio" id="${open_options[3]}" name="${questions[i].name}" value="4">
                     <label for="${open_options[3]}">${open_options[3]}</label>
                 </div>
                 <div>
-                    <input type="radio" id="${open_options[4]}" name="${questions.name[i]}" value="5">
+                    <input type="radio" id="${open_options[4]}" name="${questions[i].name}" value="5">
                     <label for="${open_options[4]}">${open_options[4]}</label>
                 </div>
                 <br>
@@ -226,7 +226,7 @@ function FunctionWhenDoneSaving() {
         }        
         
     function BFI_finish() {
-        $("BFI_finish").hide();
+        $("#BFI_finish").hide();
         curTask = curTask +1
         if(curTask < 4) {
             $("#task_finish").show();
