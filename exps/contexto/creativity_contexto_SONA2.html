@@ -241,11 +241,24 @@ function FunctionWhenDoneSaving() {
         $("#surveyQuestions").hide();
 
         var response = {};
+        var allQuestionsAnswered = true;
+
             for (let i = 0; i < questions.length; i++) {
                 var question_name = questions[i].name;
                 var score = $('input[name="' + question_name + '"]:checked').val();
+                if (score === undefined) {
+                allQuestionsAnswered = false;
+                break;
+            }
                 response[question_name] = parseInt(score);
             }
+      if (!allQuestionsAnswered) {
+        alert("Please answer all questions before continuing.");
+        $("#BFI_trials").hide();
+        $("#surveyQuestions").hide();  
+        $("#BFI_finish").show();
+        return;
+    }
         addBFIResponses(response);
         
         curTask = curTask +1
