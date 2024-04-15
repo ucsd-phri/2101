@@ -85,6 +85,11 @@
     </div>
 
     <script>
+    Shuffle = function (o) {
+    for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+};
+        
         $("#exp_start").on("click", exp_start);
 
         function exp_start() {
@@ -150,12 +155,11 @@ function FunctionWhenDoneSaving() {
       </button>
     </div>
 
-    <div id="BFI_trials" style="display:none">
-    </div>
-
     <form id="BFI_trials" style="display:none">
       <div id="surveyQuestions">
-        
+
+
+          
       </div>
       <button type="submit">
         Submit
@@ -163,11 +167,7 @@ function FunctionWhenDoneSaving() {
     </form>
     
     <script>
-      function BFI_start() {
-          $("#BFI_instructions").hide();
-          $("#BFI_trials").show();
-        }
-    document.addEventListener('DOMContentLoaded', function() {
+    
     var open_options = ["Disagree<br>strongly<br>", "Disagree<br>a little", "Neither agree<br>nor disagree", "Agree<br>a little", "Agree<br>strongly"];
     var BFI_values = [1, 2, 3, 4, 5];
 
@@ -184,46 +184,45 @@ function FunctionWhenDoneSaving() {
       { prompt: "<b>Is sophisticated in art, music, or literature</b>", name: 'sophisticated_art' }
     ];
 
-    var form = document.getElementById('bfiForm');
-    var surveyQuestions = document.getElementById('surveyQuestions');
+    Shuffle(questions);
 
-    questions.forEach(function(question) {
-      var questionDiv = document.createElement('div');
-      questionDiv.innerHTML = question.prompt;
-
-      open_options.forEach(function(option, index) {
-        var input = document.createElement('input');
-        input.type = 'radio';
-        input.name = question.name;
-        input.value = BFI_values[index];
-        input.id = question.name + '-' + index;
-
-        var label = document.createElement('label');
-        label.innerHTML = option;
-        label.setAttribute('for', question.name + '-' + index);
-
-        questionDiv.appendChild(input);
-        questionDiv.appendChild(label);
-      });
-
-      surveyQuestions.appendChild(questionDiv);
-    });
-
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-      var formData = new FormData(form);
-      var data = {};
-      formData.forEach(function(value, key) {
-        if (!data[key]) {
-          data[key] = [];
+    function generate_BFI_trials(){
+        for (let i=0; i<questions.length; i++) {
+            document.getElementById("surveyQuestions").innerHTML += `<div id="${questions.name[i]}" style="display:none">
+                ${questions.prompt[i]}<br><br>
+                <div>
+                    <input type="radio" id="${open_options[0]}" name="${questions.name[i]}" value="1">
+                    <label for="${open_options[0]}">${open_options[0]}</label>
+                </div>          
+                <div>
+                    <input type="radio" id="${open_options[1]}" name="${questions.name[i]}" value="2">
+                    <label for="${open_options[1]}">${open_options[1]}</label>
+                </div>
+                <div>
+                    <input type="radio" id="${open_options[2]}" name="${questions.name[i]}" value="3">
+                    <label for="${open_options[2]}">${open_options[2]}</label>
+                </div>
+                <div>
+                    <input type="radio" id="${open_options[3]}" name="${questions.name[i]}" value="4">
+                    <label for="${open_options[3]}">${open_options[3]}</label>
+                </div>
+                <div>
+                    <input type="radio" id="${open_options[4]}" name="${questions.name[i]}" value="5">
+                    <label for="${open_options[4]}">${open_options[4]}</label>
+                </div>
+                <br><br>
+                <button id="RAT_AC_button" class="button">
+                    Continue
+                </button>
+            </div>`
         }
-        data[key].push(value);
-      });
-      console.log(data);
-      // Here you can process the form data (e.g., send it to a server)
-      BFI_finish();
-    });
-    });
+    };
+
+      function BFI_start() {
+          $("#BFI_instructions").hide();
+          generate_BFI_trials();
+          $("#BFI_trials").show();
+        }        
         
     function BFI_finish() {
         curTask = curTask +1
@@ -368,11 +367,6 @@ function FunctionWhenDoneSaving() {
 <!-- RAT -->
 
     <script>
-
-Shuffle = function (o) {
-    for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
-};
 //         var exampleTriads = [
 //     ['dew', 'comb', 'bee'],
 // // ['loser', 'throat', 'spot'],
