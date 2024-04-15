@@ -236,10 +236,6 @@ function FunctionWhenDoneSaving() {
         }        
         
     function BFI_finish() {
-        $("#BFI_finish").hide();
-        $("#BFI_trials").hide();
-        $("#surveyQuestions").hide();
-
         var response = {};
         var allQuestionsAnswered = true;
 
@@ -260,6 +256,10 @@ function FunctionWhenDoneSaving() {
         return;
     }
         addBFIResponses(response);
+        
+        $("#BFI_finish").hide();
+        $("#BFI_trials").hide();
+        $("#surveyQuestions").hide();
         
         curTask = curTask +1
         if(curTask < 4) {
