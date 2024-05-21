@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>SONA Study</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/jspsych.js"></script>
+        <!-- <script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-iat-html.js"></script>
+        <script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-survey-multi-choice.js"></script>
+        <script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-survey-multi-select.js"></script>
+        <script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-survey-text.js"></script>
+        <script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-survey-html-form.js"></script>
+        <script src="../jsPsych/jspsych-6.1.0/plugins/jspsych-html-button-response.js"></script> -->
+        <!-- <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-iat-html.js"></script> -->
+        <script src="jspsych-6.3.1/plugins/jspsych-iat-html2.js"></script>
+        <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-survey-multi-choice.js"></script>
+        <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-survey-multi-select.js"></script>
+        <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-survey-text.js"></script>
+        <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-survey-html-form.js"></script>
+        <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-html-button-response.js"></script>
+        <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-ranking.js"></script>
+        <!-- <script defer="defer" src="static/js/main.341327a7.js"></script> -->
+        <link href="https://psyc241.ucsd.edu/jspsych-6.1.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+        <!-- <link href="css/main.css" rel="stylesheet"> -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <style>
+          .container {
+            width: 400px; /* Set width of the container */
+            border: 1px solid #ccc; /* Just for demonstration */
+            padding: 10px; /* Add some padding */
+          }
+          
+          .image {
+            float: left; /* Float the image to the left */
+            margin-right: 10px; /* Add some space between image and text */
+          }
+        </style>
+    </head>
+    <body>
+        <script>
+
+          var randCode = "IAT" + Math.round(Math.random()*1000) + "6969" + Math.round(Math.random()*1000) + "V1";
+
+          Shuffle = function (o) {
+            for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+            return o;
+          };
+
+          Shuffle2 = function (o) {
+              var shuffled = o.slice().sort(function() { return 0.5 - Math.random() });
+              var result = [];
+              for (var i = 0; i < shuffled.length; i++) {
+                  if (i === 0 || shuffled[i] !== shuffled[i - 1]) {
+                      result.push(shuffled[i]);
+                  } else {
+                      result.push(shuffled[(i + 1) % shuffled.length]);
+                      result.push(shuffled[i]);
+                      i++;
+                  }
+              }
+              return result;
+          };
+
+          var startTime = new Date();
+
+          var timeline = [];
+
+          // var self_descriptions = ["warm", "competent", "feminine", "masculine", 
+          // "attractive", "trustworthy", "threatening", "unusual"];
+
+          // self_descriptions = Shuffle(self_descriptions);
+
+          // Should this be randomized or blocked so it always switches??
+          // Should this be randomized or blocked so it always switches??
+          // Should this be randomized or blocked so it always switches??
+          // Should this be randomized or blocked so it always switches??
+          // Should this be randomized or blocked so it always switches??
+          // Should this be randomized or blocked so it always switches??
+          // var iat_words = [["human", "animal"],
+          //                 ["animal", "human"],
+          //                 ["human", "animal"],
+          //                 ["animal", "human"]];
+
+          var human_words = ['<span style="color:#F76D12">people</span>', 
+                             '<span style="color:#F76D12">citizen</span>', 
+                             '<span style="color:#F76D12">individual</span>', 
+                             '<span style="color:#F76D12">rational</span>', 
+                             '<span style="color:#F76D12">culture</span>', 
+                            '<span style="color:#F76D12">society</span>', 
+                             '<span style="color:#F76D12">mind</span>', 
+                             '<span style="color:#F76D12">us</span>'];
+          var animal_words = ['<span style="color:#F76D12">animal</span>', 
+                              '<span style="color:#F76D12">nature</span>', 
+                              '<span style="color:#F76D12">bodies</span>', 
+                              '<span style="color:#F76D12">tame</span>', 
+                              '<span style="color:#F76D12">pet</span>', 
+                              '<span style="color:#F76D12">creature</span>', 
+                              '<span style="color:#F76D12">feral</span>', 
+                              '<span style="color:#F76D12">them</span>'];
+
+          var human_animal_words = [];
+
+          for (i=0; i<human_words.length; i++) {
+            human_animal_words.push(human_words[i])
+          };
+          for (i=0; i<animal_words.length; i++) {
+            human_animal_words.push(animal_words[i])
+          };
+
+          Shuffle(human_animal_words);
+
+          var labels = [["human", "animal"],
+                        ["high competence", "low competence"]];
+
+          // Shuffle(iat_words);
+
+          // var names_m = ["paul", "raul", "anthony", "abdul", "john"];
+
+          // Shuffle(names_m);
+
+          // var names_f = ["Janna", "Angeline", "Desiree", "Rachel", "Gloria"];
+
+          // Shuffle(names_f);
+
+          // var jobs = ["construction worker", "lawyer", "nurse", "farmer", "custodian", "house keeper",
+          //           "financial advisor", "chef"];
+          var jobs = ['<span style="color:#7C05BE">sex worker</span>',
+                      '<span style="color:#7C05BE">slaughterhouse worker</span>',
+                      '<span style="color:#7C05BE">narcotics dealer</span>',
+                      '<span style="color:#7C05BE">truck driver</span>',
+                      '<span style="color:#7C05BE">panhandler</span>',
+                      '<span style="color:#7C05BE">police officer</span>',
+                      '<span style="color:#7C05BE">defense lawyer</span>',
+                      '<span style="color:#7C05BE">fashion designer</span>',
+                      '<span style="color:#7C05BE">barista</span>',
+                      '<span style="color:#7C05BE">cashier</span>',
+                      '<span style="color:#7C05BE">insurance agent</span>',
+                      '<span style="color:#7C05BE">administrative assistant</span>',
+                      '<span style="color:#7C05BE">massage therapist</span>',
+                      '<span style="color:#7C05BE">crime scene cleaner</span>',
+                      '<span style="color:#7C05BE">mortician</span>',
+                      '<span style="color:#7C05BE">influencer</span>'];
+          
+          // var uc_jobs = [];
+          // var lc_jobs = ['sex worker',
+          //             'slaughterhouse worker',
+          //             'narcotics dealer',
+          //             'truck driver',
+          //             'panhandler',
+          //             'barista',
+          //             'cashier',
+          //             'massage therapist',
+          //             'crime scene cleaner',
+          //             'mortician'];
+
+          Shuffle(jobs);
+
+          // var models_m = [1, 2, 3, 4, 5];
+
+          // Shuffle(models_m);
+
+          // var models_f = [6, 7, 8, 9, 10];
+
+          // Shuffle(models_f);
+
+          // var vignette_source_data = [[],
+          //             [],
+          //             [],
+          //             [],
+          //             [],
+          //             [],
+          //             [],
+          //             [],
+          //             [],
+          //             []];
+
+          // // Assign randomized names for male and female vignettes
+          // for (i = 0; i < 5; i++){
+          //   vignette_source_data[i].push(names_m[i])
+          //   vignette_source_data[i+5].push(names_f[i])
+          // }
+          // // Assign the "sex worker" job to the first male and female
+          // vignette_source_data[0].push("sex worker")
+          // vignette_source_data[0+5].push("sex worker")
+          // // Assign randomized jobs to the remaining males
+          // for (i = 1; i < 5; i++){
+          //   vignette_source_data[i].push(jobs[i-1])
+          // }
+          // // Assign the remaining randomized jobs to the remaining females
+          // for (i = 6; i < 10; i++){
+          //   vignette_source_data[i].push(jobs[i-2])
+          // }
+          // // Assign randomized model pictures to the male and female vignette profiles
+          // for (i = 0; i < 5; i++){
+          //   vignette_source_data[i].push(models_m[i])
+          //   vignette_source_data[i+5].push(models_f[i])
+          // }
+          // // With all male and female profiles complete, randomize the order of the vignettes
+          // vignette_source_data = Shuffle(vignette_source_data);
+
+          // var trial_self_descriptions = {
+          //   type: 'survey-multi-choice',
+          //   preamble: 'Please rate how close you feel you are to the categories below:',
+          //   questions: [
+          //     {prompt: "<strong>" + `${self_descriptions[0]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[0]}`}, 
+          //     {prompt: "<strong>" + `${self_descriptions[1]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[1]}`},
+          //     {prompt: "<strong>" + `${self_descriptions[2]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[2]}`},
+          //     {prompt: "<strong>" + `${self_descriptions[3]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[3]}`},
+          //     {prompt: "<strong>" + `${self_descriptions[4]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[4]}`},
+          //     {prompt: "<strong>" + `${self_descriptions[5]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[5]}`},
+          //     {prompt: "<strong>" + `${self_descriptions[6]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[6]}`},
+          //     {prompt: "<strong>" + `${self_descriptions[7]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[7]}`}
+          //   ],
+          //   data: {
+          //       type: "self_descriptions"}
+          // };
+
+          // timeline.push(trial_self_descriptions);
+
+          // for (i=0; i < vignette_source_data.length; i++) {
+          // timeline.push({
+          //   type: 'html-button-response',
+          //   stimulus: '<div class="container">' +
+          //   '<img src="your-image.jpg"' + `alt="${vignette_source_data[i][2]}"` + 'class="image">' +
+          //   '<p>Lorem ipsum dolor sit amet</p>' +
+          //   '</div>',
+          //   choices: ["Continue"],
+          //   data: {type: "trial_vignette",
+          //         trial: (i + 1),
+          //         name: `${vignette_source_data[i][0]}`,
+          //         job: `${vignette_source_data[i][1]}`,
+          //         model: `${vignette_source_data[i][2]}`}
+          //   })
+          // };
+
+          // Test to see if people remember the correct profiles before they can move on
+          // Test to see if people remember the correct profiles before they can move on
+          // Test to see if people remember the correct profiles before they can move on
+          // Test to see if people remember the correct profiles before they can move on
+          // Test to see if people remember the correct profiles before they can move on
+          // Test to see if people remember the correct profiles before they can move on
+          // Test to see if people remember the correct profiles before they can move on
+          // Test to see if people remember the correct profiles before they can move on
+
+          var intro = {
+            type: 'html-button-response',
+            stimulus: "Through recent technological advances in the last 50 years, there are more ways than ever to make money now.<br>In this part of the task, we are interested in people's thoughts about different professions.<br><br>",
+            choices: ["Continue"],
+            data: {type: "intro"}
+            };
+
+          timeline.push(intro);
+
+          var iat_instr = {
+            type: 'html-button-response',
+            stimulus: 'First, you will complete an Implicit Association Test (IAT)<br>in which you will be asked to sort words into groups as fast as you can.<br><br>',
+            choices: ["Continue"],
+            data: {type: "iat_instr"}
+            };
+
+          timeline.push(iat_instr);
+
+          // var iat_trial_count = 0
+
+          // // For loop for each iat word pair trial block
+          // for(i=0; i < 4; i++) {
+          //   // Create the temp trial block variable
+          //   var iat_trial_block = [];
+
+          //   // For loop to create iat trials for each vignette with the specific word pairs
+          //   for (j=0; j < vignette_source_data.length; j++) {
+          //     iat_trial_count += 1
+
+          //     iat_trial_block.push({
+          //       type: 'iat-html',
+          //       stimulus: `${vignette_source_data[j][2]}`,
+          //       stim_key_association: 'left',
+          //       // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+          //       bottom_instructions: '',
+          //       // bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+          //       force_correct_key_press: false,
+          //       display_feedback: false,
+          //       trial_duration: 100, //Only if display_feedback is false
+          //       left_category_key: 's',
+          //       right_category_key: 'k',
+          //       left_category_label: [`${iat_words[i][0]}`, "A"],
+          //       right_category_label: [`${iat_words[i][1]}`, "B"],
+          //       response_ends_trial: true,
+          //       data: {type: "iat_trial",
+          //             trial: iat_trial_count,
+          //             name: `${vignette_source_data[i][0]}`,
+          //             job: `${vignette_source_data[i][1]}`,
+          //             model: `${vignette_source_data[i][2]}`,
+          //             s: `${iat_words[i][0]}`,
+          //             k: `${iat_words[i][1]}`}
+          //     });
+          //     // Randomize the order of the trials within the word pair block
+          //     // By doing this, the trial order gets fucked up. Need to fix -- possibly by adding the trial number afterwards
+          //       // var temp = jsPsych.data.get().filter({type: "iat_trial"}).values()
+          //       // for (i=0; i < temp.length; i++) {
+          //       //   temp[i]["trial"] = i
+          //       // }
+          //     }
+          //     Shuffle(iat_trial_block);
+          //       // Add trials to timeline
+          //     for (k=0; k < iat_trial_block.length; k++) {
+          //       timeline.push(iat_trial_block[k])
+          //   }
+          // };
+
+          // human-animal words IAT trials:
+          // human-animal words IAT trials:
+          // human-animal words IAT trials:
+          // human-animal words IAT trials:
+          // human-animal words IAT trials:
+          // human-animal words IAT trials:
+
+          var block1_instr = {
+            type: 'html-keyboard-response',
+            stimulus: 'In this section, you will press the "D" key for items that belong to the category <span style="color:#F76D12"><b>Human</b></span><br>'+
+            'and press the "K" key for items that belong to the category <span style="color:#F76D12"><b>Animal</b></span>.<br><br>'+
+            'Items will appear one at a time.<br><br>'+
+            '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
+            'Press the <b>space bar</b> when you are ready to start.',
+            choices: ['space'],
+        };
+          timeline.push(block1_instr);
+
+          var block1 = [];
+          for (i=0; i < human_animal_words.length; i++) {
+            block1.push(human_animal_words[i])
+          };
+          for (i=0; i < human_animal_words.length; i++) {
+            block1.push(human_animal_words[i])
+          };
+
+          Shuffle2(block1);
+
+          var iat_trial_count = 0
+          // Create the temp trial block variable
+          var iat_trial_block = [];
+
+          // For loop to create the human-animal word IAT trials
+          for(i=0; i < human_animal_words.length; i++) {
+            iat_trial_count += 1
+
+            iat_trial_block.push({
+              type: 'iat-html',
+              stimulus: '<b>'+`${block1[i]}`+'</b>',
+              stim_key_association: human_words.includes(block1[i]) ? "left" : "right",
+              // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+              bottom_instructions: '',
+              // bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+              force_correct_key_press: false,
+              display_feedback: false,
+              trial_duration: 100, //Only if display_feedback is false
+              left_category_key: 'd',
+              right_category_key: 'k',
+              left_category_label: ['<span style="color:#F76D12">human</span>'],
+              right_category_label: ['<span style="color:#F76D12">animal</span>'],
+              response_ends_trial: true,
+              data: {type: "iat_trial",
+                    block: "block1_human_animal",
+                    trial: iat_trial_count,
+                    stimulus: block1[i],
+                    d: 'human',
+                    k: 'animal'}
+            });
+            // Randomize the order of the trials within the word pair block
+            // By doing this, the trial order gets fucked up. Need to fix -- possibly by adding the trial number afterwards
+              // var temp = jsPsych.data.get().filter({type: "iat_trial"}).values()
+              // for (i=0; i < temp.length; i++) {
+              //   temp[i]["trial"] = i
+              // }
+            }
+            // Shuffle(iat_trial_block);
+              // Add trials to timeline
+            for (i=0; i < iat_trial_block.length; i++) {
+              timeline.push(iat_trial_block[i])
+          };
+
+          // jobs IAT trials:
+          // jobs IAT trials:
+          // jobs IAT trials:
+          // jobs IAT trials:
+          // jobs IAT trials:
+          // jobs IAT trials:
+
+          var block2_instr = {
+            type: 'html-keyboard-response',
+            stimulus: 'In this section, you will press the "D" key for items that belong to the category <span style="color:#7C05BE"><b>High Competence</b></span><br>'+
+            'and press the "K" key for items that belong to the category <span style="color:#7C05BE"><b>Low Competence</b></span>.<br><br>'+
+            'Items will appear one at a time.<br><br>'+
+            '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
+            'Press the <b>space bar</b> when you are ready to start.',
+            choices: ['space'],
+        };
+          timeline.push(block2_instr);
+
+          var block2 = [];
+          for (i=0; i < jobs.length; i++) {
+            block2.push(jobs[i])
+          };
+          for (i=0; i < jobs.length; i++) {
+            block2.push(jobs[i])
+          };
+
+          Shuffle2(block2);
+
+          var iat_trial_count = 0
+          // Create the temp trial block variable
+          var iat_trial_block = [];
+
+          // For loop to create the jobs IAT trials
+          for(i=0; i < block2.length; i++) {
+            iat_trial_count += 1
+
+            iat_trial_block.push({
+              type: 'iat-html',
+              stimulus: '<b>'+`${block2[i]}`+'</b>',
+              stim_key_association: "left",
+              // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+              bottom_instructions: '',
+              // bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+              force_correct_key_press: false,
+              display_feedback: false,
+              trial_duration: 100, //Only if display_feedback is false
+              left_category_key: 'd',
+              right_category_key: 'k',
+              left_category_label: ['<span style="color:#7C05BE">high competence</span>'],
+              right_category_label: ['<span style="color:#7C05BE">low competence</span>'],
+              response_ends_trial: true,
+              data: {type: "iat_trial",
+                    block: "block2_jobs",
+                    trial: iat_trial_count,
+                    stimulus: block2[i],
+                    d: 'high_competence',
+                    k: 'low_competence'}
+            });
+            // Randomize the order of the trials within the word pair block
+            // By doing this, the trial order gets fucked up. Need to fix -- possibly by adding the trial number afterwards
+              // var temp = jsPsych.data.get().filter({type: "iat_trial"}).values()
+              // for (i=0; i < temp.length; i++) {
+              //   temp[i]["trial"] = i
+              // }
+            }
+            // Shuffle(iat_trial_block);
+              // Add trials to timeline
+            for (i=0; i < iat_trial_block.length; i++) {
+              timeline.push(iat_trial_block[i])
+          };  
+
+          // block3 IAT trials:
+          // block3 IAT trials:
+          // block3 IAT trials:
+          // block3 IAT trials:
+          // block3 IAT trials:
+          // block3 IAT trials:
+
+          var block3_instr = {
+            type: 'html-keyboard-response',
+            stimulus: 'In this section, you will press the "D" key for <span style="color:#F76D12"><b>Human</b></span> and for <span style="color:#7C05BE"><b>High Competence</b></span><br>'+
+            'and press the "K" key for <span style="color:#F76D12"><b>Animal</b></span> and for <span style="color:#7C05BE"><b>Low Competence</b></span>.<br><br>'+
+            'Each item belongs to only one category.<br>'+
+            'Items will appear one at a time.<br><br>'+
+            '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
+            'Press the <b>space bar</b> when you are ready to start.',
+            choices: ['space'],
+          };
+          timeline.push(block3_instr);
+
+          var iat_trial_count = 0
+          // Create the temp trial block variable
+          var iat_trial_block = [];
+          var block3 = [];
+
+          Shuffle(human_animal_words);
+          Shuffle(jobs);
+
+          for (i=0; i < human_animal_words.length; i++) {
+            block3.push(human_animal_words[i])
+            block3.push(jobs[i])
+          };
+          // for (i=0; i < jobs.length; i++) {
+          //   block3.push(jobs[i])
+          // };
+          // Shuffle(block3);
+
+          // For loop to create the jobs IAT trials
+          for(i=0; i < block3.length; i++) {
+            iat_trial_count += 1
+
+            iat_trial_block.push({
+              type: 'iat-html',
+              stimulus: '<b>'+`${block3[i]}`+'</b>',
+              stim_key_association: human_words.includes(block3[i]) ? "left" : "right",
+              // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+              bottom_instructions: '',
+              // bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+              force_correct_key_press: false,
+              display_feedback: false,
+              trial_duration: 100, //Only if display_feedback is false
+              left_category_key: 'd',
+              right_category_key: 'k',
+              left_category_label: ['<span style="color:#F76D12">human</span>', '<span style="color:#7C05BE">high competence</span>'],
+              right_category_label: ['<span style="color:#F76D12">animal</span>', '<span style="color:#7C05BE">low competence</span>'],
+              response_ends_trial: true,
+              data: {type: "iat_trial",
+                    block: "block3",
+                    trial: iat_trial_count,
+                    stimulus: block3[i],
+                    d: 'human_high_competence',
+                    k: 'animal_low_competence'}
+            });
+            }
+            // Shuffle(iat_trial_block);
+              // Add trials to timeline
+            for (i=0; i < iat_trial_block.length; i++) {
+              timeline.push(iat_trial_block[i])
+          };
+
+          // block4 IAT trials:
+          // block4 IAT trials:
+          // block4 IAT trials:
+          // block4 IAT trials:
+          // block4 IAT trials:
+          // block4 IAT trials:
+
+          var block4_instr = {
+            type: 'html-keyboard-response',
+            stimulus: 'This section will be the same as the previous part.<br>'+
+            'Press the "D" key for <span style="color:#F76D12"><b>Human</b></span> and for <span style="color:#7C05BE"><b>High Competence</b></span>.<br>'+
+            'Press the "K" key for <span style="color:#F76D12"><b>Animal</b></span> and for <span style="color:#7C05BE"><b>Low Competence</b></span>.<br><br>'+
+            'Items will appear one at a time.<br>'+
+            'Each item belongs to only one category.<br><br>'+
+            '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
+            'Press the <b>space bar</b> when you are ready to start.',
+            choices: ['space'],
+          };
+          timeline.push(block4_instr);
+
+          var iat_trial_count = 0
+          // Create the temp trial block variable
+          var iat_trial_block = [];
+          var block4 = [];
+
+          Shuffle(human_animal_words);
+          Shuffle(jobs);
+
+          for (i=0; i < human_animal_words.length; i++) {
+            block4.push(human_animal_words[i])
+            block4.push(jobs[i])
+          };
+
+          Shuffle(human_animal_words);
+          Shuffle(jobs);
+
+          for (i=0; i < human_animal_words.length; i++) {
+            block4.push(human_animal_words[i])
+            block4.push(jobs[i])
+          };          
+
+          // For loop to create the jobs IAT trials
+          for(i=0; i < block4.length; i++) {
+            iat_trial_count += 1
+
+            iat_trial_block.push({
+              type: 'iat-html',
+              stimulus: '<b>'+`${block4[i]}`+'</b>',
+              stim_key_association: human_words.includes(block4[i]) ? "left" : "right",
+              // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+              bottom_instructions: '',
+              // bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+              force_correct_key_press: false,
+              display_feedback: false,
+              trial_duration: 100, //Only if display_feedback is false
+              left_category_key: 'd',
+              right_category_key: 'k',
+              left_category_label: ['<span style="color:#F76D12">human</span>', '<span style="color:#7C05BE">high competence</span>'],
+              right_category_label: ['<span style="color:#F76D12">animal</span>', '<span style="color:#7C05BE">low competence</span>'],
+              response_ends_trial: true,
+              data: {type: "iat_trial",
+                    block: "block4",
+                    trial: iat_trial_count,
+                    stimulus: block4[i],
+                    d: 'human_high_competence',
+                    k: 'animal_low_competence'}
+            });
+            // Randomize the order of the trials within the word pair block
+            // By doing this, the trial order gets fucked up. Need to fix -- possibly by adding the trial number afterwards
+              // var temp = jsPsych.data.get().filter({type: "iat_trial"}).values()
+              // for (i=0; i < temp.length; i++) {
+              //   temp[i]["trial"] = i
+              // }
+            }
+            // Shuffle(iat_trial_block);
+              // Add trials to timeline
+            for (i=0; i < iat_trial_block.length; i++) {
+              timeline.push(iat_trial_block[i])
+          };
+
+
+          // block5 IAT trials:
+          // block5 IAT trials:
+          // block5 IAT trials:
+          // block5 IAT trials:
+          // block5 IAT trials:
+          // block5 IAT trials:
+
+          var block5_instr = {
+            type: 'html-keyboard-response',
+            stimulus: '<b>Watch out, the labels have changed position!</b><br>'+
+            'Press the "D" key for <span style="color:#F76D12"><b>Animal</b></span>.<br>'+
+            'Press the "K" key for <span style="color:#F76D12"><b>Human</b></span>.<br><br>'+
+            'Items will appear one at a time.<br><br>'+
+            '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
+            'Press the <b>space bar</b> when you are ready to start.',
+            choices: ['space'],
+          };
+          timeline.push(block5_instr);
+
+          var iat_trial_count = 0
+          // Create the temp trial block variable
+          var iat_trial_block = [];
+          var block5 = [];
+
+          for (i=0; i < human_animal_words.length; i++) {
+            block5.push(human_animal_words[i])
+          };
+          for (i=0; i < human_animal_words.length; i++) {
+            block5.push(human_animal_words[i])
+          };
+          Shuffle2(block5);
+
+          // For loop to create the jobs IAT trials
+          for(i=0; i < block5.length; i++) {
+            iat_trial_count += 1
+
+            iat_trial_block.push({
+              type: 'iat-html',
+              stimulus: '<b>'+`${block5[i]}`+'</b>',
+              stim_key_association: human_words.includes(block5[i]) ? "right" : "left",
+              // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+              bottom_instructions: '',
+              // bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+              force_correct_key_press: false,
+              display_feedback: false,
+              trial_duration: 100, //Only if display_feedback is false
+              left_category_key: 'd',
+              right_category_key: 'k',
+              left_category_label: ['<span style="color:#F76D12">animal</span>'],
+              right_category_label: ['<span style="color:#F76D12">human</span>'],
+              response_ends_trial: true,
+              data: {type: "iat_trial",
+                    block: "block5",
+                    trial: iat_trial_count,
+                    stimulus: block5[i],
+                    d: 'animal',
+                    k: 'human'}
+            });
+            // Randomize the order of the trials within the word pair block
+            // By doing this, the trial order gets fucked up. Need to fix -- possibly by adding the trial number afterwards
+              // var temp = jsPsych.data.get().filter({type: "iat_trial"}).values()
+              // for (i=0; i < temp.length; i++) {
+              //   temp[i]["trial"] = i
+              // }
+            }
+            // Shuffle(iat_trial_block);
+              // Add trials to timeline
+            for (i=0; i < iat_trial_block.length; i++) {
+              timeline.push(iat_trial_block[i])
+          };
+
+          // block6 IAT trials:
+          // block6 IAT trials:
+          // block6 IAT trials:
+          // block6 IAT trials:
+          // block6 IAT trials:
+          // block6 IAT trials:
+
+          var block6_instr = {
+            type: 'html-keyboard-response',
+            stimulus: 'Press the "D" key for <span style="color:#F76D12"><b>Animal</b></span> and for <span style="color:#7C05BE"><b>High Competence</b></span>.<br>'+
+            'Press the "K" key for <span style="color:#F76D12"><b>Human</b></span> and for <span style="color:#7C05BE"><b>Low Competence</b></span>.<br><br>'+
+            'Items will appear one at a time.<br>'+
+            'Each item belongs to only one category.<br><br>'+
+            '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
+            'Press the <b>space bar</b> when you are ready to start.',
+            choices: ['space'],
+          };
+          timeline.push(block6_instr);
+
+          var iat_trial_count = 0
+          // Create the temp trial block variable
+          var iat_trial_block = [];
+          var block6 = [];
+
+          Shuffle(human_animal_words);
+          Shuffle(jobs);
+
+          for (i=0; i < human_animal_words.length; i++) {
+            block6.push(human_animal_words[i])
+            block6.push(jobs[i])
+          };          
+
+          // for (i=0; i < human_animal_words.length; i++) {
+          //   block6.push(human_animal_words[i])
+          // };
+          // for (i=0; i < jobs.length; i++) {
+          //   block6.push(jobs[i])
+          // };
+          // Shuffle(block6);
+
+          // For loop to create the jobs IAT trials
+          for(i=0; i < block6.length; i++) {
+            iat_trial_count += 1
+
+            iat_trial_block.push({
+              type: 'iat-html',
+              stimulus: '<b>'+`${block6[i]}`+'</b>',
+              stim_key_association: human_words.includes(block6[i]) ? "right" : "left",
+              // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+              bottom_instructions: '',
+              // bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+              force_correct_key_press: false,
+              display_feedback: false,
+              trial_duration: 100, //Only if display_feedback is false
+              left_category_key: 'd',
+              right_category_key: 'k',
+              left_category_label: ['<span style="color:#F76D12">animal</span>', '<span style="color:#7C05BE">high competence</span>'],
+              right_category_label: ['<span style="color:#F76D12">human</span>', '<span style="color:#7C05BE">low competence</span>'],
+              response_ends_trial: true,
+              data: {type: "iat_trial",
+                    block: "block6",
+                    trial: iat_trial_count,
+                    stimulus: block6[i],
+                    d: 'animal_high_competence',
+                    k: 'human_low_competence'}
+            });
+            }
+            // Shuffle(iat_trial_block);
+              // Add trials to timeline
+            for (i=0; i < iat_trial_block.length; i++) {
+              timeline.push(iat_trial_block[i])
+          };
+
+
+
+          // block7 IAT trials:
+          // block7 IAT trials:
+          // block7 IAT trials:
+          // block7 IAT trials:
+          // block7 IAT trials:
+          // block7 IAT trials:
+
+          var block7_instr = {
+            type: 'html-keyboard-response',
+            stimulus: 'This section will be the same as the previous part.<br>'+
+            'Press the "D" key for <span style="color:#F76D12"><b>Animal</b></span> and for <span style="color:#7C05BE"><b>High Competence</b></span>.<br>'+
+            'Press the "K" key for <span style="color:#F76D12"><b>Human</b></span> and for <span style="color:#7C05BE"><b>Low Competence</b></span>.<br><br>'+
+            'Items will appear one at a time.<br>'+
+            'Each item belongs to only one category.<br><br>'+
+            '<u>Go as fast as you can while being accurate</u>. That is, respond as quickly and accurately as possible.<br><br>'+
+            'Press the <b>space bar</b> when you are ready to start.',
+            choices: ['space'],
+          };
+          timeline.push(block7_instr);
+
+          var iat_trial_count = 0
+          // Create the temp trial block variable
+          var iat_trial_block = [];
+          var block7 = [];
+
+          Shuffle(human_animal_words);
+          Shuffle(jobs);
+
+          for (i=0; i < human_animal_words.length; i++) {
+            block7.push(human_animal_words[i])
+            block7.push(jobs[i])
+          };
+
+          Shuffle(human_animal_words);
+          Shuffle(jobs);
+
+          for (i=0; i < human_animal_words.length; i++) {
+            block7.push(human_animal_words[i])
+            block7.push(jobs[i])
+          };                    
+
+          // for (i=0; i < block6.length; i++) {
+          //   block7.push(block6[i])
+          // };
+          // for (i=0; i < block6.length; i++) {
+          //   block7.push(block6[i])
+          // };
+          // Shuffle(block7);
+
+          // For loop to create the jobs IAT trials
+          for(i=0; i < block7.length; i++) {
+            iat_trial_count += 1
+
+            iat_trial_block.push({
+              type: 'iat-html',
+              stimulus: '<b>'+`${block7[i]}`+'</b>',
+              stim_key_association: human_words.includes(block7[i]) ? "right" : "left",
+              // html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+              bottom_instructions: '',
+              // bottom_instructions: '<p>If you press the wrong key, a red X will appear. Press the other key to continue</p>',
+              force_correct_key_press: false,
+              display_feedback: false,
+              trial_duration: 100, //Only if display_feedback is false
+              left_category_key: 'd',
+              right_category_key: 'k',
+              left_category_label: ['<span style="color:#F76D12">animal</span>', '<span style="color:#7C05BE">high competence</span>'],
+              right_category_label: ['<span style="color:#F76D12">human</span>', '<span style="color:#7C05BE">low competence</span>'],
+              response_ends_trial: true,
+              data: {type: "iat_trial",
+                    block: "block7",
+                    trial: iat_trial_count,
+                    stimulus: block7[i],
+                    d: 'animal_high_competence',
+                    k: 'human_low_competence'}
+            });
+            }
+            // Shuffle(iat_trial_block);
+              // Add trials to timeline
+            for (i=0; i < iat_trial_block.length; i++) {
+              timeline.push(iat_trial_block[i])
+          };          
+        //   // For loop to create trials where participants rate the characters on the categories
+        //   for(i=0; i < vignette_source_data.length; i++) {
+        //     timeline.push({
+        //     type: 'survey-multi-choice',
+        //     preamble: 'Please rate how close you feel' + ` <strong><u>${vignette_source_data[i][0]}</u></strong> ` + 'is to the categories below:',
+        //     questions: [
+        //       {prompt: "<strong>" + `${self_descriptions[0]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[0]}`}, 
+        //       {prompt: "<strong>" + `${self_descriptions[1]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[1]}`},
+        //       {prompt: "<strong>" + `${self_descriptions[2]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[2]}`},
+        //       {prompt: "<strong>" + `${self_descriptions[3]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[3]}`},
+        //       {prompt: "<strong>" + `${self_descriptions[4]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[4]}`},
+        //       {prompt: "<strong>" + `${self_descriptions[5]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[5]}`},
+        //       {prompt: "<strong>" + `${self_descriptions[6]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[6]}`},
+        //       {prompt: "<strong>" + `${self_descriptions[7]}` + "</strong>", options: [1, 2, 3, 4, 5, 6, 7], values: [1, 2, 3, 4, 5, 6, 7], required: true, horizontal: true, name: `${self_descriptions[7]}`}
+        //     ],
+        //     data: {
+        //         type: "model_descriptions",
+        //         trial: (i+1),
+        //         name: `${vignette_source_data[i][0]}`,
+        //         job: `${vignette_source_data[i][1]}`,
+        //         model: `${vignette_source_data[i][2]}`}
+        //   });
+        // }
+        // situations intro:
+        var situations_instr = {
+            type: 'html-button-response',
+            stimulus: 'For the following questions, you will be asked to rank people in various lines of work<br>in order of who you would choose to complete various tasks.<br>'+
+              'You will see a different task on each page, and need to rank the individuals in terms of who you would pick to complete that task.',
+            choices: ["Continue"],
+            data: {type: "situations_instr"}
+            };
+
+        timeline.push(situations_instr);
+
+        var situations = [["Complete sets of mathematical problems", 'competence', 'math_problems'],
+                          ["Give a motivational speech to at-risk youth", 'higher', 'motivational_speech'],
+                        ["Call potential donors to raise money for a charity", 'compassion', 'charity'],
+                        ["Coach a children's sports team", 'compassion', 'coach_sports'],
+                        ["Model for a fashion collection", 'spicy', 'model'],
+                        ["Help clean portable toilets at a construction site", 'disgust', 'clean_toilets'],
+                        ["Clean up roadkill (rotting animal carcasses) from the side of a highway", 'disgust', 'roadkill'],
+                        ["Write a persuasive letter to local government officials", 'competence', 'local_government'],
+                        ["Perform in a talent show", 'higher', 'talent_show'],
+                        ["Provide basic medical care to survivors of a natural disaster", 'compassion', 'natural_disaster'],
+                        ["Take care of and bathe elderly residents of a nursing home", 'disgust', 'bathe_elderly'],
+                        ["Organize and participate in a speed dating event", 'spicy', 'speed_dating'],
+                        ["Steal cars", 'spicy', 'steal_cars']];
+
+        Shuffle(situations);                
+
+        var jobs_subset = ['sex worker',
+                      'slaughterhouse worker',
+                      'narcotics dealer',
+                      'panhandler',
+                      'police officer',
+                      'defense lawyer',
+                      'barista',
+                      'massage therapist',
+                      'crime scene cleaner',
+                      'mortician'];
+
+        function shuffleArray(array) {
+            let shuffledArray = array.slice(); // Create a copy of the array to avoid modifying the original
+            for (let i = shuffledArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+            }
+            return shuffledArray;
+        };
+
+        for (i=0; i < situations.length; i++) {
+          let shuffled_jobs = shuffleArray(jobs_subset);
+          timeline.push({
+            type: "rank-order",
+            options: shuffled_jobs,
+            prompt: `${situations.length - (i+1)} questions remaining in this section<br><br>` + 
+            "Rank in order who you would choose to help you when...<br><br>" +
+            situations[i][0],
+            data: {
+              category: situations[i][1],
+              stimulus: situations[i][2],
+              type: "situations",
+              trial: i
+            }
+          })
+        };
+
+        // // SDO
+        // var SDO_options = ["Strongly<br>Oppose<br>", "Somewhat<br>Oppose", "Slightly<br>Oppose", "Neutral", "Slightly<br>Favor", "Somewhat<br>Favor", "Strongly<br>Favor"];
+        // var SDO_values = [1,2,3,4,5,6,7];
+        // var SDO_values_reverse = [7,6,5,4,3,2,1];
+
+        // var SDO = {
+        //   type: 'survey-multi-choice',
+        //   preamble: "Show how much you favor or oppose each idea below by selecting a number from 1 to 7 on the scale below.<br>You can work quickly; your first feeling is generally best.<br><br>",
+        //   questions: [
+        //     {prompt: "<b>An ideal society requires some groups to be on top and others to be on the bottom.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values, name: 'PD_1'}, 
+        //     {prompt: "<b>Some groups of people are simply inferior to other groups.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values, name: 'PD_2'},
+        //     {prompt: "<b>No one group should dominate in society.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values_reverse, name: 'CD_1'}, //R
+        //     {prompt: "<b>Groups at the bottom are just as deserving as groups at the top.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values_reverse, name: 'CD_2'}, //R
+        //     {prompt: "<b>Group equality should not be our primary goal.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values, name: 'PAG_1'},
+        //     {prompt: "<b>It is unjust to try to make groups equal.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values, name: 'PAG_2'},
+        //     {prompt: "<b>We should do what we can to equalize conditions for different groups.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values_reverse, name: 'CAG_1'}, //R
+        //     {prompt: "<b>We should work to give all groups an equal chance to succeed.</b>", options: SDO_options, required: true, horizontal: true, values: SDO_values_reverse, name: 'CAG_2'} //R
+        //   ],
+        //   randomize_question_order: true,
+        //   data: {
+        //     type: 'SDO'
+        //   }
+        // };
+
+        // timeline.push(SDO);
+
+        // RWA
+        var RWA_options = ["<span style='font-size: 12px;'>Very Strongly<br>Disagree<br></span>", 
+        "<span style='font-size: 12px;'>Strongly<br>Disagree</span>", 
+        "<span style='font-size: 12px;'>Somewhat<br>Disagree</span>", 
+        "<span style='font-size: 12px;'>Slightly<br>Disagree</span>", 
+        "<span style='font-size: 12px;'>Unsure or Neutral</span>", 
+        "<span style='font-size: 12px;'>Slightly<br>Agree</span>", 
+        "<span style='font-size: 12px;'>Somewhat<br>Agree</span>", 
+        "<span style='font-size: 12px;'>Strongly<br>Agree</span>", 
+        "<span style='font-size: 12px;'>Very Strongly<br>Agree</span>"];
+        // var RWA_values = [-4,-3,-2,-1,0,1,2,3,4];
+        // var RWA_values_reverse = [4,3,2,1,0,-1,-2,-3,-4];
+        var RWA_values = [1,2,3,4,5,6,7,8,9];
+        var RWA_values_reverse = [9,8,7,6,5,4,3,2,1];
+
+        var RWA = {
+          type: 'survey-multi-choice',
+          preamble: "Please indicate how much you agree or disagree with the statements below.<br><br>",
+          questions: [
+            {prompt: "<b>It's great that many young people today are prepared to defy authority.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'CAS_1'}, //R
+            {prompt: "<b>What our country needs most is discipline, with everyone following our leaders in unity.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'CAS_2'},
+            {prompt: "<b>God's laws about abortion, pornography, and marriage must be strictly followed before it is too late.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'TC_1'},
+            {prompt: "<b>There is nothing wrong with premarital sexual intercourse.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'TC_2'}, //R
+            {prompt: "<b>Our society does NOT need tougher government and stricter laws.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values_reverse, name: 'AAR_1'}, //R
+            {prompt: "<b>The facts on crime and the recent public disorders show we have to crack down harder on troublemakers, if we are going to preserve law and order.</b>", options: RWA_options, required: true, horizontal: true, values: RWA_values, name: 'AAR_2'}
+          ],
+          randomize_question_order: true,
+          data: {
+            type: 'RWA'
+          }
+        };
+
+        timeline.push(RWA);
+
+        // // DWB
+        // var DWB_options = ["Strongly<br>Disagree<br>", "Somewhat<br>Disagree", "Slightly<br>Disagree", "Neutral", "Slightly<br>Agree", "Somewhat<br>Agree", "Strongly<br>Agree"];
+        // var DWB_values = [1,2,3,4,5,6,7];
+        // var DWB_values_reverse = [7,6,5,4,3,2,1];
+
+        // var DWB = {
+        //   type: 'survey-multi-choice',
+        //   preamble: "Please indicate how much you agree or disagree with the statements below.<br><br>",
+        //   questions: [
+        //     {prompt: "<b>My knowledge and experience tells me that the social world we live in<br>is basically a safe, stable and secure place<br>in which most people are fundamentally good.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values_reverse, name: 'DWB1'}, //R
+        //     {prompt: "<b>It seems that every year there are fewer and fewer truly respectable people,<br>and more and more persons with no morals at all who threaten everyone else.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values, name: 'DWB2'},
+        //     {prompt: "<b>Although it may appear that things are constantly getting<br> more dangerous and chaotic, it really isn't so. Every era has its problems, and a person's chances<br>of living a safe, untroubled life are better today than ever before.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values_reverse, name: 'DWB3'}, //R
+        //     {prompt: "<b>Any day now chaos and anarchy could erupt around us.<br>All the signs are pointing to it.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values, name: 'DWB4'},
+        //     {prompt: "<b>There are many dangerous people in our society who will attack someone<br> out of pure meanness, for no reason at all.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values, name: 'DWB5'},
+        //     {prompt: "<b>The 'end' is not near. People who think that earthquakes, wars, and famines mean<br>God might be about to destroy the world are being foolish.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values_reverse, name: 'DWB6'}, //R
+        //     {prompt: "<b>My knowledge and experience tells me that the social world we live in<br>is basically a dangerous and unpredictable place, in which good, decent and moral people's<br>values and way of life are threatened and disrupted by bad people.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values, name: 'DWB7'},
+        //     {prompt: "<b>Despite what one hears about 'crime in the street,'<br>there probably isn't any more now than there ever has been.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values_reverse, name: 'DWB8'}, //R
+        //     {prompt: "<b>If a person takes a few sensible precautions, nothing bad is likely to happen to him or her;<br>we do not live in a dangerous world.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values_reverse, name: 'DWB9'}, //R
+        //     {prompt: "<b>Every day as society become more lawless and bestial,<br>a person's chances of being robbed, assaulted, and even murdered go up and up.</b>", options: DWB_options, required: true, horizontal: true, values: DWB_values, name: 'DWB10'}
+        //   ],
+        //   randomize_question_order: true,
+        //   data: {
+        //     type: 'DWB'
+        //   }
+        // };
+
+        // timeline.push(DWB);
+
+        var know_jobs = {
+          type: "survey-multi-select",
+          questions: [
+            {
+              prompt: "We're curious about whether you personally know someone working in the jobs we asked you about earlier.<br><br>" +
+              "Please select below to indicate whether you know someone in those jobs.",
+              options: jobs,
+              horizontal: false,
+              required: true,
+              name: "know_jobs"
+            }
+          ]
+        };
+
+        timeline.push(know_jobs);
+
+        // Stop Trial for debugging
+        // Stop Trial for debugging
+        // Stop Trial for debugging
+        // Stop Trial for debugging
+        // Stop Trial for debugging
+        // timeline.push(trial_self_descriptions);
+
+        // Preload images
+        // var preloadImages = [];          
+        // for (i = 1; i < 38; i++) {     
+        //   preloadImages.push(`stimuli/${i}.png`)
+        // };
+
+        // preloadImages.push(`stimuli/mask.png`);
+
+        jsPsych.data.addProperties({userAgent: navigator.userAgent,
+          startTime: startTime,
+	        randCode: randCode,
+          prolificID: jsPsych.data.getURLVariable("id")
+        });
+
+        jsPsych.init({
+              timeline: timeline,
+              // preload_images: preloadImages,
+            show_progress_bar: true,
+              on_finish: function () {
+              var endTime = new Date();
+              jsPsych.data.addProperties({endTime: endTime});
+                    // jsPsych.data.displayData();
+              SaveData(jsPsych.data.get().csv()); // .json()?
+            }
+            });
+
+            function SaveData(curData) {
+          var dataToServer = {
+            'id': randCode,
+            'experimenter': 'Ethan',
+            'experimentName': 'IAT_SONA_v2',
+            'curData': curData
+          }; 
+
+
+        $.post("https://bradylab.ucsd.edu/turk/save.php",
+            dataToServer,
+            FunctionWhenDoneSaving
+          ).fail(FunctionWhenDoneSaving);
+        };
+
+        function FunctionWhenDoneSaving() {
+            var urlToRedirect = "https://app.prolific.com/submissions/complete?cc=C8F74GWE";
+             window.location.href = urlToRedirect;
+              };
+
+        </script>
+  
+    </body>
+</html>
