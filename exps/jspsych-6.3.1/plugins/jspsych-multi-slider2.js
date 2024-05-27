@@ -43,7 +43,7 @@ jsPsych.plugins['multi-slider2'] = (function() {
         }
         .jspsych-multi-slider-question input[type=range] {
           width: 644px;
-          margin-left: 10px; /* Space between prompt and slider */
+          margin-left: auto; /* Center slider within the container */
           margin-right: auto; /* Center slider within the container */
           display: block; /* Ensure slider is centered */
         }
