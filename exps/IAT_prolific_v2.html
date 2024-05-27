@@ -942,7 +942,7 @@
   var competence = {
     type: 'multi-slider',
     instructions: 'In this next section, we are interested in your beliefs about people who make money in the ways introduced previously.<br>'+
-      'Please rate each on how <b>competent</b> you think that person would be. By "competent", we mean things like intelligence, confidence, competitiveness, independence, etc.',
+      'Please rate each on how <b>competent</b> you think that person would be. By "competent", we mean things like intelligent, confident, competitive, independent, etc.',
     questions: competence_prompts,
 	  data: {type: 'competence'}
   };
@@ -1119,7 +1119,10 @@ timeline.push(ascent);
         jsPsych.data.addProperties({userAgent: navigator.userAgent,
           startTime: startTime,
 	        randCode: randCode,
-          volID: jsPsych.data.getURLVariable("id")
+          // volID: jsPsych.data.getURLVariable("id")
+          prolificID: jsPsych.data.getURLVariable("PROLIFIC_PID"),
+          studyID: jsPsych.data.getURLVariable("STUDY_ID"),
+          sessionID: jsPsych.data.getURLVariable("SESSION_ID")				    
         });
 
         jsPsych.init({
@@ -1129,14 +1132,14 @@ timeline.push(ascent);
               on_finish: function () {
               var endTime = new Date();
               jsPsych.data.addProperties({endTime: endTime});
-        	jsPsych.data.displayData();
-              // SaveData(jsPsych.data.get().csv()); // .json()?
+        	// jsPsych.data.displayData();
+              SaveData(jsPsych.data.get().csv()); // .json()?
             }
             });
 
             function SaveData(curData) {
           var dataToServer = {
-            'id': randCode,
+            'id': jsPsych.data.getURLVariable("PROLIFIC_PID"),
             'experimenter': 'Ethan',
             'experimentName': 'IAT_prolific_v2',
             'curData': curData
@@ -1150,8 +1153,7 @@ timeline.push(ascent);
         };
 
         function FunctionWhenDoneSaving() {
-            var urlToRedirect = "https://ucsd.sona-systems.com/webstudy_credit.aspx?experiment_id=2485&credit_token=9b9dcefb1ffb41e28f0dc8810db3abe9&survey_code=" +
-              jsPsych.data.getURLVariable("id");
+            var urlToRedirect = "https://app.prolific.com/submissions/complete?cc=C8F74GWE";
              window.location.href = urlToRedirect;
               };
 
