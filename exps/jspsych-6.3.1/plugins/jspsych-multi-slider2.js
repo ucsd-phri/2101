@@ -25,31 +25,27 @@ jsPsych.plugins['multi-slider2'] = (function() {
   }
 
   plugin.trial = function(display_element, trial) {
-    var html = '<div id="jspsych-multi-slider-container">';
+    var html = '<div id="jspsych-multi-slider-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">';
 
     // Add custom CSS to make sliders 644px wide and left align the prompts while centering sliders
     html += `
       <style>
-        #jspsych-multi-slider-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
         .jspsych-multi-slider-question {
           display: flex;
           align-items: center;
           margin: 10px 0px; /* Minimize distance between prompts */
-          width: 100%; /* Ensure the question div takes full width */
+          width: 80%; /* Ensure the question div takes 80% of the width */
         }
         .jspsych-multi-slider-prompt {
           margin-right: 10px; /* Space between prompt and slider */
-          text-align: left;
+          text-align: right;
           flex: 1; /* Make prompt take available space to the left */
         }
         .jspsych-multi-slider-question input[type=range] {
           width: 644px;
-          margin-left: auto; /* Center slider within the container */
+          margin-left: 10px; /* Space between prompt and slider */
           margin-right: auto; /* Center slider within the container */
+          display: block; /* Ensure slider is centered */
         }
       </style>
     `;
