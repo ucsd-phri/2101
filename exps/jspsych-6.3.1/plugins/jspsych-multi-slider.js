@@ -91,7 +91,7 @@ jsPsych.plugins['multi-slider'] = (function() {
       }
 
       var trial_data = {
-        responses: responses
+        responses: JSON.stringify(responses)
       };
 
       display_element.innerHTML = '';
