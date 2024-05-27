@@ -18,6 +18,7 @@
         <!-- <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-iat-html.js"></script> -->
         <script src="jspsych-6.3.1/plugins/jspsych-iat-html2.js"></script>
 	<script src="jspsych-6.3.1/plugins/jspsych-multi-slider.js"></script>    
+	<script src="jspsych-6.3.1/plugins/jspsych-multi-slider2.js"></script>
 <!--         <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-survey-multi-choice.js"></script> -->
 	<script src="jspsych-6.3.1/plugins/jspsych-survey-multi-choice3.js"></script>    
         <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-survey-multi-select.js"></script>
@@ -967,7 +968,34 @@ timeline.push(competence);
 	  data: {type: 'warmth'}
   };
 
-timeline.push(warmth);          
+timeline.push(warmth);
+
+
+//
+//
+//
+//
+  var ascent_prompts = [];
+
+  for (var i = 0; i < jobs.length; i++) {
+    ascent_prompts.push({
+      prompt: jobs[i],
+      min: 0,
+      max: 100,
+      start: 50
+    });
+  }
+  
+  var ascent = {
+    type: 'multi-slider2',
+    instructions: 'People can vary in how human-like they seem. Some people seem highly evolved whereas others seem no different than lower animals.<br>'+
+	    'Using the images below, indicate using the sliders how evolved you consider the average person who makes money in the following ways to be:<br>'+
+      '<img src="stimuli/Ascent_of_Humans.png">',
+    questions: ascent_prompts,
+	  data: {type: 'ascent'}
+  };
+
+timeline.push(ascent);       		
 
         // // SDO
         // var SDO_options = ["Strongly<br>Oppose<br>", "Somewhat<br>Oppose", "Slightly<br>Oppose", "Neutral", "Slightly<br>Favor", "Somewhat<br>Favor", "Strongly<br>Favor"];
