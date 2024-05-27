@@ -25,26 +25,56 @@ jsPsych.plugins['multi-slider2'] = (function() {
   }
 
   plugin.trial = function(display_element, trial) {
-    var html = '<div id="jspsych-multi-slider-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">';
+    var html = '<div id="jspsych-multi-slider-container">';
 
+    // Add custom CSS to make sliders 644px wide and left align the prompts while centering sliders
+    html += `
+      <style>
+        #jspsych-multi-slider-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .jspsych-multi-slider-question {
+          display: flex;
+          align-items: center;
+          margin: 10px 0px; /* Minimize distance between prompts */
+          width: 100%; /* Ensure the question div takes full width */
+          justify-content: center; /* Center the slider horizontally */
+        }
+        .jspsych-multi-slider-prompt {
+          margin-right: 10px; /* Space between prompt and slider */
+          text-align: left;
+          flex: 1; /* Make prompt take available space to the left */
+        }
+        .jspsych-multi-slider-question input[type=range] {
+          width: 644px;
+          margin-left: auto; /* Center slider within the container */
+          margin-right: auto; /* Center slider within the container */
+        }
+      </style>
+    `;
+    
     // Add initial instructions prompt
     if (trial.instructions) {
-      html += '<div id="jspsych-multi-slider-instructions" style="margin-bottom: 20px; text-align: center; width: 80%;">' + trial.instructions + '</div>';
+      html += '<div id="jspsych-multi-slider-instructions" style="margin-bottom: 20px; text-align: center;">' + trial.instructions + '</div>';
     }
 
     // Add secondary instructions at the top
     if (trial.instructions2) {
-      html += '<div id="jspsych-multi-slider-instructions2-top" style="margin-bottom: 20px; text-align: center; width: 80%;">' + trial.instructions2 + '</div>';
+      html += '<div id="jspsych-multi-slider-instructions2-top" style="margin-bottom: 20px; text-align: center;">' + trial.instructions2 + '</div>';
     }
 
     for (var i = 0; i < trial.questions.length; i++) {
       var question = trial.questions[i];
       if (i > 0 && i % 5 === 0) {
-        html += '<div id="jspsych-multi-slider-instructions2" style="margin-bottom: 20px; text-align: center; width: 80%;">' + trial.instructions2 + '</div>';
+        html += '<div id="jspsych-multi-slider-instructions2" style="margin-bottom: 20px; text-align: center;">' + trial.instructions2 + '</div>';
       }
-      html += '<div class="jspsych-multi-slider-question" style="text-align: center; width: 80%;">';
-      html += '<div style="margin-bottom: 10px;">' + question.prompt + '</div>';
-      html += '<input type="range" min="' + question.min + '" max="' + question.max + '" value="' + question.start + '" step="1" style="width: 644px;">';
+      html += '<div class="jspsych-multi-slider-question">';
+      html += '<div class="jspsych-multi-slider-prompt">' + question.prompt + '</div>';
+      html += '</div>';
+      html += '<div class="jspsych-multi-slider-question">';
+      html += '<input type="range" min="' + question.min + '" max="' + question.max + '" value="' + question.start + '" step="1" id="jspsych-multi-slider-' + i + '">';
       html += '</div>';
     }
 
