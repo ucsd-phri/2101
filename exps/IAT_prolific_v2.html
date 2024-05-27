@@ -924,10 +924,10 @@
         //
         //
         //
-  var comptence_prompts = [];
+  var competence_prompts = [];
 
   for (var i = 0; i < jobs.length; i++) {
-    comptence_prompts.push({
+    competence_prompts.push({
       prompt: jobs[i],
       min: 0,
       max: 100,
@@ -939,7 +939,7 @@
     type: 'multi-slider',
     instructions: 'In this next section, we are interested in your beliefs about people who make money in the ways introduced previously.<br>"+
       "Please rate each on how <b>competent</b> you think that person would be. By competent, we mean things like intelligence, confidence, competitiveness, independence, etc.',
-    questions: comptence_prompts
+    questions: competence_prompts
   };
 
 timeline.push(competence);
