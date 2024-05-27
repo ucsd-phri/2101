@@ -22,7 +22,7 @@ jsPsych.plugins['multi-slider2'] = (function() {
   plugin.trial = function(display_element, trial) {
     var html = '<div id="jspsych-multi-slider-container">';
 
-    // Add custom CSS to make sliders wider and position prompts to the left
+    // Add custom CSS to make sliders 644px wide and right align the prompts
     html += `
       <style>
         .jspsych-multi-slider-question {
@@ -32,9 +32,11 @@ jsPsych.plugins['multi-slider2'] = (function() {
         }
         .jspsych-multi-slider-prompt {
           margin-right: 10px; /* Space between prompt and slider */
+          text-align: right;
+          flex: 1; /* Make prompt take available space to the left */
         }
         .jspsych-multi-slider-question input[type=range] {
-          width: 75%;
+          width: 644px;
         }
       </style>
     `;
