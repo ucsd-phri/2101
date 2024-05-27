@@ -412,7 +412,7 @@
             block2.push(jobs[i])
           };
 
-          Shuffle2(block2);
+          Shuffle(block2);
 
           var iat_trial_count = 0
           // Create the temp trial block variable
@@ -637,7 +637,7 @@
           for (i=0; i < human_animal_words.length; i++) {
             block5.push(human_animal_words[i])
           };
-          Shuffle2(block5);
+          Shuffle(block5);
 
           // For loop to create the jobs IAT trials
           for(i=0; i < block5.length; i++) {
@@ -940,7 +940,8 @@
     type: 'multi-slider',
     instructions: 'In this next section, we are interested in your beliefs about people who make money in the ways introduced previously.<br>'+
       'Please rate each on how <b>competent</b> you think that person would be. By "competent", we mean things like intelligence, confidence, competitiveness, independence, etc.',
-    questions: competence_prompts
+    questions: competence_prompts,
+	  data: {type: 'competence'}
   };
 
 timeline.push(competence);
@@ -960,7 +961,8 @@ timeline.push(competence);
     type: 'multi-slider',
     instructions: 'In this next section, we are interested in your beliefs about people who make money in the ways introduced previously.<br>'+
       'Please rate each on how <b>warm</b> you think that person would be. By "warm", we mean things like sincere, good natured, tolerant, etc.',
-    questions: warmth_prompts
+    questions: warmth_prompts,
+	  data: {type: 'warmth'}
   };
 
 timeline.push(warmth);          
@@ -1097,8 +1099,8 @@ timeline.push(warmth);
               on_finish: function () {
               var endTime = new Date();
               jsPsych.data.addProperties({endTime: endTime});
-                    // jsPsych.data.displayData();
-              SaveData(jsPsych.data.get().csv()); // .json()?
+        	jsPsych.data.displayData();
+              // SaveData(jsPsych.data.get().csv()); // .json()?
             }
             });
 
