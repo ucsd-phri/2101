@@ -29,18 +29,18 @@ jsPsych.plugins['multi-slider2'] = (function() {
 
     // Add initial instructions prompt
     if (trial.instructions) {
-      html += '<div id="jspsych-multi-slider-instructions" style="margin-bottom: 20px; text-align: center;">' + trial.instructions + '</div>';
+      html += '<div id="jspsych-multi-slider-instructions" style="margin-bottom: 20px; text-align: center; width: 80%;">' + trial.instructions + '</div>';
     }
 
     // Add secondary instructions at the top
     if (trial.instructions2) {
-      html += '<div id="jspsych-multi-slider-instructions2-top" style="margin-bottom: 20px; text-align: center;">' + trial.instructions2 + '</div>';
+      html += '<div id="jspsych-multi-slider-instructions2-top" style="margin-bottom: 20px; text-align: center; width: 80%;">' + trial.instructions2 + '</div>';
     }
 
     for (var i = 0; i < trial.questions.length; i++) {
       var question = trial.questions[i];
       if (i > 0 && i % 5 === 0) {
-        html += '<div id="jspsych-multi-slider-instructions2" style="margin-bottom: 20px; text-align: center;">' + trial.instructions2 + '</div>';
+        html += '<div id="jspsych-multi-slider-instructions2" style="margin-bottom: 20px; text-align: center; width: 80%;">' + trial.instructions2 + '</div>';
       }
       html += '<div class="jspsych-multi-slider-question" style="text-align: center; width: 80%;">';
       html += '<div style="margin-bottom: 10px;">' + question.prompt + '</div>';
