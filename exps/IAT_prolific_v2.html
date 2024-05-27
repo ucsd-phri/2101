@@ -928,6 +928,7 @@
         //
         //
         //
+  Shuffle(jobs);		
   var competence_prompts = [];
 
   for (var i = 0; i < jobs.length; i++) {
@@ -949,6 +950,7 @@
 
 timeline.push(competence);
 
+  Shuffle(jobs);		
   var warmth_prompts = [];
 
   for (var i = 0; i < jobs.length; i++) {
@@ -975,6 +977,7 @@ timeline.push(warmth);
 //
 //
 //
+  Shuffle(jobs);		
   var ascent_prompts = [];
 
   for (var i = 0; i < jobs.length; i++) {
@@ -1084,7 +1087,7 @@ timeline.push(ascent);
         // };
 
         // timeline.push(DWB);
-
+  Shuffle(jobs);
         var know_jobs = {
           type: "survey-multi-select",
           questions: [
