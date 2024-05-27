@@ -13,7 +13,7 @@ jsPsych.plugins['multi-slider2'] = (function() {
       instructions2: {
         type: jsPsych.plugins.parameterType.STRING,
         default: '',
-        description: 'Secondary instructions to be displayed every 5 questions.'
+        description: 'Secondary instructions to be displayed at the top and every 5 questions.'
       },
       questions: {
         type: jsPsych.plugins.parameterType.COMPLEX,
@@ -27,7 +27,7 @@ jsPsych.plugins['multi-slider2'] = (function() {
   plugin.trial = function(display_element, trial) {
     var html = '<div id="jspsych-multi-slider-container">';
 
-    // Add custom CSS to make sliders 644px wide and right align the prompts while centering sliders
+    // Add custom CSS to make sliders 644px wide and left align the prompts while centering sliders
     html += `
       <style>
         #jspsych-multi-slider-container {
@@ -43,7 +43,7 @@ jsPsych.plugins['multi-slider2'] = (function() {
         }
         .jspsych-multi-slider-prompt {
           margin-right: 10px; /* Space between prompt and slider */
-          text-align: right;
+          text-align: left;
           flex: 1; /* Make prompt take available space to the left */
         }
         .jspsych-multi-slider-question input[type=range] {
@@ -57,6 +57,11 @@ jsPsych.plugins['multi-slider2'] = (function() {
     // Add initial instructions prompt
     if (trial.instructions) {
       html += '<div id="jspsych-multi-slider-instructions" style="margin-bottom: 20px; text-align: center;">' + trial.instructions + '</div>';
+    }
+
+    // Add secondary instructions at the top
+    if (trial.instructions2) {
+      html += '<div id="jspsych-multi-slider-instructions2-top" style="margin-bottom: 20px; text-align: center;">' + trial.instructions2 + '</div>';
     }
 
     for (var i = 0; i < trial.questions.length; i++) {
