@@ -42,8 +42,8 @@ jsPsych.plugins['multi-slider2'] = (function() {
       if (i > 0 && i % 5 === 0) {
         html += '<div id="jspsych-multi-slider-instructions2" style="margin-bottom: 20px; text-align: center;">' + trial.instructions2 + '</div>';
       }
-      html += '<div class="jspsych-multi-slider-question" style="display: flex; align-items: center; width: 80%;">';
-      html += '<div style="flex: 1; text-align: right;">' + question.prompt + '</div>';
+      html += '<div class="jspsych-multi-slider-question" style="text-align: center; width: 80%;">';
+      html += '<div style="margin-bottom: 10px;">' + question.prompt + '</div>';
       html += '<input type="range" min="' + question.min + '" max="' + question.max + '" value="' + question.start + '" step="1" style="width: 644px;">';
       html += '</div>';
     }
