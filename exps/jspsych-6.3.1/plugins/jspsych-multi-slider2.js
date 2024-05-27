@@ -38,13 +38,13 @@ jsPsych.plugins['multi-slider2'] = (function() {
         .jspsych-multi-slider-question {
           display: flex;
           align-items: center;
-          margin: 10px 0px; /* Minimize distance between prompts */
+          margin: 5px 0px; /* Minimize distance between prompts */
           width: 100%; /* Ensure the question div takes full width */
           justify-content: center; /* Center the slider horizontally */
         }
         .jspsych-multi-slider-prompt {
-          margin-right: 10px; /* Space between prompt and slider */
-          text-align: left;
+          margin-right: 5px; /* Space between prompt and slider */
+          text-align: center;
           flex: 1; /* Make prompt take available space to the left */
         }
         .jspsych-multi-slider-question input[type=range] {
