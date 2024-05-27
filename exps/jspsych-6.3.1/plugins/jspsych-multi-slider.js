@@ -21,6 +21,15 @@ jsPsych.plugins['multi-slider'] = (function() {
 
   plugin.trial = function(display_element, trial) {
     var html = '<div id="jspsych-multi-slider-container">';
+
+    // Add custom CSS to make sliders wider
+    html += `
+      <style>
+        .jspsych-multi-slider-question input[type=range] {
+          width: 75%;
+        }
+      </style>
+    `;
     
     // Add instructions prompt
     if (trial.instructions) {
