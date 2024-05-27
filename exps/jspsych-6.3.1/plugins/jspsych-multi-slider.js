@@ -5,6 +5,11 @@ jsPsych.plugins['multi-slider'] = (function() {
   plugin.info = {
     name: 'multi-slider',
     parameters: {
+      instructions: {
+        type: jsPsych.plugins.parameterType.STRING,
+        default: '',
+        description: 'Instructions to be displayed above all slider questions.'
+      },
       questions: {
         type: jsPsych.plugins.parameterType.COMPLEX,
         array: true,
@@ -16,6 +21,11 @@ jsPsych.plugins['multi-slider'] = (function() {
 
   plugin.trial = function(display_element, trial) {
     var html = '<div id="jspsych-multi-slider-container">';
+    
+    // Add instructions prompt
+    if (trial.instructions) {
+      html += '<div id="jspsych-multi-slider-instructions" style="margin-bottom: 20px;">' + trial.instructions + '</div>';
+    }
 
     for (var i = 0; i < trial.questions.length; i++) {
       var question = trial.questions[i];
