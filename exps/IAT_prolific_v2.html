@@ -18,7 +18,8 @@
         <!-- <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-iat-html.js"></script> -->
         <script src="jspsych-6.3.1/plugins/jspsych-iat-html2.js"></script>
 	<script src="jspsych-6.3.1/plugins/jspsych-multi-slider.js"></script>    
-        <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-survey-multi-choice.js"></script>
+<!--         <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-survey-multi-choice.js"></script> -->
+	<script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-survey-multi-choice3.js"></script>    
         <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-survey-multi-select.js"></script>
         <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-survey-text.js"></script>
         <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/plugins/jspsych-survey-html-form.js"></script>
@@ -140,7 +141,7 @@
                       '<span style="color:#7C05BE">doctor</span>',
                       '<span style="color:#7C05BE">scientist</span>',
                       '<span style="color:#7C05BE">defense lawyer</span>',
-                      '<span style="color:#7C05BE">maid</span>',
+                      '<span style="color:#7C05BE">house cleaner</span>',
                       '<span style="color:#7C05BE">massage therapist</span>',
                       '<span style="color:#7C05BE">fast food worker</span>',
                       '<span style="color:#7C05BE">drug dealer</span>',
@@ -252,7 +253,7 @@
 
           var intro = {
             type: 'html-button-response',
-            stimulus: "Through recent technological advances in the last 50 years, there are more ways than ever to make money now.<br>In this part of the task, we are interested in people's thoughts about different ways people make money.<br><br>",
+            stimulus: "Through recent technological advances in the last 50 years, there are more ways than ever to make money now.<br>In this part of the task, we are interested in your thoughts about different ways people make money.<br><br>",
             choices: ["Continue"],
             data: {type: "intro"}
             };
@@ -1061,7 +1062,7 @@ timeline.push(warmth);
           questions: [
             {
               prompt: "We're curious about whether you personally know someone makes money in one of the ways we asked you about earlier.<br><br>" +
-              "Please select below to indicate whether you know someone who makes money in one of those ways.",
+              "Please select below to indicate whether you know someone who makes or has made money that way.",
               options: jobs,
               horizontal: false,
               required: true,
