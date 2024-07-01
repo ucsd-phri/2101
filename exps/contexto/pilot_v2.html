@@ -309,13 +309,23 @@ let close_enough_on = 0;
     'curData': curData
   }; 
 
-  $.post("https://bradylab.ucsd.edu/turk/save.php",
+//   $.post("https://bradylab.ucsd.edu/turk/save.php",
+//     dataToServer,
+//     function(data) { 
+//     }
+//   ).fail(function(data) { 
+// 	});      
+// };
+ $.post("https://bradylab.ucsd.edu/turk/save.php",
     dataToServer,
-    function(data) { 
-    }
-  ).fail(function(data) { 
-	});      
+    FunctionWhenDoneSaving
+  ).fail(FunctionWhenDoneSaving);
 };
+
+function FunctionWhenDoneSaving() {
+	var urlToRedirect = "https://ucsd.sona-systems.com/webstudy_credit.aspx?experiment_id=2485&credit_token=9b9dcefb1ffb41e28f0dc8810db3abe9&survey_code=" + id;
+       window.location.href = urlToRedirect;
+      };	    
 </script>
 
   <script>
