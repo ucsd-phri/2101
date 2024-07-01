@@ -8,7 +8,12 @@
   <script src="https://psyc241.ucsd.edu/jspsych-6.1.0/jspsych.js"></script>
   <!-- <script defer="defer" src="static/js/main.341327a7.js"></script> -->
   <link href="css/main.css" rel="stylesheet">
-  
+    <style>
+        /* Ensure the age input is visible */
+        #age {
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
     <script src="bower_components/underscore/underscore.js"></script>
@@ -26,6 +31,9 @@
   var data = {
     'id': jsPsych.data.getURLVariable('id'),
     'date': new Date(),
+    'age': '',
+    'gender': '',
+    'race': '',	  
     'data': [
   ]
   };
@@ -163,13 +171,40 @@ const getBarColor = (distance) => {
   <iframe src="https://ucsd-phri.github.io/2101/exps/contexto/151866_AdultConsent_MTurk.pdf#toolbar=0" width="100%" height="500px"></iframe>
   <br><br>
   <div style="position: relative; padding: 15px 0px;">
-    <button type="button" class="button" style="margin:0 auto; display:block;" onclick="begin()">
+    <button type="button" class="button" style="margin:0 auto; display:block;" onclick="begin_demo()">
       <div style="min-width: 104px;">I Agree</div>
    </button>
  </div>
 </div>
 
-
+<form id="demographicsForm" style="display:none">
+        <label for="age">Current Age:</label>
+        <input type="number" id="age" name="age" min="0" style="display:block" required>
+        <br><br>
+        <label for="gender">Gender Identity:</label>
+        <select id="gender" name="gender" required>
+            <option value="">Select your gender identity</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="nonbinary">Non-binary</option>
+            <option value="other">Other</option>
+        </select>
+	<br><br>
+	<label for="race">Ethnoracial Identity:</label>
+	<select id="race" name="race" required>
+            <option value="">Select your ethnoracial identity</option>
+            <option value="native">Indigenous American or Alaska Native</option>
+            <option value="asian">Asian</option>
+            <option value="black">Black or African American</option>
+            <option value="pacific_islander"> Native Hawaiian or Other Pacific Islander</option>
+	    <option value="white">White</option>
+	    <option value="multi">Multi-Racial</option>	
+		American Indian or Alaska Native, Asian, Black or African American, Native Hawaiian or Other Pacific Islander, and White
+        </select>
+        <br><br>
+        <button type="button" class="button"  style="margin:0 auto; display:block;" onclick="begin()">
+		<div style="min-width: 104px;">Continue</button>
+    </form>	
 
 <div id="root">
   <div class="wrapper">
@@ -270,7 +305,7 @@ let close_enough_on = 0;
   var dataToServer = {
     'id': jsPsych.data.getURLVariable('id'),
     'experimenter': 'Ethan',
-    'experimentName': 'contexto_pilot_v2',
+    'experimentName': 'contexto_pilot_v3',
     'curData': curData
   }; 
 
@@ -579,9 +614,24 @@ let start_word = '<div class="row-wrapper current" id="guesses" data-sort=' + wi
   (() => {
     $("#root").hide()
   })();
-    var begin = function() {
-      $("#root").show();
+    var begin_demo = function() {
+      // data.id.push($(".id_input").text());
+      $("#demographicsForm").show();
+      $('#age').css('display', 'inline-block');
       $(".consent").hide();
+    };	
+    
+    var begin = function() {
+      // data.id.push($(".id_input").text());
+        if ($('#age').val() === '' || $('#gender').val() === '' || $('#race').val() === '') {
+            alert('Please complete all fields.');
+            return;
+        }
+      data.age = $('#age').val();
+      data.gender = $('#gender').val();
+      data.race = $('#race').val();
+      $("#root").show();
+      $("#demographicsForm").hide();
     };
   </script>
 
