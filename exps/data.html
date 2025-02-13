@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Protected Redirect</title>
+    <script>
+        function checkCredentials() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var correctUsername = "zeidanlab"; // Change this to your desired username
+            var correctPassword = "neuroimg2022"; // Change this to your desired password
+            
+            if (username === correctUsername && password === correctPassword) {
+                window.location.replace("https://bradylab.ucsd.edu/turk/data/Ethan/"); // Change this to your URL
+            } else {
+                alert("Incorrect username or password. Try again.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Enter Credentials to Proceed</h2>
+    <input type="text" id="username" placeholder="Enter username">
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="checkCredentials()">Submit</button>
+</body>
+</html>
