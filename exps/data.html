@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Protected Redirect</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #contentContainer {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
     <script>
         function checkCredentials() {
             var username = document.getElementById("username").value;
@@ -12,7 +31,9 @@
             var correctPassword = "neuroimg2022"; // Change this to your desired password
             
             if (username === correctUsername && password === correctPassword) {
-                window.location.replace("https://bradylab.ucsd.edu/turk/data/Ethan/"); // Change this to your URL
+                document.getElementById("loginForm").style.display = "none";
+                document.getElementById("contentContainer").style.display = "block";
+                document.getElementById("contentFrame").src = "https://bradylab.ucsd.edu/turk/data/Ethan/"; // Change this to your URL
             } else {
                 alert("Incorrect username or password. Try again.");
             }
@@ -20,9 +41,15 @@
     </script>
 </head>
 <body>
-    <h2>Enter Credentials to Proceed</h2>
-    <input type="text" id="username" placeholder="Enter username">
-    <input type="password" id="password" placeholder="Enter password">
-    <button onclick="checkCredentials()">Submit</button>
+    <div id="loginForm">
+        <h2>Enter Credentials to Proceed</h2>
+        <input type="text" id="username" placeholder="Enter username">
+        <input type="password" id="password" placeholder="Enter password">
+        <button onclick="checkCredentials()">Submit</button>
+    </div>
+    
+    <div id="contentContainer">
+        <iframe id="contentFrame"></iframe>
+    </div>
 </body>
 </html>
